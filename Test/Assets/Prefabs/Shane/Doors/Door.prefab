@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &503651214387106967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1972852084303179138}
+  - component: {fileID: 8355962653560319303}
+  m_Layer: 0
+  m_Name: SideOfDoorCheck2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1972852084303179138
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503651214387106967}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.314022, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9014527333177232488}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8355962653560319303
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503651214387106967}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.616023, y: 1.2597582, z: 1.6105201}
+  m_Center: {x: 4.3080115, y: 0.12987933, z: -0.052924246}
 --- !u!1 &1600552823793616215
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,6 +104,50 @@ MonoBehaviour:
   PlayerInRange: 0
   PlayerIsInteracting: 0
   PlayerInteractedOnce: 0
+--- !u!1 &4721375040370830837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5817108559820627081}
+  - component: {fileID: 3718153148299924268}
+  m_Layer: 0
+  m_Name: SideOfDoorCheck1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5817108559820627081
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4721375040370830837}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9014527333177232488}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3718153148299924268
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4721375040370830837}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.616023, y: 1.2597582, z: 1.6105201}
+  m_Center: {x: 4.3080115, y: 0.12987933, z: -0.052924246}
 --- !u!1 &9014527333177232532
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +181,8 @@ Transform:
   m_Children:
   - {fileID: 1163926724475271731}
   - {fileID: 3567582481971153006}
+  - {fileID: 5817108559820627081}
+  - {fileID: 1972852084303179138}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -171,8 +261,13 @@ MonoBehaviour:
   IsInteractable: 1
   ObjectName: Door
   UIMessageToShowIfPlayerLooksAtObject: Press F to Unlock Door
+  indexOfAreaUnlocked: -1
+  areaIndexOfSide1: 0
+  areaIndexOfSide2: 0
   pointsToUnlock: 300
   unlockSound: {fileID: 8300000, guid: b7886a023cfc2034a98d530d6a368bc4, type: 3}
+  sideOfDoorCheck1: {fileID: 3718153148299924268}
+  sideOfDoorCheck2: {fileID: 8355962653560319303}
 --- !u!1001 &4783935745868564005
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -100,7 +100,6 @@ public class WaveController : MonoBehaviour
 
         //Wait until audio ends.
         yield return new WaitForSeconds(transitionAudio.length * transitionAudioWaveStarterOffset);
-
     }
 
     public Spawner GetRandomSpawner()
@@ -111,6 +110,9 @@ public class WaveController : MonoBehaviour
     //When player opens door to new area - spawners in that area become active.
     public void AddSpawnersToActiveSpawnerList(int areaIndex)
     {
+        if (activeSpawnersList.Any(s => s.areaIndex == areaIndex))
+            return;
+
         activeSpawnersList.AddRange(allSpawnersList.FindAll(s => s.areaIndex == areaIndex));
     }
 

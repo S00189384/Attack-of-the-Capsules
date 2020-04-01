@@ -12,8 +12,13 @@ public class DefenceBuildingDoor : PlayerInteractableObject
 
     [Header("Door")]
     public int indexOfAreaUnlocked;
+    public int areaIndexOfSide1;
+    public int areaIndexOfSide2;
     public int pointsToUnlock;
     public AudioClip unlockSound;
+
+    public BoxCollider sideOfDoorCheck1;
+    public BoxCollider sideOfDoorCheck2;
 
     public UnlockDoorDelegate UnlockDoorEvent;
 
@@ -28,23 +33,15 @@ public class DefenceBuildingDoor : PlayerInteractableObject
     public override void PlayerInteracted()
     {
         //Get which side the player interacted and determine which area index they opened.
-        print(playerInteractRaycast.hitInfo.normal);
-        print(-transform.forward);
+        if (sideOfDoorCheck1.bounds.Contains(player.transform.position))
+            indexOfAreaUnlocked = areaIndexOfSide2;
+        else if (sideOfDoorCheck2.bounds.Contains(player.transform.position))
+            indexOfAreaUnlocked = areaIndexOfSide1;
 
-
-
+        print("Area " + indexOfAreaUnlocked + " opened.");
 
         UnlockDoorEvent(indexOfAreaUnlocked);
-
-        print("unlocked door");
         Destroy(gameObject);
-        //if player has enough points
-        //destroy / unlock door
         uiBehaviour.HidePlayerInteractMessage();
-
-
     }
-
-
-
 }
