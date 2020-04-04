@@ -813,3 +813,6 @@ D:\Unity Projects\Games-Project2\Test\obj\Debug\Assembly-CSharp.csproj.CoreCompi
 D:\Unity Projects\Games-Project2\Test\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 D:\Unity Projects\Games-Project2\Test\obj\Debug\Assembly-CSharp.dll
 D:\Unity Projects\Games-Project2\Test\obj\Debug\Assembly-CSharp.pdb
+D:\Unity Projects\Games-Project2\Test\Temp\bin\Debug\nunit.framework.dll
+D:\Unity Projects\Games-Project2\Test\Temp\bin\Debug\nunit.framework.pdb
+D:\Unity Projects\Games-Project2\Test\Temp\bin\Debug\nunit.framework.xml
