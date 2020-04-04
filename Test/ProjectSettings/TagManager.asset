@@ -19,6 +19,7 @@ TagManager:
   - DeathScreen
   - WaveController
   - BlackScreen
+  - MissileScreen
   layers:
   - Default
   - TransparentFX
