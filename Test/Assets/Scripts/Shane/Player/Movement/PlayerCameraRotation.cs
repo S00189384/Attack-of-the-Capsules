@@ -9,6 +9,7 @@ public class PlayerCameraRotation : MonoBehaviour
     HealthComponent playerHealthComponent;
 
     public Transform PlayerBody;
+    public Camera playerCamera;
 
     //Rotation
     [Header("Rotation Speed")]
@@ -27,6 +28,7 @@ public class PlayerCameraRotation : MonoBehaviour
     void Start ()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        playerCamera = Camera.main;
         playerHealthComponent = GetComponentInParent<HealthComponent>();
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     }
@@ -62,4 +64,7 @@ public class PlayerCameraRotation : MonoBehaviour
         if (VerticalRotation >= MaxXAxisClampValue || VerticalRotation <= MinXAxisClampValue)
             verticalRotationInput = 0;
     }
+
+
+
 }

@@ -8,6 +8,7 @@ public class PlayerInteractRaycast : MonoBehaviour
     UIBehaviour uiBehaviour;
     PlayerInteractableObject interactableObject;
     PlayerInteractableArea interactableArea;
+    PlayerCameraRotation playerCameraComponent;
     PlayerGunAttack playerGunAttack;
 
     public Ray ray;
@@ -27,6 +28,8 @@ public class PlayerInteractRaycast : MonoBehaviour
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         uiBehaviour = GameObject.FindGameObjectWithTag("UI").GetComponent<UIBehaviour>();
+
+        playerCameraComponent = GetComponentInChildren<PlayerCameraRotation>();
         playerGunAttack = GetComponentInChildren<PlayerGunAttack>();
     }
     private void Update()
@@ -52,41 +55,44 @@ public class PlayerInteractRaycast : MonoBehaviour
     {
         if(other.gameObject.tag == "InteractableArea")
         {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if(Physics.Raycast(ray, out hitInfo, interactDistance, layerMask, QueryTriggerInteraction.Collide))
+            if(playerCameraComponent.playerCamera.enabled)
             {
-                if (interactableObject == null || hitInfo.collider.gameObject != interactableObject.gameObject)
-                    interactableObject = hitInfo.collider.GetComponent<PlayerInteractableObject>();
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                if(interactableObject != null)
+                if (Physics.Raycast(ray, out hitInfo, interactDistance, layerMask, QueryTriggerInteraction.Collide))
                 {
-                    if (interactableObject.IsInteractable && !playerGunAttack.IsAiming)
+                    if (interactableObject == null || hitInfo.collider.gameObject != interactableObject.gameObject)
+                        interactableObject = hitInfo.collider.GetComponent<PlayerInteractableObject>();
+
+                    if (interactableObject != null)
                     {
-                        IsLookingAtInteractableObject = true;
+                        if (interactableObject.IsInteractable && !playerGunAttack.IsAiming)
+                        {
+                            IsLookingAtInteractableObject = true;
 
-                        //Change UI stuff.
-                        uiBehaviour.ShowPlayerInteractMessage(interactableObject.UIMessageToShowIfPlayerLooksAtObject, true);
+                            //Change UI stuff.
+                            uiBehaviour.ShowPlayerInteractMessage(interactableObject.UIMessageToShowIfPlayerLooksAtObject, true);
 
-                        if (uiBehaviour._imgPlayerAimDot.color != aimDotColorWhenLooking)
-                            uiBehaviour.FadeAimDotColour(aimDotFadeSpeed, aimDotColorWhenLooking);
+                            if (uiBehaviour._imgPlayerAimDot.color != aimDotColorWhenLooking)
+                                uiBehaviour.FadeAimDotColour(aimDotFadeSpeed, aimDotColorWhenLooking);
+                        }
                     }
                 }
-            }
-            else //Raycast not hitting interactable object.
-            {
-
-                if (interactableObject != null)
+                else //Raycast not hitting interactable object.
                 {
-                    interactableObject = null;
-                    uiBehaviour.HidePlayerInteractMessage();
+
+                    if (interactableObject != null)
+                    {
+                        interactableObject = null;
+                        uiBehaviour.HidePlayerInteractMessage();
+                    }
+
+                    IsLookingAtInteractableObject = false;
+
+                    if (uiBehaviour._imgPlayerAimDot.color != uiBehaviour.aimDotOriginalColour && !playerGunAttack.IsAiming)
+                        uiBehaviour._imgPlayerAimDot.color = Color.Lerp(uiBehaviour._imgPlayerAimDot.color, uiBehaviour.aimDotOriginalColour, aimDotFadeSpeed * Time.deltaTime);
                 }
-
-                IsLookingAtInteractableObject = false;
-
-                if (uiBehaviour._imgPlayerAimDot.color != uiBehaviour.aimDotOriginalColour && !playerGunAttack.IsAiming)
-                    uiBehaviour._imgPlayerAimDot.color = Color.Lerp(uiBehaviour._imgPlayerAimDot.color, uiBehaviour.aimDotOriginalColour, aimDotFadeSpeed * Time.deltaTime);
-            }
+            }           
         }
     }
 

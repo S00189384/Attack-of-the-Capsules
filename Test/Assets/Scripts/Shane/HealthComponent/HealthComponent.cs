@@ -5,8 +5,9 @@ using UnityEngine;
 public delegate void OnDeath();
 public class HealthComponent : MonoBehaviour
 {
-    [Header("Alive or Not")]
+    [Header("Status")]
     public bool IsAlive = true;
+    public bool CanTakeDamage = true;
 
     [Header("Health")]
     public float maxHealth = 100;
@@ -26,35 +27,41 @@ public class HealthComponent : MonoBehaviour
 
     public void ApplyDamage(float amount)
     {
-        currentHealth -= amount;
-
-        if (currentHealth <= 0)
+        if(CanTakeDamage)
         {
-            IsAlive = false;
+            currentHealth -= amount;
 
-            if(DestroyOnDeath)
-                Destroy(gameObject);
+            if (currentHealth <= 0)
+            {
+                IsAlive = false;
 
-            OnDeathEvent?.Invoke();
-        }
+                if (DestroyOnDeath)
+                    Destroy(gameObject);
+
+                OnDeathEvent?.Invoke();
+            }
+        }        
     }
 
     //If you want to store the direction a raycast hits object for use (particle effect death effect for example).
     public void ApplyDamage(float amount,Vector3 directionOfHit)
     {
-        this.directionOfHit = directionOfHit;
-
-        currentHealth -= amount;
-
-        if (currentHealth <= 0)
+        if(CanTakeDamage)
         {
-            IsAlive = false;
+            this.directionOfHit = directionOfHit;
 
-            if (DestroyOnDeath)
-                Destroy(gameObject);
+            currentHealth -= amount;
 
-            OnDeathEvent?.Invoke();
-        }
+            if (currentHealth <= 0)
+            {
+                IsAlive = false;
+
+                if (DestroyOnDeath)
+                    Destroy(gameObject);
+
+                OnDeathEvent?.Invoke();
+            }
+        }       
     }
 
 }
