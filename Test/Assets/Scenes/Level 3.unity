@@ -77164,6 +77164,8 @@ MonoBehaviour:
   gameManager: {fileID: 817464849}
   computerCanvas: {fileID: 1561846055}
   computerScreenCamera: {fileID: 322270904}
+  computerScreenRenderTexture: {fileID: 8400000, guid: 18b3b241a4705f846848b341ddb1a9c4,
+    type: 2}
   interactSpeed: 1.4
   IsInCooldown: 0
   coolDownCountdownTime: 30

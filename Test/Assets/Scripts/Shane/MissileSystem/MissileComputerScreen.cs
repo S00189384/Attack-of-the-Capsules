@@ -9,8 +9,10 @@ public class MissileComputerScreen : PlayerInteractableObject
     public MissileComputerCanvas computerCanvas;
     HealthComponent playerHealthComponent;
 
-    //Player camera & computer screen camera stuff.
+    [Header("Computer Camera")]
     public Camera computerScreenCamera;
+    public RenderTexture computerScreenRenderTexture;
+    private Camera playerCamera;
 
     [Header("Player Interaction")]
     public float interactSpeed = 5f;
@@ -30,6 +32,15 @@ public class MissileComputerScreen : PlayerInteractableObject
         base.Start();
         playerCameraFieldOfView = Camera.main.fieldOfView;
         playerHealthComponent = player.GetComponent<HealthComponent>();
+        playerCamera = Camera.main;
+    }
+
+    public override void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            StartCoroutine(MoveCameraBackToPlayerPosition());
+        }
     }
 
     //Moving player camera to position;
@@ -42,28 +53,33 @@ public class MissileComputerScreen : PlayerInteractableObject
         while(percentageComplete <= 1)
         {
             percentageComplete += interactSpeed * Time.deltaTime;
-            print(percentageComplete);
             Camera.main.transform.position = Vector3.Lerp(playerCameraPositionAtStartOfInteraction, targetPosition, percentageComplete);
             Camera.main.transform.rotation = Quaternion.Lerp(playerCameraRotationAtStartOfInteraction, targetRotation, percentageComplete);
             Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, targetFieldOfView, percentageComplete);
             yield return null;
         }
+    }
+    IEnumerator MoveCameraToComputerScreen()
+    {
+        playerCameraPositionAtStartOfInteraction = Camera.main.transform.position;
+        playerCameraRotationAtStartOfInteraction = Camera.main.transform.rotation;
+
+        yield return StartCoroutine(MoveAndRotatePlayerCameraToPosition(computerScreenCamera.transform.position, computerScreenCamera.transform.rotation, computerScreenCamera.fieldOfView));
 
         computerScreenCamera.targetTexture = null;
-        Camera.main.enabled = false;
+        playerCamera.enabled = false;
     }
+    IEnumerator MoveCameraBackToPlayerPosition()
+    {
+        playerCamera.enabled = true;
 
-    //IEnumerator MoveCameraToComputerScreen()
-    //{
-    //    playerCameraPositionAtStartOfInteraction = Camera.main.transform.position;
-    //    playerCameraRotationAtStartOfInteraction = Camera.main.transform.rotation;
-    //}
+        yield return StartCoroutine(MoveAndRotatePlayerCameraToPosition(playerCameraPositionAtStartOfInteraction, playerCameraRotationAtStartOfInteraction, playerCamera.fieldOfView));
 
-
-
-
-
-
+        computerScreenCamera.targetTexture = computerScreenRenderTexture;
+        gameManager.EnablePlayerMovement();
+        playerHealthComponent.CanTakeDamage = true;
+        uiBehaviour.EnableUI();
+    }
 
     //Interaction.
     public override void PlayerInteracted()
@@ -82,7 +98,8 @@ public class MissileComputerScreen : PlayerInteractableObject
             playerHealthComponent.CanTakeDamage = false;
 
             //Move camera to position.
-            StartCoroutine(MoveAndRotatePlayerCameraToPosition(computerScreenCamera.transform.position,computerScreenCamera.transform.rotation,computerScreenCamera.fieldOfView));
+            //StartCoroutine(MoveAndRotatePlayerCameraToPosition(computerScreenCamera.transform.position,computerScreenCamera.transform.rotation,computerScreenCamera.fieldOfView));
+            StartCoroutine(MoveCameraToComputerScreen());
         }
     }
 
