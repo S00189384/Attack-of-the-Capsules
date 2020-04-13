@@ -119,7 +119,6 @@ public class WaveController : MonoBehaviour
     public void IncreaseEnemiesKilledInWave()
     {
         numberOfEnemiesKilledInWave++;
-        print("No. of enemies killed = " + numberOfEnemiesKilledInWave);
 
         if (numberOfEnemiesKilledInWave >= currentWave.numberOfEnemiesInWave)
             allEnemiesKilledInWave = true;

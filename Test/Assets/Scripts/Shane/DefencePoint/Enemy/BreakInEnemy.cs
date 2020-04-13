@@ -59,7 +59,6 @@ public class BreakInEnemy : NavMeshEnemy
     [Header("Death")]
     public ParticleSystem deathParticleEffect;
     public Vector3 directionRaycastHit;
-    public AudioClip[] possibleDeathSounds;
 
     [Header("Chasing Player")]
     [Tooltip("Name of area mask that's inside building that the enemy will switch to once inside so it can't leave")]
@@ -287,8 +286,6 @@ public class BreakInEnemy : NavMeshEnemy
     }
     public void OnDeath()
     {
-        audioSource.PlayOneShot(possibleDeathSounds[rng.Next(0, possibleDeathSounds.Length)]);
-
         //Particle effect - spawning, setting colour, destroying.
         ParticleSystem particleSystem = Instantiate(deathParticleEffect,transform.position,Quaternion.FromToRotation(Vector3.forward,healthComponent.directionOfHit));
         ParticleSystem.MainModule psMainModule = particleSystem.main;

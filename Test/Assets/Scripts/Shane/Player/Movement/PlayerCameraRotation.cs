@@ -50,9 +50,7 @@ public class PlayerCameraRotation : MonoBehaviour
             VerticalRotation += verticalRotationInput * mouseSensitivity * Time.deltaTime;
             ClampVerticalRotation();
 
-
             //Rotate player camera and player.
-            //transform.Rotate(Vector3.left * verticalRotationInput);
             transform.localRotation = Quaternion.Euler(-VerticalRotation, 0f, 0f);
             PlayerBody.Rotate(Vector3.up * horizontalRotationInput * mouseSensitivity * Time.deltaTime);
         }
@@ -64,7 +62,4 @@ public class PlayerCameraRotation : MonoBehaviour
         if (VerticalRotation >= MaxXAxisClampValue || VerticalRotation <= MinXAxisClampValue)
             verticalRotationInput = 0;
     }
-
-
-
 }

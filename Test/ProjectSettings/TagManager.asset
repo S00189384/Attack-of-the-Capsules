@@ -20,6 +20,7 @@ TagManager:
   - WaveController
   - BlackScreen
   - MissileScreen
+  - MissileScreenCanvas
   layers:
   - Default
   - TransparentFX
@@ -39,7 +40,7 @@ TagManager:
   - Weapon
   - Player
   - MissileCanvas
-  - 
+  - Roof
   - 
   - 
   - 

@@ -8,8 +8,9 @@ public class UIBehaviour : MonoBehaviour
     public Image _imgPlayerAimDot;
     public Color aimDotOriginalColour;
 
-    [Header("Overall Canvas")]
-    public CanvasGroup canvasGroup;
+    [Header("Canvas Groups")]
+    public CanvasGroup entireUICanvasGroup;
+    public CanvasGroup allUIExceptInteractMessageCanvasGroup;
     public float canvasFadeSpeed;
 
     [Header("Interact Message For Player")]
@@ -30,9 +31,6 @@ public class UIBehaviour : MonoBehaviour
 
         if (FadeUIElement)
         {
-            //if (FadeInteractMessage != null)
-            //    StopCoroutine(FadeInteractMessage);
-
             if(FadeInteractMessage == null)
                 FadeInteractMessage = StartCoroutine(FadePlayerInteractMessage());
         }
@@ -82,7 +80,7 @@ public class UIBehaviour : MonoBehaviour
         while (fadeTimer < 1)
         {
             fadeTimer += Time.deltaTime;
-            canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, 0, fadeTimer * canvasFadeSpeed); 
+            entireUICanvasGroup.alpha = Mathf.Lerp(entireUICanvasGroup.alpha, 0, fadeTimer * canvasFadeSpeed); 
             yield return null;
         }
 
@@ -90,10 +88,19 @@ public class UIBehaviour : MonoBehaviour
     }
     public void DisableUI()
     {
-        canvasGroup.gameObject.SetActive(false);
+        entireUICanvasGroup.alpha = 0;
     }
     public void EnableUI()
     {
-        canvasGroup.gameObject.SetActive(true);
+        entireUICanvasGroup.alpha = 1;
+    }
+
+    public void DisableUIExceptInteractMessage()
+    {
+        allUIExceptInteractMessageCanvasGroup.alpha = 0;
+    }
+    public void EnableUIExceptInteractMessage()
+    {
+        allUIExceptInteractMessageCanvasGroup.alpha = 1;
     }
 }

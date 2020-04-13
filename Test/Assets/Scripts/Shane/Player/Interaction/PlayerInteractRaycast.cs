@@ -81,16 +81,18 @@ public class PlayerInteractRaycast : MonoBehaviour
                 else //Raycast not hitting interactable object.
                 {
 
-                    if (interactableObject != null)
+                    if(interactableObject != null)
                     {
                         interactableObject = null;
                         uiBehaviour.HidePlayerInteractMessage();
                     }
 
-                    IsLookingAtInteractableObject = false;
+                    if(IsLookingAtInteractableObject)
+                        IsLookingAtInteractableObject = false;
 
                     if (uiBehaviour._imgPlayerAimDot.color != uiBehaviour.aimDotOriginalColour && !playerGunAttack.IsAiming)
-                        uiBehaviour._imgPlayerAimDot.color = Color.Lerp(uiBehaviour._imgPlayerAimDot.color, uiBehaviour.aimDotOriginalColour, aimDotFadeSpeed * Time.deltaTime);
+                        uiBehaviour._imgPlayerAimDot.color = uiBehaviour.aimDotOriginalColour;
+                        //uiBehaviour._imgPlayerAimDot.color = Color.Lerp(uiBehaviour._imgPlayerAimDot.color, uiBehaviour.aimDotOriginalColour, aimDotFadeSpeed * Time.deltaTime);
                 }
             }           
         }
@@ -103,6 +105,7 @@ public class PlayerInteractRaycast : MonoBehaviour
         {
             if (interactableObject != null)
             {
+                IsLookingAtInteractableObject = false;
                 uiBehaviour.HidePlayerInteractMessage();
                 uiBehaviour.ResetAimDotColour();
             }

@@ -1,13 +1,31 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+   Computer screen script handles player camera zooming in and out of screen and enables / disables cooldown. 
+   Canvas script handles everything else (mainly updating what's on screen - cooldown timer countdown, status message etc.)
+ */
+
+
+public delegate void PlayerInteractionWithScreen();
 public class MissileComputerScreen : PlayerInteractableObject
 {
     //Components.
     public GameManager gameManager;
     public MissileComputerCanvas computerCanvas;
     HealthComponent playerHealthComponent;
+    AudioSource playerAudioSource;
+
+    //Events.
+    public PlayerInteractionWithScreen PlayerLookedAtScreenEvent;
+    public PlayerInteractionWithScreen PlayerLookedAwayFromScreenEvent;
+
+    //Capturing player camera info when they interact.
+    private Vector3 playerCameraPositionAtStartOfInteraction;
+    private Quaternion playerCameraRotationAtStartOfInteraction;
+    private float playerCameraFieldOfView;
 
     [Header("Computer Camera")]
     public Camera computerScreenCamera;
@@ -17,26 +35,24 @@ public class MissileComputerScreen : PlayerInteractableObject
     [Header("Player Interaction")]
     public float interactSpeed = 5f;
 
-    //Capturing player camera info when they interact.
-    private Vector3 playerCameraPositionAtStartOfInteraction;
-    private Quaternion playerCameraRotationAtStartOfInteraction;
-    private float playerCameraFieldOfView;
-
-    [Header("Cooldown & Status")]
+    [Header("Cooldown")]
     public bool IsInCooldown;
-    public float coolDownCountdownTime = 30f;
-    public float coolDownTimer;
+
 
     public override void Start()
     {
         base.Start();
         playerCameraFieldOfView = Camera.main.fieldOfView;
         playerHealthComponent = player.GetComponent<HealthComponent>();
+        playerAudioSource = player.GetComponent<AudioSource>();
         playerCamera = Camera.main;
-    }
 
+        computerCanvas.CooldownStartedEvent += ActivateCooldown;
+        computerCanvas.CooldownEndedEvent += DisableCooldown;
+    }
     public override void Update()
     {
+        //Testing.
         if(Input.GetKeyDown(KeyCode.B))
         {
             StartCoroutine(MoveCameraBackToPlayerPosition());
@@ -68,17 +84,25 @@ public class MissileComputerScreen : PlayerInteractableObject
 
         computerScreenCamera.targetTexture = null;
         playerCamera.enabled = false;
+        PlayerLookedAtScreenEvent();
     }
     IEnumerator MoveCameraBackToPlayerPosition()
     {
+        //Re-enable the comp screen.
+        computerScreenCamera.enabled = true;
+        computerScreenCamera.targetTexture = computerScreenRenderTexture;
         playerCamera.enabled = true;
 
-        yield return StartCoroutine(MoveAndRotatePlayerCameraToPosition(playerCameraPositionAtStartOfInteraction, playerCameraRotationAtStartOfInteraction, playerCamera.fieldOfView));
+        yield return StartCoroutine(MoveAndRotatePlayerCameraToPosition(playerCameraPositionAtStartOfInteraction, playerCameraRotationAtStartOfInteraction, playerCameraFieldOfView));
 
-        computerScreenCamera.targetTexture = computerScreenRenderTexture;
+        PlayerLookedAwayFromScreenEvent();
+
+        //Reset player state.
         gameManager.EnablePlayerMovement();
         playerHealthComponent.CanTakeDamage = true;
-        uiBehaviour.EnableUI();
+
+        //Re-enable UI.
+        uiBehaviour.EnableUIExceptInteractMessage();
     }
 
     //Interaction.
@@ -86,39 +110,38 @@ public class MissileComputerScreen : PlayerInteractableObject
     {
         if(!IsInCooldown)
         {
-            //Reset UI.
-            uiBehaviour.DisableUI();
+            //Disable footstep audio from player if they were walking when they interacted.
+            playerAudioSource.Stop();
 
-            //Reset computer screen text.
-            computerCanvas.ResetMissileStatusFade();
-            computerCanvas.SetMissileStatusColour(computerCanvas.missileStatusAvailableColour);
+            //Reset UI.
+            IsInteractable = false;
+            uiBehaviour.DisableUIExceptInteractMessage();
+            uiBehaviour.HidePlayerInteractMessage();
 
             //Disable movement & make player not take damage.
             gameManager.DisablePlayerMovement();
             playerHealthComponent.CanTakeDamage = false;
 
             //Move camera to position.
-            //StartCoroutine(MoveAndRotatePlayerCameraToPosition(computerScreenCamera.transform.position,computerScreenCamera.transform.rotation,computerScreenCamera.fieldOfView));
             StartCoroutine(MoveCameraToComputerScreen());
         }
     }
 
-    //Cooldown.
-    public IEnumerator StartCooldown()
+    public void ActivateCooldown()
     {
-        computerCanvas.SetMissileStatusColour(computerCanvas.missileStatusNotAvailableColour);
-        StartCoroutine(computerCanvas.FadeUIText());
-
-        //Activate countdown text on screen;
-
-        while(coolDownTimer >= 0)
-        {
-            coolDownTimer -= Time.deltaTime;
-            yield return null;
-        }
+        IsInteractable = false;
+        IsInCooldown = true;
     }
-    public void ResetCooldownTimer()
+    public void DisableCooldown()
     {
-        coolDownTimer = coolDownCountdownTime;
+        IsInteractable = true;
+        IsInCooldown = false;
+    }
+
+    //Recontrolling player after missile explodes.
+    public void RecontrolPlayer()
+    {
+        StartCoroutine(MoveCameraBackToPlayerPosition());
     }
 }
+
