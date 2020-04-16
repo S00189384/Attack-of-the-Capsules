@@ -11,15 +11,13 @@ public class ParticleTrapButton : PlayerInteractableObject
     [Header("Trap It Controls")]
     public ParticleTrap particleTrap;
 
-    [Header("Cooldown")]
-    public float cooldownTime;
-    public float cooldownTimer;
-
     public override void Start()
     {
         base.Start();
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
+
+        particleTrap.CooldownEndedEvent += SwitchInteractableStatus;
     }
 
     public override void PlayerInteracted()

@@ -17,4 +17,9 @@ public class PlayerInteractableObject : PlayerInteractableComponent
     {
 
     }
+
+    public void SwitchInteractableStatus()
+    {
+        IsInteractable = !IsInteractable;
+    }
 }

@@ -20,6 +20,13 @@ public class ParticleTrap : MonoBehaviour
     public float durationOfTrap;
     public float trapActiveTimer;
 
+    [Header("Cooldown")]
+    public bool IsInCooldown;
+    public float cooldownTimer;
+    public float cooldownTime;
+
+    public CooldownDelegate CooldownEndedEvent;
+
     void Start()
     {
         particleSystems = GetComponentsInChildren<ParticleSystem>();
@@ -48,7 +55,6 @@ public class ParticleTrap : MonoBehaviour
 
         StartCoroutine(SwitchHitboxStatus(hitboxDisableDelay));
     }
-
     IEnumerator SwitchHitboxStatus(float delayBeforeSwitching)
     {
         yield return new WaitForSeconds(delayBeforeSwitching);
@@ -64,7 +70,25 @@ public class ParticleTrap : MonoBehaviour
 
         Deactivate();
         trapActiveTimer = 0;
+
+        StartCoroutine(CooldownCountdown());
     }
+    IEnumerator CooldownCountdown()
+    {
+        print("cooldown");
+        IsInCooldown = true;
+
+        while (cooldownTimer <= cooldownTime)
+        {
+            cooldownTimer += Time.deltaTime;
+            yield return null;
+        }
+
+        CooldownEndedEvent();
+        IsInCooldown = false;
+        cooldownTimer = 0;
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {

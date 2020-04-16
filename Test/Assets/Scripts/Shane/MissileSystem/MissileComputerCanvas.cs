@@ -209,8 +209,6 @@ public class MissileComputerCanvas : MonoBehaviour
         }
 
         //Cooldown is over. Event changes the canvas & computer updates.
-        //IsInteractable = true;
-        //IsInCooldown = false;
         CooldownEndedEvent();
         ResetCooldownTimer();
         ResetComputerAfterCooldown();
