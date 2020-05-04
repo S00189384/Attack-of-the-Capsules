@@ -60,7 +60,9 @@ public class Grenade : ThrowableWeapon
 
         //Updating Inventory.
         numberInPlayerInventory--;
-        print(numberInPlayerInventory);
+
+        //Update UI.
+        uiBehaviour.UpdateThrowableRemaining(numberInPlayerInventory);
 
         if (numberInPlayerInventory > 0)
         {
@@ -70,6 +72,7 @@ public class Grenade : ThrowableWeapon
         {
             playerWeaponInventory.UnequipWeaponFromPlayer();
             playerWeaponInventory.RemoveWeaponFromInventory(playerInventoryIndex);
+            uiBehaviour.DisableThrowableUI();
         }
     }
 }

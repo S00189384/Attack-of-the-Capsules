@@ -85,6 +85,9 @@ public class Shotgun : RaycastGun
         Reserves--;
         Magazine++;
 
+        uiBehaviour.UpdateAmmoCount(this);
+        uiBehaviour.UpdateReserveCount(this);
+
         //Check to stop reload animation.
         if (numberOfRoundsToReload <= 0 || StopReloadEarly || Reserves <= 0)
         {

@@ -209,15 +209,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd6d51c5bca602489c09aa200d48104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  audioSource: {fileID: 0}
+  nameOfWeapon: Knife
   weaponPrefab: {fileID: 9047839936591907183}
   playerInventoryIndex: 4
   defaultWeaponPosition: {x: 0.214, y: -0.09999999, z: 0.442}
+  damage: 0
   targetMask:
     serializedVersion: 2
     m_Bits: 1024
-  animator: {fileID: 0}
   nextTimeCanAttack: 0
   coolDownTime: 2
-  damage: 0
   IsDoingMeleeAttack: 0
+  throwingKnife: {fileID: 0}
   throwForce: 0
+  throwingAnimation: {fileID: 0}

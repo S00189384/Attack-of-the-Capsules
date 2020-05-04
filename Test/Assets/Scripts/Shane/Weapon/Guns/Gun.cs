@@ -36,6 +36,10 @@ public class Gun : Weapon
 
     public int AmmoUsePerShot;
 
+    [Tooltip("What percentage of the max magazine do you consider the gun to be low on ammo? UI shows ammo count as red when its low on ammo.")]
+    [Range(0, 1)]
+    public float lowOnAmmoPercentage;
+
     [Header("Single Fire")]
     public float singleRateOfFire = 2;
 
@@ -61,7 +65,6 @@ public class Gun : Weapon
     [Header("Gun Kick Back")]
     public Vector2 kickMinMax = new Vector2(0.05f, 0.2f);
 
-
     public override void Awake()
     {
         base.Awake();
@@ -75,6 +78,8 @@ public class Gun : Weapon
     {
         Magazine -= AmmoUsePerShot;
         audioSource.PlayOneShot(shootAudio);
+
+        uiBehaviour.UpdateAmmoCount(this);
 
         //Visuals
         transform.localPosition -= Vector3.forward * Random.Range(kickMinMax.x, kickMinMax.y);
@@ -130,6 +135,9 @@ public class Gun : Weapon
         reloadCoroutine = null;
         IsReloading = false;
         animator.SetBool("Reloading", false);
+
+        uiBehaviour.UpdateAmmoCount(this);
+        uiBehaviour.UpdateReserveCount(this);
     }
 
     //If reload animation is playing when player switches weapon, reset the animation.

@@ -164,14 +164,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc7386f90203ad84daacdfa4a6b6d904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  audioSource: {fileID: 0}
+  nameOfWeapon: Ak-47
   weaponPrefab: {fileID: 0}
   playerInventoryIndex: 1
   defaultWeaponPosition: {x: 0.276, y: -0.143, z: 0.97}
+  damage: 50
   targetMask:
     serializedVersion: 2
     m_Bits: 23552
-  damage: 50
-  animator: {fileID: 0}
   EjectCasingOnShoot: 1
   casingPrefab: {fileID: 5566844798329587950, guid: 0a86d87bbf6572e46a32b4f4cca3f747,
     type: 3}
@@ -186,6 +188,7 @@ MonoBehaviour:
   MaxMagazine: 30
   Magazine: 0
   AmmoUsePerShot: 1
+  lowOnAmmoPercentage: 0.1
   singleRateOfFire: 2
   IsAutomatic: 1
   automaticRateOfFire: 9
@@ -207,6 +210,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 103533041295209927}
     m_Modifications:
+    - target: {fileID: 4064662493942241613, guid: 2ea70ae68e35d5b4a9dca3f2ef185f6f,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4064662494881981782, guid: 2ea70ae68e35d5b4a9dca3f2ef185f6f,
         type: 3}
       propertyPath: m_LocalPosition.x

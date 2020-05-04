@@ -142,14 +142,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc7386f90203ad84daacdfa4a6b6d904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  audioSource: {fileID: 0}
+  nameOfWeapon: Handgun
   weaponPrefab: {fileID: 6330467622007980908}
   playerInventoryIndex: 0
   defaultWeaponPosition: {x: 0.226, y: -0.103, z: 0.612}
+  damage: 50
   targetMask:
     serializedVersion: 2
     m_Bits: 23552
-  damage: 50
-  animator: {fileID: 0}
   EjectCasingOnShoot: 1
   casingPrefab: {fileID: 7755281128476788068, guid: 17a30b0e82c1392408271e5fb16a531f,
     type: 3}
@@ -164,6 +166,7 @@ MonoBehaviour:
   MaxMagazine: 6
   Magazine: 0
   AmmoUsePerShot: 1
+  lowOnAmmoPercentage: 0.465
   singleRateOfFire: 5
   IsAutomatic: 0
   automaticRateOfFire: 5

@@ -463,9 +463,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc7386f90203ad84daacdfa4a6b6d904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultWeaponPosition: {x: 0.226, y: -0.103, z: 0.612}
-  playerInventoryIndex: 0
+  animator: {fileID: 0}
+  audioSource: {fileID: 0}
+  nameOfWeapon: Handgun
   weaponPrefab: {fileID: 7585132483071270214}
+  playerInventoryIndex: 0
+  defaultWeaponPosition: {x: 0.226, y: -0.103, z: 0.612}
+  damage: 0
   targetMask:
     serializedVersion: 2
     m_Bits: 23552
@@ -476,7 +480,6 @@ MonoBehaviour:
   IsShooting: 0
   shootPosition: {fileID: 8858007880763631911}
   gunInventoryIndex: 0
-  weaponPosNotAiming: {x: 0.226, y: -0.103, z: 0.612}
   weaponPosAiming: {x: 0, y: -0.051, z: 0.422}
   playerCamera: {fileID: 0}
   MaxReserves: 100
@@ -492,13 +495,11 @@ MonoBehaviour:
   IsReloading: 0
   reloadTime: 1.85
   reloadAnimation: {fileID: 7400000, guid: 261846c41440c4b4991a956af1dd3ada, type: 2}
+  idleAnimation: {fileID: 0}
   shootAudio: {fileID: 8300000, guid: 587c47ebcc90e154fa50744f44182f08, type: 3}
   reloadAudio: {fileID: 8300000, guid: fee3a21f251a4914cabce25b13e7d2a8, type: 3}
-  currentRecoil: 0
-  maxRecoil: 0
   kickMinMax: {x: 0.05, y: 0.2}
   range: 10
-  damagePerHit: 25
   bulletHoleEffect: {fileID: 3820066492337826296, guid: 6b6bc8b138678fd438c48a2f83dd5755,
     type: 3}
 --- !u!1 &3521373442713535010

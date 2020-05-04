@@ -8,6 +8,7 @@ public class PlayerWeaponInventory : MonoBehaviour
     GameManager gameManager;
     PlayerGunAttack playerAttack;
     HealthComponent playerHealthComponent;
+    UIBehaviour uiBehaviour;
 
     [Header("Weapons")]
     public Weapon[] weaponInventory = new Weapon[7];
@@ -26,9 +27,13 @@ public class PlayerWeaponInventory : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        uiBehaviour = GameObject.FindGameObjectWithTag("UI").GetComponent<UIBehaviour>();
         playerAttack = GetComponent<PlayerGunAttack>();
         playerHealthComponent = GetComponentInParent<HealthComponent>();
         playerHealthComponent.OnDeathEvent += FindAndDestroyEquippedWeapon;
+
+        if(activeWeapon)
+            uiBehaviour.UpdateWeaponUIOnSwitchingWeapon(activeWeapon);
     }
     void Update()
     {
@@ -123,6 +128,9 @@ public class PlayerWeaponInventory : MonoBehaviour
                 //Set its position to be correct.
                 FixActiveWeaponPosition();
                 activeWeaponIndex = index;
+
+                //Update UI.
+                uiBehaviour.UpdateWeaponUIOnSwitchingWeapon(activeWeapon);
             }
         }
     }
@@ -162,107 +170,4 @@ public class PlayerWeaponInventory : MonoBehaviour
         activeWeapon.transform.localPosition = activeWeapon.defaultWeaponPosition;
         activeWeapon.transform.forward = transform.forward;
     }
-
-    //Old weapon inventory setup.
-    //public Gun[] gunInventory = new Gun[4];
-    //public int activeGunIndex = -1;
-
-    //[Header("Melee Weapons")]
-    //public MeleeWeapon meleeWeaponInventory;
-    //public MeleeWeapon activeMeleeWeapon;
-    //if (Input.GetKeyDown(KeyCode.Alpha1))
-    //    SetActiveGun(0);
-    //if (Input.GetKeyDown(KeyCode.Alpha2))
-    //    SetActiveGun(1);
-    //if (Input.GetKeyDown(KeyCode.Alpha3))
-    //    SetActiveGun(2);
-    //if (Input.GetKeyDown(KeyCode.Alpha4))
-    //    SetActiveGun(3);
-    //if (Input.GetKeyDown(KeyCode.Alpha5))
-    //    EquipKnife();
-
-    //public void AddGunToInventory(Gun weaponToAdd)
-    //{
-    //    gunInventory[weaponToAdd.gunInventoryIndex] = weaponToAdd;
-    //}
-
-    ////Only a knife for now.
-    //public void AddMeleeWeaponToInventory(MeleeWeapon weaponToAdd)
-    //{
-    //    meleeWeaponInventory = weaponToAdd;
-    //}
-    //void SetActiveGun(int index)
-    //{
-    //    if (index != activeGunIndex)
-    //    {
-    //        if (gunInventory[index] != null)
-    //        {
-    //            if (activeGun)
-    //            {
-    //                if (activeGun.IsReloading)
-    //                {
-    //                    activeGun.IsReloading = false;
-    //                    activeGun.reloadCoroutine = null;
-    //                }
-
-    //                activeGun.gameObject.SetActive(false);
-    //            }
-
-    //            if(activeMeleeWeapon)
-    //            {
-    //                activeMeleeWeapon.gameObject.SetActive(false);
-    //                activeMeleeWeapon = null;
-    //            }
-
-    //            Transform gunToEquip = transform.Find(gunInventory[index].gameObject.name + "(Clone)");
-
-    //            if (!gunToEquip) 
-    //                activeGun = Instantiate(gunInventory[index], transform.position, Quaternion.identity);
-    //            else
-    //            {
-    //                gunToEquip.gameObject.SetActive(true);
-    //                activeGun = gunToEquip.GetComponent<Gun>();
-    //            }
-
-    //            activeGun.transform.parent = transform;
-    //            activeGun.transform.localPosition = activeGun.weaponPosNotAiming;
-    //            activeGun.transform.forward = transform.forward;
-    //            activeGunIndex = index;
-    //        }
-    //    }
-    //}
-
-    //public void EquipKnife()
-    //{
-    //    if(!activeMeleeWeapon)
-    //    {
-    //        //If any guns are equipped deactivate them.
-    //        if (activeGun)
-    //        {
-    //            if (activeGun.IsReloading)
-    //            {
-    //                activeGun.IsReloading = false;
-    //                activeGun.reloadCoroutine = null;
-    //            }
-
-    //            activeGun.gameObject.SetActive(false);
-    //            activeGun = null;
-    //            activeGunIndex = -1;
-    //        }
-
-    //        Transform meleeWeaponToEquip = transform.Find(meleeWeaponInventory.gameObject.name + "(Clone)");
-
-    //        if(!meleeWeaponToEquip)
-    //            activeMeleeWeapon = Instantiate(meleeWeaponInventory, meleeWeaponInventory.weaponPosition, Quaternion.identity);
-    //        else
-    //        {
-    //            meleeWeaponToEquip.gameObject.SetActive(true);
-    //            activeMeleeWeapon = meleeWeaponToEquip.GetComponent<MeleeWeapon>();
-    //        }
-
-    //        activeMeleeWeapon.transform.parent = transform;
-    //        activeMeleeWeapon.transform.localPosition = activeMeleeWeapon.weaponPosition;
-    //        activeMeleeWeapon.transform.forward = transform.forward;
-    //    }     
-    //}
 }

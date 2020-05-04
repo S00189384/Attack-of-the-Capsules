@@ -9,8 +9,6 @@ public class ThrowableWeapon : Weapon
     [Header("Throwable Weapon")]
     public bool ThrowOnSpawn;
 
-    //public int numberOfThrowableInPlayerInventory;
-
     [Header("Throw Options")]
     public float throwForce;
     public bool CanDamageTarget = true;

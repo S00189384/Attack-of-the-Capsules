@@ -18,7 +18,6 @@ public class PlayerPickupItem : PlayerInteractableObject
             case "Grenade":
                 player.GetComponentInChildren<PlayerWeaponInventory>().AddThrowableToInventory(prefabToPickup.GetComponent<Grenade>());
                 Grenade.numberInPlayerInventory++;
-                print(Grenade.numberInPlayerInventory);
                 break;
         }
 

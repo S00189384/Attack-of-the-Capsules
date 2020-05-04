@@ -154,14 +154,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e22a72a04d93147adf355206c42b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  audioSource: {fileID: 0}
+  nameOfWeapon: Shotgun
   weaponPrefab: {fileID: 0}
   playerInventoryIndex: 2
   defaultWeaponPosition: {x: 0.313, y: -0.122, z: 0.822}
+  damage: 100
   targetMask:
     serializedVersion: 2
     m_Bits: 23552
-  damage: 100
-  animator: {fileID: 0}
   EjectCasingOnShoot: 0
   casingPrefab: {fileID: 505019249819060661, guid: fbe14a689642648409cd825eb5e533e9,
     type: 3}
@@ -176,6 +178,7 @@ MonoBehaviour:
   MaxMagazine: 8
   Magazine: 0
   AmmoUsePerShot: 1
+  lowOnAmmoPercentage: 0.225
   singleRateOfFire: 0.92
   IsAutomatic: 0
   automaticRateOfFire: 5

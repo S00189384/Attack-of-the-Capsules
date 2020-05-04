@@ -7,8 +7,10 @@ public class Weapon : MonoBehaviour
 {
     public Animator animator;
     public AudioSource audioSource;
+    protected UIBehaviour uiBehaviour;
 
     [Header("Player Inventory")]
+    public string nameOfWeapon;
     public Weapon weaponPrefab;
     public int playerInventoryIndex;
 
@@ -26,6 +28,7 @@ public class Weapon : MonoBehaviour
 
     public virtual void Awake()
     {
+        uiBehaviour = GameObject.FindGameObjectWithTag("UI").GetComponent<UIBehaviour>();
         animator = GetComponentInChildren<Animator>();
         audioSource = GetComponent<AudioSource>();
     }

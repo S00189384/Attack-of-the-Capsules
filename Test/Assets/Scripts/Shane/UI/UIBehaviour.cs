@@ -8,6 +8,7 @@ public class UIBehaviour : MonoBehaviour
     //General
     Color transparentColour = new Color(255, 255, 255, 0);
 
+    //Aim Dot.
     public Image _imgPlayerAimDot;
     public Color aimDotOriginalColour;
 
@@ -31,6 +32,21 @@ public class UIBehaviour : MonoBehaviour
     public float delayAfterRoundFadingEnds;
     Coroutine startOfRoundFadeCoroutine;
     Coroutine roundTransitionCoroutine;
+
+    [Header("Gun Info")]
+    public GameObject gunInfoUI;
+    public TextMeshProUGUI tmProWeaponName;
+    Coroutine fadeWeaponNameCoroutine;
+    public Color weaponNameColour;
+    public float weaponNameFadeSpeedAfterEquipping;
+    public TextMeshProUGUI tmProGunAmmoCount;
+    public Color ammoCountLowColour;
+    public Color ammoCountNotLowColour;
+    public TextMeshProUGUI tmProGunReserveCount;
+
+    [Header("Throwable UI")]
+    public TextMeshProUGUI TMProThrowableCount;
+    public GameObject throwableUI;
 
     private void Start()
     {
@@ -148,7 +164,6 @@ public class UIBehaviour : MonoBehaviour
     {
         startOfRoundFadeCoroutine = StartCoroutine(FadeTMProColourFromTo(tmProWaveNumber, startOfRoundFadeSpeed, tmProWaveNumber.color, waveNumberColour));
     }
-
     public IEnumerator UpdateRoundNumberOnRoundTransition(int roundNumber)
     {
         tmProWaveNumber.color = waveNumberColourDuringRoundTransition;
@@ -156,5 +171,77 @@ public class UIBehaviour : MonoBehaviour
         yield return new WaitForSeconds(delayAfterRoundFadingEnds);
         tmProWaveNumber.text = roundNumber.ToString();
         FadeRoundNumberOnRoundStart();
+    }
+
+    //Gun UI.
+    public void UpdateWeaponUIOnSwitchingWeapon(Weapon weaponToEquip)
+    {
+        UpdateWeaponName(weaponToEquip.nameOfWeapon);
+
+        if(weaponToEquip.CompareTag("Gun"))
+        {
+            DisableThrowableUI();
+            EnableGunInfoUI();
+            Gun gun = weaponToEquip.GetComponent<Gun>();
+            UpdateAmmoCount(gun);
+            UpdateReserveCount(gun);
+        }
+        else
+        {
+            DisableGunInfoUI();
+        }
+
+        if(weaponToEquip.CompareTag("Grenade"))
+        {         
+            EnableThrowableUI();
+            UpdateThrowableRemaining(Grenade.numberInPlayerInventory);
+        }
+        else
+        {
+            DisableThrowableUI();
+        }
+    }
+    public void UpdateWeaponName(string nameOfWeapon)
+    {
+        if (fadeWeaponNameCoroutine != null)
+            StopCoroutine(fadeWeaponNameCoroutine);
+
+        tmProWeaponName.color = weaponNameColour;
+        tmProWeaponName.text = nameOfWeapon;
+        fadeWeaponNameCoroutine = StartCoroutine(FadeTMProColourFromTo(tmProWeaponName, weaponNameFadeSpeedAfterEquipping, weaponNameColour,new Color(weaponNameColour.r,weaponNameColour.g,weaponNameColour.b,0)));
+    }
+    public void UpdateAmmoCount(Gun gunToUpdate)
+    {
+        tmProGunAmmoCount.text = gunToUpdate.Magazine.ToString();
+        if(gunToUpdate.Magazine <= gunToUpdate.MaxMagazine * gunToUpdate.lowOnAmmoPercentage)
+            tmProGunAmmoCount.color = ammoCountLowColour;
+        else
+            tmProGunAmmoCount.color = ammoCountNotLowColour;
+    }
+    public void UpdateReserveCount(Gun gunToUpdate)
+    {
+        tmProGunReserveCount.text = gunToUpdate.Reserves.ToString();
+    }
+    public void EnableGunInfoUI()
+    {
+        gunInfoUI.gameObject.SetActive(true);
+    }
+    public void DisableGunInfoUI()
+    {
+        gunInfoUI.gameObject.SetActive(false);
+    }
+
+    //Throwable UI.
+    public void UpdateThrowableRemaining(int numberThrowableRemaining)
+    {
+        TMProThrowableCount.text = numberThrowableRemaining.ToString();
+    }
+    public void EnableThrowableUI()
+    {
+        throwableUI.gameObject.SetActive(true);
+    }
+    public void DisableThrowableUI()
+    {
+        throwableUI.gameObject.SetActive(false);
     }
 }
