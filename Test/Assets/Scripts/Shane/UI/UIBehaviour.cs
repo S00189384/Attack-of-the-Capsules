@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIBehaviour : MonoBehaviour
 {
     //General
-    Color transparentColour = new Color(255, 255, 255, 0);
+    public static Color transparentColour = new Color(255, 255, 255, 0);
 
     //Aim Dot.
     public Image _imgPlayerAimDot;
@@ -51,7 +51,11 @@ public class UIBehaviour : MonoBehaviour
     private void Start()
     {
         aimDotOriginalColour = _imgPlayerAimDot.color;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<HealthComponent>().OnDeathEvent += DisableUI;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        HealthComponent playerHealthComponent = player.GetComponent<HealthComponent>();
+
+        playerHealthComponent.OnDeathEvent += UpdateGameOverTextFailure;
+        playerHealthComponent.OnDeathEvent += DisableUI;
     }
 
     //Interact Message.
@@ -122,8 +126,8 @@ public class UIBehaviour : MonoBehaviour
         allUIExceptInteractMessageCanvasGroup.alpha = 1;
     }
 
-    //General tmpro methods.
-    IEnumerator FadeTMProColourFromTo(TextMeshProUGUI tmProElement, float fadeSpeed,Color currentColour,Color colourToFadeTo)
+    //General tmpro methods (used in other UI - game over screen etc.)
+    public static IEnumerator FadeTMProColourFromTo(TextMeshProUGUI tmProElement, float fadeSpeed,Color currentColour,Color colourToFadeTo)
     {
         float percentageComplete = 0;
         while (percentageComplete <= 1)
@@ -133,7 +137,7 @@ public class UIBehaviour : MonoBehaviour
             yield return null;
         }
     }
-    IEnumerator FadeTMProFromClearToVisibleContinuously(TextMeshProUGUI tmProElement, float fadeSpeed)
+    public static IEnumerator FadeTMProFromClearToVisibleContinuously(TextMeshProUGUI tmProElement, float fadeSpeed)
     {
         Color tmProOriginalColour = tmProElement.color;
         float fadeTimer = 0;
@@ -145,7 +149,7 @@ public class UIBehaviour : MonoBehaviour
             yield return null;
         }
     }
-    IEnumerator FadeTMProFromClearToVisibleOverTime(TextMeshProUGUI tmProElement, float fadeSpeed, float durationOfFade,float alphaToSetAtEnd)
+    public static IEnumerator FadeTMProFromClearToVisibleOverTime(TextMeshProUGUI tmProElement, float fadeSpeed, float durationOfFade,float alphaToSetAtEnd)
     {
         Color tmProOriginalColour = tmProElement.color;
         float timer = 0;
@@ -157,6 +161,10 @@ public class UIBehaviour : MonoBehaviour
         }
 
         tmProElement.color = new Color(tmProOriginalColour.r, tmProOriginalColour.g, tmProOriginalColour.b, alphaToSetAtEnd);
+    }
+    public void UpdateGameOverTextFailure()
+    {
+        GameOverUI.gameOverText = "You Died";
     }
 
     //Wave UI.
