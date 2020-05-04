@@ -92,10 +92,12 @@ public class WaveController : MonoBehaviour
 
             yield return BeforeWaveTransition(transitionBetweenWavesAudio);
         }
+        //All waves are over - end game.
         else
         {
-            //Fade to black - game / level ends.
+            GameOverUI.gameOverText = "You Win!";
             StartCoroutine(GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().FadeToBlackAndLoadScene(endGameFadeToBlackDelay,endGameFadeToBlackSpeed,1));
+
         }
     }
     IEnumerator BeforeWaveTransition(AudioClip transitionAudio)

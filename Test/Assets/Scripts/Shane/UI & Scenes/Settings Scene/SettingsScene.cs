@@ -20,6 +20,5 @@ public class SettingsScene : MonoBehaviour
     public void SaveSettings()
     {
         Settings.SetPlayerCameraSensitivity((int)sensitivitySlider.value);
-        print(Settings.playerCameraSensitivity);
     }
 }

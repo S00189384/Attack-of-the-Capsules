@@ -27,6 +27,6 @@ public class PlayerAnimations : MonoBehaviour
 
     private void StartFadeToBlack()
     {
-        StartCoroutine(GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().FadeToBlackAndLoadScene(0,fadeToBlackSpeed,2));
+        StartCoroutine(GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().FadeToBlackAndLoadScene(0,fadeToBlackSpeed,1));
     }
 }
