@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class UIBehaviour : MonoBehaviour
 {
+    //General
+    Color transparentColour = new Color(255, 255, 255, 0);
+
     public Image _imgPlayerAimDot;
     public Color aimDotOriginalColour;
 
@@ -14,9 +17,20 @@ public class UIBehaviour : MonoBehaviour
     public float canvasFadeSpeed;
 
     [Header("Interact Message For Player")]
-    public TextMeshProUGUI _txtInteractMessage;
+    public TextMeshProUGUI tmProInteractMessage;
     public float interactMessageFadeSpeed = 1f;
-    Coroutine FadeInteractMessage;
+    Coroutine FadeInteractMessageCoroutine;
+
+    [Header("Wave Number")]
+    public TextMeshProUGUI tmProWaveNumber;
+    public Color waveNumberColour;
+    public Color waveNumberColourDuringRoundTransition;
+    public float startOfRoundFadeSpeed;
+    public float roundTransitionFadeSpeed;
+    public float roundTransitionFadeDuration;
+    public float delayAfterRoundFadingEnds;
+    Coroutine startOfRoundFadeCoroutine;
+    Coroutine roundTransitionCoroutine;
 
     private void Start()
     {
@@ -27,39 +41,27 @@ public class UIBehaviour : MonoBehaviour
     //Interact Message.
     public void ShowPlayerInteractMessage(string message, bool FadeUIElement)
     {
-        _txtInteractMessage.text = message;
+        tmProInteractMessage.text = message;
 
         if (FadeUIElement)
         {
-            if(FadeInteractMessage == null)
-                FadeInteractMessage = StartCoroutine(FadePlayerInteractMessage());
+            if(FadeInteractMessageCoroutine == null)
+                FadeInteractMessageCoroutine = StartCoroutine(FadeTMProFromClearToVisibleContinuously(tmProInteractMessage,interactMessageFadeSpeed));
         }
     }
     public void HidePlayerInteractMessage()
     {
-        _txtInteractMessage.text = "";
-        _txtInteractMessage.color = Color.white;
-        if (FadeInteractMessage != null)
+        tmProInteractMessage.text = "";
+        tmProInteractMessage.color = Color.white;
+        if (FadeInteractMessageCoroutine != null)
         {
-            StopCoroutine(FadeInteractMessage);
-            FadeInteractMessage = null;
-        }
-    }
-    IEnumerator FadePlayerInteractMessage()
-    {
-        Color transparentColour = new Color(255, 255, 255, 0);
-        float fadeTimer = 0;
-
-        while (true)
-        {
-            fadeTimer += Time.deltaTime;
-            _txtInteractMessage.color = Color.Lerp(aimDotOriginalColour, transparentColour, Mathf.PingPong(fadeTimer * interactMessageFadeSpeed, 1));
-            yield return null;
+            StopCoroutine(FadeInteractMessageCoroutine);
+            FadeInteractMessageCoroutine = null;
         }
     }
     public bool IsNotificationMessageOnScreen()
     {
-        return _txtInteractMessage.text != "";
+        return tmProInteractMessage.text != "";
     }
 
     //Aim dot.
@@ -102,5 +104,57 @@ public class UIBehaviour : MonoBehaviour
     public void EnableUIExceptInteractMessage()
     {
         allUIExceptInteractMessageCanvasGroup.alpha = 1;
+    }
+
+    //General tmpro methods.
+    IEnumerator FadeTMProColourFromTo(TextMeshProUGUI tmProElement, float fadeSpeed,Color currentColour,Color colourToFadeTo)
+    {
+        float percentageComplete = 0;
+        while (percentageComplete <= 1)
+        {
+            percentageComplete += Time.deltaTime * fadeSpeed;
+            tmProElement.color = Color.Lerp(currentColour, colourToFadeTo, percentageComplete);
+            yield return null;
+        }
+    }
+    IEnumerator FadeTMProFromClearToVisibleContinuously(TextMeshProUGUI tmProElement, float fadeSpeed)
+    {
+        Color tmProOriginalColour = tmProElement.color;
+        float fadeTimer = 0;
+
+        while (true)
+        {
+            fadeTimer += Time.deltaTime * fadeSpeed;
+            tmProElement.color = Color.Lerp(tmProOriginalColour, transparentColour, Mathf.PingPong(fadeTimer, 1));
+            yield return null;
+        }
+    }
+    IEnumerator FadeTMProFromClearToVisibleOverTime(TextMeshProUGUI tmProElement, float fadeSpeed, float durationOfFade,float alphaToSetAtEnd)
+    {
+        Color tmProOriginalColour = tmProElement.color;
+        float timer = 0;
+        while(timer <= durationOfFade)
+        {
+            timer += Time.deltaTime;
+            tmProElement.color = Color.Lerp(tmProOriginalColour,transparentColour,Mathf.PingPong(timer, 1));
+            yield return null;
+        }
+
+        tmProElement.color = new Color(tmProOriginalColour.r, tmProOriginalColour.g, tmProOriginalColour.b, alphaToSetAtEnd);
+    }
+
+    //Wave UI.
+    public void FadeRoundNumberOnRoundStart()
+    {
+        startOfRoundFadeCoroutine = StartCoroutine(FadeTMProColourFromTo(tmProWaveNumber, startOfRoundFadeSpeed, tmProWaveNumber.color, waveNumberColour));
+    }
+
+    public IEnumerator UpdateRoundNumberOnRoundTransition(int roundNumber)
+    {
+        tmProWaveNumber.color = waveNumberColourDuringRoundTransition;
+        yield return roundTransitionCoroutine = StartCoroutine(FadeTMProFromClearToVisibleOverTime(tmProWaveNumber, roundTransitionFadeSpeed, roundTransitionFadeDuration,0));
+        yield return new WaitForSeconds(delayAfterRoundFadingEnds);
+        tmProWaveNumber.text = roundNumber.ToString();
+        FadeRoundNumberOnRoundStart();
     }
 }

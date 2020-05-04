@@ -10,6 +10,7 @@ public class WaveController : MonoBehaviour
 
     //Components.
     AudioSource audioSource;
+    UIBehaviour uiBehaviour;
 
     [Header("Waves")]
     public int currentWaveIndex;
@@ -37,11 +38,18 @@ public class WaveController : MonoBehaviour
     IEnumerator Start()
     {
         audioSource = GetComponent<AudioSource>();
+        uiBehaviour = GameObject.FindGameObjectWithTag("UI").GetComponent<UIBehaviour>();
 
         currentWave = wavesList[currentWaveIndex];
 
         //Play audio at start - when it ends start to spawn waves.
-        yield return BeforeWaveTransition(startOfGameAudio);
+        uiBehaviour.FadeRoundNumberOnRoundStart();
+
+        //Start of game - fade number UI from transparent to its colour.
+        audioSource.clip = startOfGameAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(startOfGameAudio.length * transitionAudioWaveStarterOffset);
+
         StartCoroutine(SpawnAllWaves());
     }
 
@@ -52,7 +60,6 @@ public class WaveController : MonoBehaviour
             yield return SpawnAllEnemiesInWave();
         }
     }
-
     IEnumerator SpawnAllEnemiesInWave()
     {
         //Spawn all enemies in wave.
@@ -91,17 +98,17 @@ public class WaveController : MonoBehaviour
             StartCoroutine(GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().FadeToBlackAndLoadScene(endGameFadeToBlackDelay,endGameFadeToBlackSpeed,1));
         }
     }
-
     IEnumerator BeforeWaveTransition(AudioClip transitionAudio)
     {
         //Play audio.
         audioSource.clip = transitionAudio;
         audioSource.Play();
 
+        StartCoroutine(uiBehaviour.UpdateRoundNumberOnRoundTransition(currentWaveIndex + 1));
+
         //Wait until audio ends.
         yield return new WaitForSeconds(transitionAudio.length * transitionAudioWaveStarterOffset);
     }
-
     public Spawner GetRandomSpawner()
     {
         return activeSpawnersList[rng.Next(0, activeSpawnersList.Count)];

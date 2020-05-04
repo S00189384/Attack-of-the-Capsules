@@ -180,7 +180,7 @@ public class BreakInEnemy : NavMeshEnemy
                     float interpolation = (-(percentageComplete * percentageComplete) + percentageComplete) * 4;
                     transform.position = Vector3.Lerp(startingPosition, positionToDashTo, interpolation);
 
-                    if (attackTarget != player && interpolation >= 0.5f & !HasAppliedDamage)
+                    if (interpolation >= 0.5f & !HasAppliedDamage)
                     {
                         audioSource.PlayOneShot(attackSound);
 

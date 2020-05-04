@@ -16,5 +16,5 @@ MonoBehaviour:
     type: 3}
   numberOfEnemiesInWave: 1
   numberOfEnemiesSpawned: 0
-  minTimeBetweenEnemySpawns: 1
-  maxTimeBetweenEnemySpawns: 1.5
+  minTimeBetweenEnemySpawns: 2
+  maxTimeBetweenEnemySpawns: 2.8
