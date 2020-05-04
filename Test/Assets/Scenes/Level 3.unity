@@ -111428,6 +111428,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: MainCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 4862942537248295061, guid: 89bd07db3561db247bc6c085b461804e,
+        type: 3}
+      propertyPath: defaultMouseSensitivity
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4862942537248295062, guid: 89bd07db3561db247bc6c085b461804e,
         type: 3}
       propertyPath: field of view

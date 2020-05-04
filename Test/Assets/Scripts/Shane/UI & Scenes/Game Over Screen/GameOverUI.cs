@@ -17,8 +17,6 @@ public class GameOverUI : MonoBehaviour
 
     [Header("Menu")]
     public GameObject menuUI;
-    public Button btnMainMenu;
-    public Button btnTryAgain;
 
     IEnumerator Start()
     {
@@ -32,11 +30,4 @@ public class GameOverUI : MonoBehaviour
 
         menuUI.gameObject.SetActive(true);
     }
-
-    //Menu. Button Presses.
-    public void LoadScene(int sceneNumber)
-    {
-        SceneManager.LoadScene(sceneNumber);
-    }
-
 }

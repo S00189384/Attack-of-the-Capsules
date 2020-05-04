@@ -13,7 +13,7 @@ public class PlayerCameraRotation : MonoBehaviour
 
     //Rotation
     [Header("Rotation Speed")]
-    public float mouseSensitivity;
+    public int defaultMouseSensitivity;
 
     [Header("Player Input")]
     public float horizontalRotationInput;
@@ -47,12 +47,12 @@ public class PlayerCameraRotation : MonoBehaviour
             verticalRotationInput = Input.GetAxisRaw("Mouse Y");
 
             //Get rotation amount for looking down and up and clamp it.
-            VerticalRotation += verticalRotationInput * mouseSensitivity * Time.deltaTime;
+            VerticalRotation += verticalRotationInput * Settings.playerCameraSensitivity * Time.deltaTime;
             ClampVerticalRotation();
 
             //Rotate player camera and player.
             transform.localRotation = Quaternion.Euler(-VerticalRotation, 0f, 0f);
-            PlayerBody.Rotate(Vector3.up * horizontalRotationInput * mouseSensitivity * Time.deltaTime);
+            PlayerBody.Rotate(Vector3.up * horizontalRotationInput * Settings.playerCameraSensitivity * Time.deltaTime);
         }
     }
     private void ClampVerticalRotation()

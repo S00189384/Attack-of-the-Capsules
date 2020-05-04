@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 87983171}
   - component: {fileID: 87983170}
   - component: {fileID: 87983174}
+  - component: {fileID: 87983175}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -240,8 +241,18 @@ MonoBehaviour:
   gameOverTextFadeInSpeed: 1.4
   delayToDisplayMenu: 1.1
   menuUI: {fileID: 1507244332}
-  btnMainMenu: {fileID: 672895887}
-  btnTryAgain: {fileID: 1304593387}
+--- !u!114 &87983175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87983169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8228a3311fdc6342a0d5cbcea2bd398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &335486998
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,7 +933,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 87983174}
+      - m_Target: {fileID: 87983175}
         m_MethodName: LoadScene
         m_Mode: 3
         m_Arguments:
@@ -1061,7 +1072,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 87983174}
+      - m_Target: {fileID: 87983175}
         m_MethodName: LoadScene
         m_Mode: 3
         m_Arguments:
