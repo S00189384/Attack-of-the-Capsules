@@ -3,8 +3,14 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.AI;
 
-public delegate void LeftDefencePoint(BreakInEnemy enemy);
+/*  Enemy is assigned a "defence point" at spawn. If the enemy is in the first row at the defence point they attack the barricade or the player if the player gets too close.
+ *  If there are enemies waiting not in the front row and another enemy in the front row dies, a random enemy in the back row is chosen to move up and attack the barricade / player.
+ *  Once the defence point has no barricades the enemies chase the player - their navmeshmask changes so that once they enter the building they cant leave.
+ *  When chasing they check if there is obstacles between them and the player which prevents them from attacking through walls.
+ *  Their attack is a dash towards the player after a certain amount of time.  
+ */
 
+public delegate void LeftDefencePoint(BreakInEnemy enemy);
 public class BreakInEnemy : NavMeshEnemy
 {
     System.Random rng = new System.Random();
@@ -74,6 +80,7 @@ public class BreakInEnemy : NavMeshEnemy
     {
         base.Start();
 
+        //Components.
         healthComponent = GetComponent<HealthComponent>();
         audioSource = GetComponent<AudioSource>();
         DefencePointEnemyBehaviour = defencePoint.GetComponentInChildren<DefencePointEnemyBehaviour>();
@@ -83,7 +90,8 @@ public class BreakInEnemy : NavMeshEnemy
         waveController = GameObject.FindGameObjectWithTag("WaveController").GetComponent<WaveController>();
 
         //Subscribing events.
-        GetComponent<HealthComponent>().OnDeathEvent += OnDeath;
+        player.GetComponent<HealthComponent>().OnDeathEvent += DisableAttack;
+        healthComponent.OnDeathEvent += OnDeath;
         ReachedDestinationEvent += CheckIfReachedFrontRow;
 
         if(defencePoint.IsBarricaded())
@@ -92,6 +100,7 @@ public class BreakInEnemy : NavMeshEnemy
             DefencePointPlayerBehaviour.PlayerLeftDefencePointArea += TargetBarricade;
         }
 
+        //Assigning material of enemy.
         materialOfEnemy = possibleMaterials[rng.Next(0, possibleMaterials.Count)];
         GetComponent<MeshRenderer>().material = materialOfEnemy;
     }	
@@ -101,10 +110,10 @@ public class BreakInEnemy : NavMeshEnemy
     {
         base.Update();
 
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            navMeshAgent.areaMask = 1 << 5;
-        }
+        //if(Input.GetKeyDown(KeyCode.L))
+        //{
+        //    navMeshAgent.areaMask = 1 << 5;
+        //}
 
         if(CanAttack)
         {
@@ -153,6 +162,11 @@ public class BreakInEnemy : NavMeshEnemy
     {
         attackTarget = defencePoint.GetLastBarricade().gameObject;
     }
+    public void DisableAttack()
+    {
+        CanAttack = false;
+    }
+
 
     //General Attack.
     IEnumerator AttackTarget()

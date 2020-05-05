@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+/* Script deals with enemy behaviour at a defence point.     
+ * Assigns positions for enemies to move to around the defence point.     
+ */
+
 public class DefencePointEnemyBehaviour : MonoBehaviour
 {
     System.Random rng = new System.Random();
@@ -74,7 +78,7 @@ public class DefencePointEnemyBehaviour : MonoBehaviour
         numberOfEnemiesActive--;
     }
 
-    //Does defence point have max number of enemies 
+    //Does defence point have max number of enemies .
     public bool HasMaxNumberOfEnemies()
     {
         return numberOfEnemiesActive >= maxNumberOfEnemies;

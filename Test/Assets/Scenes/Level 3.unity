@@ -56848,6 +56848,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9014527333177232532, guid: 2d242639559351b42b0d7ce2a6b76742,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d242639559351b42b0d7ce2a6b76742, type: 3}
 --- !u!1001 &1095827793

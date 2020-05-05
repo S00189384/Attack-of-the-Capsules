@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/* Spawns break in enemies. Gives them a defence point and notifies defence point enemy behaviour script.
+ */
+
 public class Spawner : MonoBehaviour
 {
     public DefencePointEnemyBehaviour DefencePointEnemyBehaviour;
