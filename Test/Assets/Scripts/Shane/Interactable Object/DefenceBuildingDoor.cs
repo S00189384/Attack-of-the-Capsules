@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public delegate void UnlockDoorDelegate(int indexOfAreaUnlocked);
 [RequireComponent(typeof(AudioSource))]
@@ -43,5 +44,7 @@ public class DefenceBuildingDoor : PlayerInteractableObject
         UnlockDoorEvent(indexOfAreaUnlocked);
         Destroy(gameObject);
         uiBehaviour.HidePlayerInteractMessage();
+
+        GetComponent<NavMeshObstacle>().carving = false;
     }
 }
