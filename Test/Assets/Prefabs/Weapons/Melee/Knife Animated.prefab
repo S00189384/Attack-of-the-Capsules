@@ -189,9 +189,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   audioSource: {fileID: 0}
+  inventoryUISlot: {fileID: 0}
   nameOfWeapon: Knife
   weaponPrefab: {fileID: 683914986522057668}
-  playerInventoryIndex: 4
+  playerInventoryIndex: 0
   defaultWeaponPosition: {x: 0.214, y: -0.09999999, z: 0.442}
   damage: 100
   targetMask:

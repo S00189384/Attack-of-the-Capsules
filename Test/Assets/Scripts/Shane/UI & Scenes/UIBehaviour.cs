@@ -48,6 +48,10 @@ public class UIBehaviour : MonoBehaviour
     public TextMeshProUGUI TMProThrowableCount;
     public GameObject throwableUI;
 
+    [Header("Inventory UI")]
+    public InventoryUISlot[] inventoryUISlots;
+    private InventoryUISlot lastInventoryUISlotEquipped;
+
     private void Start()
     {
         aimDotOriginalColour = _imgPlayerAimDot.color;
@@ -252,4 +256,14 @@ public class UIBehaviour : MonoBehaviour
     {
         throwableUI.gameObject.SetActive(false);
     }
+
+    //Inventory.
+    public void EnableInventoryItemSlot(int indexToEnable)
+    {
+        if (lastInventoryUISlotEquipped != null)
+            lastInventoryUISlotEquipped.ChangeBackgroundColourToUnequipped();
+
+        inventoryUISlots[indexToEnable].ChangeBackgroundColourToEquipped();
+        lastInventoryUISlotEquipped = inventoryUISlots[indexToEnable];
+    }        
 }

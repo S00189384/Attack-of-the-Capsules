@@ -44,15 +44,19 @@ public class PlayerWeaponInventory : MonoBehaviour
     public void AddWeaponToInventory(Weapon weaponToAdd)
     {
         weaponInventory[weaponToAdd.playerInventoryIndex] = weaponToAdd;
+        uiBehaviour.inventoryUISlots[weaponToAdd.playerInventoryIndex].EnableInventoryItemPicture();
     }
     public void AddThrowableToInventory(ThrowableWeapon throwableWeaponToAdd)
     {
         if(weaponInventory[throwableWeaponToAdd.playerInventoryIndex] == null)
+        {
             weaponInventory[throwableWeaponToAdd.playerInventoryIndex] = throwableWeaponToAdd;
+            uiBehaviour.inventoryUISlots[throwableWeaponToAdd.playerInventoryIndex].EnableInventoryItemPicture();
+        }
     }
 
     //Switching / Equipping weapons.
-    void SwitchWeaponsOnPlayerInput()
+    private void SwitchWeaponsOnPlayerInput()
     {
         if(gameManager.CanControlPlayer)
         {
@@ -131,6 +135,7 @@ public class PlayerWeaponInventory : MonoBehaviour
 
                 //Update UI.
                 uiBehaviour.UpdateWeaponUIOnSwitchingWeapon(activeWeapon);
+                uiBehaviour.EnableInventoryItemSlot(activeWeaponIndex);
             }
         }
     }
@@ -142,11 +147,16 @@ public class PlayerWeaponInventory : MonoBehaviour
         //Set its position to be correct.
         FixActiveWeaponPosition();
         activeWeaponIndex = index;
+
+        uiBehaviour.EnableInventoryItemSlot(activeWeaponIndex);
     }
 
     //Unequipping / removing weapons from player / inventory.
     public void UnequipWeaponFromPlayer()
     {
+        uiBehaviour.inventoryUISlots[activeWeaponIndex].ChangeBackgroundColourToUnequipped();
+        uiBehaviour.inventoryUISlots[activeWeaponIndex].DisableInventoryItemPicture();
+
         activeWeaponIndex = -1;
         activeWeapon = null;
         activeMeleeWeapon = null;

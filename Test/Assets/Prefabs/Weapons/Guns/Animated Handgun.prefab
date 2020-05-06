@@ -144,9 +144,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   audioSource: {fileID: 0}
+  inventoryUISlot: {fileID: 0}
   nameOfWeapon: Handgun
   weaponPrefab: {fileID: 6330467622007980908}
-  playerInventoryIndex: 0
+  playerInventoryIndex: 2
   defaultWeaponPosition: {x: 0.226, y: -0.103, z: 0.612}
   damage: 50
   targetMask:

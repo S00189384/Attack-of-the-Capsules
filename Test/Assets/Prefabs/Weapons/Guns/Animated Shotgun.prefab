@@ -156,9 +156,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   audioSource: {fileID: 0}
+  inventoryUISlot: {fileID: 0}
   nameOfWeapon: Shotgun
   weaponPrefab: {fileID: 0}
-  playerInventoryIndex: 2
+  playerInventoryIndex: 4
   defaultWeaponPosition: {x: 0.313, y: -0.122, z: 0.822}
   damage: 100
   targetMask:

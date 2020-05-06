@@ -622,7 +622,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Try Again
+  m_text: Play Again
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d29059f82a4348d4a9c3f18c7fc02ff2, type: 2}
   m_sharedMaterial: {fileID: -7466975371476080098, guid: d29059f82a4348d4a9c3f18c7fc02ff2,
@@ -692,7 +692,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 548142297}
-    characterCount: 9
+    characterCount: 10
     spriteCount: 0
     spaceCount: 1
     wordCount: 2
@@ -1227,7 +1227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1507244333
 RectTransform:
   m_ObjectHideFlags: 0

@@ -5,9 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Weapon : MonoBehaviour
 {
+    //Components.
     public Animator animator;
     public AudioSource audioSource;
     protected UIBehaviour uiBehaviour;
+    public InventoryUISlot inventoryUISlot;
 
     [Header("Player Inventory")]
     public string nameOfWeapon;

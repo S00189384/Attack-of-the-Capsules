@@ -166,9 +166,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   audioSource: {fileID: 0}
+  inventoryUISlot: {fileID: 0}
   nameOfWeapon: Ak-47
   weaponPrefab: {fileID: 0}
-  playerInventoryIndex: 1
+  playerInventoryIndex: 3
   defaultWeaponPosition: {x: 0.276, y: -0.143, z: 0.97}
   damage: 50
   targetMask:

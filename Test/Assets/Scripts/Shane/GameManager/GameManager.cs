@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(delayBeforeStartingFade);
 
         DisablePlayerMovement();
-        player.GetComponentInChildren<PlayerWeaponInventory>().UnequipWeaponFromPlayer();
+        player.GetComponent<AudioSource>().Stop();
 
         yield return GameObject.FindGameObjectWithTag("BlackScreen").GetComponent<BlackScreen>().FadeToBlack(fadeSpeed);
 
