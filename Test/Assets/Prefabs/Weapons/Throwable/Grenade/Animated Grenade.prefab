@@ -145,7 +145,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &342152611261127397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   damage: 100
   targetMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 66560
   ThrowOnSpawn: 0
   throwForce: 20
   CanDamageTarget: 1
@@ -178,18 +178,21 @@ MonoBehaviour:
   IsActivated: 0
   explosionEffect: {fileID: 1427962332153456, guid: 301583a5af63a494298d60cd9f296909,
     type: 3}
-  explosionRadius: 10
+  explosionRadius: 4
   timeUntilExplosion: 3
---- !u!64 &6159086636320207657
+  layersToCheckIfCanDealDamage:
+    serializedVersion: 2
+    m_Bits: 84992
+--- !u!64 &8835212659960875420
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7008403475654888589}
-  m_Material: {fileID: 13400000, guid: 4d35f9d3b7192734291c8a408c514e71, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 30

@@ -14,19 +14,19 @@ public class Grenade : ThrowableWeapon
     public GameObject explosionEffect;
     public float explosionRadius = 10;
     public float timeUntilExplosion = 3f;
+    public LayerMask layersToCheckIfCanDealDamage;
 
     public static int numberInPlayerInventory;
 
     public override void Awake()
     {
         base.Awake();
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        playerWeaponInventory = player.GetComponentInChildren<PlayerWeaponInventory>();
-        //Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponentInChildren<Collider>(), true);
+        playerWeaponInventory = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerWeaponInventory>();
     }
 
     public void ActivateGrenade()
     {
+        GetComponentInChildren<MeshCollider>().enabled = true;
         IsActivated = true;
         Invoke("Explode", timeUntilExplosion);
     }
@@ -36,7 +36,7 @@ public class Grenade : ThrowableWeapon
         //Spawn explosion effect.
         GameObject explosion = Instantiate(explosionEffect, transform.position, Quaternion.Euler(-90,0,0));
 
-        //Makeshift way to visualise explosion radius.
+        ////Makeshift way to visualise explosion radius.
         //GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         //go.transform.position = transform.position;
         //go.GetComponent<SphereCollider>().radius = explosionRadius;
@@ -48,14 +48,21 @@ public class Grenade : ThrowableWeapon
 
     private void DamageNearbyTargets()
     {
+        Ray damageCheckRay;
+        RaycastHit hitInfo;
         Collider[] collidersInRangeOfExplosion = Physics.OverlapSphere(transform.position, explosionRadius, targetMask, QueryTriggerInteraction.Ignore);
 
+        //Go through all enemies in explosion radius and check if wall is in the way of applying damage.
         for (int i = 0; i < collidersInRangeOfExplosion.Length; i++)
         {
-            if (((1 << collidersInRangeOfExplosion[i].gameObject.layer) & targetMask) != 0)
+            damageCheckRay = new Ray(transform.position, collidersInRangeOfExplosion[i].gameObject.transform.position - transform.position);
+            Debug.DrawRay(damageCheckRay.origin, damageCheckRay.direction * explosionRadius, Color.green, 200);
+            if (Physics.Raycast(damageCheckRay, out hitInfo, explosionRadius, layersToCheckIfCanDealDamage, QueryTriggerInteraction.Ignore))
             {
-                collidersInRangeOfExplosion[i].GetComponent<HealthComponent>().ApplyDamage(damage);
-                print(collidersInRangeOfExplosion[i].gameObject.name);
+                if (((1 << hitInfo.collider.gameObject.layer) & targetMask) != 0)
+                {
+                    collidersInRangeOfExplosion[i].GetComponent<HealthComponent>().ApplyDamage(damage);
+                }
             }
         }
     }
