@@ -16,6 +16,7 @@ public class MissileComputerScreen : PlayerInteractableObject
     public GameManager gameManager;
     public MissileComputerCanvas computerCanvas;
     HealthComponent playerHealthComponent;
+    PlayerWeaponInventory playerWeaponInventory;
     AudioSource playerAudioSource;
 
     //Events.
@@ -45,6 +46,7 @@ public class MissileComputerScreen : PlayerInteractableObject
         playerCameraFieldOfView = Camera.main.fieldOfView;
         playerHealthComponent = player.GetComponent<HealthComponent>();
         playerAudioSource = player.GetComponent<AudioSource>();
+        playerWeaponInventory = player.GetComponentInChildren<PlayerWeaponInventory>();
         playerCamera = Camera.main;
 
         computerCanvas.CooldownStartedEvent += ActivateCooldown;
@@ -99,6 +101,7 @@ public class MissileComputerScreen : PlayerInteractableObject
 
         //Reset player state.
         gameManager.EnablePlayerMovement();
+        playerWeaponInventory.ActivateEquippedWeapon();
         playerHealthComponent.CanTakeDamage = true;
 
         //Re-enable UI.
@@ -112,6 +115,9 @@ public class MissileComputerScreen : PlayerInteractableObject
         {
             //Disable footstep audio from player if they were walking when they interacted.
             playerAudioSource.Stop();
+
+            //Disable weapon temporarily if they have any. Not unequip but just make it not visible.
+            playerWeaponInventory.DisableEquippedWeapon();
 
             //Reset UI.
             IsInteractable = false;

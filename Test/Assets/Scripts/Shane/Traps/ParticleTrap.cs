@@ -75,7 +75,6 @@ public class ParticleTrap : MonoBehaviour
     }
     IEnumerator CooldownCountdown()
     {
-        print("cooldown");
         IsInCooldown = true;
 
         while (cooldownTimer <= cooldownTime)

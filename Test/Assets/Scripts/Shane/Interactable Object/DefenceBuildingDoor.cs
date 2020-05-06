@@ -39,8 +39,6 @@ public class DefenceBuildingDoor : PlayerInteractableObject
         else if (sideOfDoorCheck2.bounds.Contains(player.transform.position))
             indexOfAreaUnlocked = areaIndexOfSide1;
 
-        print("Area " + indexOfAreaUnlocked + " opened.");
-
         UnlockDoorEvent(indexOfAreaUnlocked);
         Destroy(gameObject);
         uiBehaviour.HidePlayerInteractMessage();

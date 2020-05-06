@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class PlayerInteractRaycast : MonoBehaviour
 {
+    //Components.
     GameManager gameManager;
     UIBehaviour uiBehaviour;
-    PlayerInteractableObject interactableObject;
+    public PlayerInteractableObject interactableObject;
     PlayerInteractableArea interactableArea;
     PlayerCameraRotation playerCameraComponent;
     PlayerGunAttack playerGunAttack;
 
     public Ray ray;
     public RaycastHit hitInfo;
+    private bool CheckForRaycastLeavingInteractableObject;
 
     public bool Interacted = false;
 
@@ -59,8 +61,14 @@ public class PlayerInteractRaycast : MonoBehaviour
             {
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(ray, out hitInfo, interactDistance, layerMask, QueryTriggerInteraction.Collide))
+                if (Physics.Raycast(ray, out hitInfo, interactDistance, layerMask, QueryTriggerInteraction.Collide)) //Looks at interactable.
                 {
+                    Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 1);
+
+
+                    if (!CheckForRaycastLeavingInteractableObject)
+                        CheckForRaycastLeavingInteractableObject = true;
+
                     if (interactableObject == null || hitInfo.collider.gameObject != interactableObject.gameObject)
                         interactableObject = hitInfo.collider.GetComponent<PlayerInteractableObject>();
 
@@ -78,23 +86,23 @@ public class PlayerInteractRaycast : MonoBehaviour
                         }
                     }
                 }
-                else //Raycast not hitting interactable object.
+                else //Looks away from interactable.
                 {
-
-                    if(interactableObject != null)
-                    {
+                    if (interactableObject != null)
                         interactableObject = null;
-                        uiBehaviour.HidePlayerInteractMessage();
-                    }
-
-                    if(IsLookingAtInteractableObject)
-                        IsLookingAtInteractableObject = false;
-
-                    if (uiBehaviour._imgPlayerAimDot.color != uiBehaviour.aimDotOriginalColour && !playerGunAttack.IsAiming)
-                        uiBehaviour._imgPlayerAimDot.color = uiBehaviour.aimDotOriginalColour;
-                        //uiBehaviour._imgPlayerAimDot.color = Color.Lerp(uiBehaviour._imgPlayerAimDot.color, uiBehaviour.aimDotOriginalColour, aimDotFadeSpeed * Time.deltaTime);
                 }
-            }           
+            }  
+            
+            //Checkforleave bool makes below code execute once - when the raycast leaves the object. 
+            if(CheckForRaycastLeavingInteractableObject && interactableObject == null)
+            {
+                CheckForRaycastLeavingInteractableObject = false;
+                uiBehaviour.HidePlayerInteractMessage();
+                IsLookingAtInteractableObject = false;
+
+                if (uiBehaviour._imgPlayerAimDot.color != uiBehaviour.aimDotOriginalColour && !playerGunAttack.IsAiming)
+                    uiBehaviour._imgPlayerAimDot.color = uiBehaviour.aimDotOriginalColour;
+            }
         }
     }
 

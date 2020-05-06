@@ -234,7 +234,6 @@ public class BreakInEnemy : NavMeshEnemy
             Debug.DrawRay(transform.position, (player.transform.position - transform.position) * 20, Color.red, 20);
             if (preventDashAttackHitCheck.collider.tag != "Player")
             {
-                print("Cant attack player, " + preventDashAttackHitCheck.collider + " is in the way");
                 return true;
             }
         }

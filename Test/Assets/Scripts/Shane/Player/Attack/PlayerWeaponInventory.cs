@@ -152,10 +152,13 @@ public class PlayerWeaponInventory : MonoBehaviour
     }
 
     //Unequipping / removing weapons from player / inventory.
-    public void UnequipWeaponFromPlayer()
+    public void UnequipWeaponFromPlayer(bool updateUI)
     {
-        uiBehaviour.inventoryUISlots[activeWeaponIndex].ChangeBackgroundColourToUnequipped();
-        uiBehaviour.inventoryUISlots[activeWeaponIndex].DisableInventoryItemPicture();
+        if(updateUI)
+        {
+            uiBehaviour.inventoryUISlots[activeWeaponIndex].ChangeBackgroundColourToUnequipped();
+            uiBehaviour.inventoryUISlots[activeWeaponIndex].DisableInventoryItemPicture();
+        }
 
         activeWeaponIndex = -1;
         activeWeapon = null;
@@ -171,6 +174,20 @@ public class PlayerWeaponInventory : MonoBehaviour
     {
         if(activeWeaponIndex != -1)
             Destroy(transform.Find(weaponInventory[activeWeaponIndex].gameObject.name + "(Clone)").gameObject);
+    }
+    public void ActivateEquippedWeapon()
+    {
+        if(activeWeaponIndex != -1)
+        {
+            activeWeapon.gameObject.SetActive(true);
+        }
+    }
+    public void DisableEquippedWeapon()
+    {
+        if (activeWeaponIndex != -1)
+        {
+            activeWeapon.gameObject.SetActive(false);
+        }
     }
 
     //Fix weapon position.

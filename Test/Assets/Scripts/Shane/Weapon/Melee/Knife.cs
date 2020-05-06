@@ -43,7 +43,7 @@ public class Knife : MeleeWeapon
         GameObject knife = Instantiate(throwingKnife, transform.position, Quaternion.identity);
         knife.transform.forward = transform.forward;
 
-        playerWeaponInventory.UnequipWeaponFromPlayer();
+        playerWeaponInventory.UnequipWeaponFromPlayer(true);
         playerWeaponInventory.RemoveWeaponFromInventory(playerInventoryIndex);
         Destroy(gameObject);
     }

@@ -70,7 +70,7 @@ public class Grenade : ThrowableWeapon
         }
         else
         {
-            playerWeaponInventory.UnequipWeaponFromPlayer();
+            playerWeaponInventory.UnequipWeaponFromPlayer(true);
             playerWeaponInventory.RemoveWeaponFromInventory(playerInventoryIndex);
             uiBehaviour.DisableThrowableUI();
         }
