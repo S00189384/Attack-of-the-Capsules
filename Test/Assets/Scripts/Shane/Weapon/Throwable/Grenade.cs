@@ -20,7 +20,9 @@ public class Grenade : ThrowableWeapon
     public override void Awake()
     {
         base.Awake();
-        playerWeaponInventory = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerWeaponInventory>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerWeaponInventory = player.GetComponentInChildren<PlayerWeaponInventory>();
+        //Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponentInChildren<Collider>(), true);
     }
 
     public void ActivateGrenade()
@@ -31,7 +33,7 @@ public class Grenade : ThrowableWeapon
 
     public void Explode()
     {
-        //Spawn explosion effect
+        //Spawn explosion effect.
         GameObject explosion = Instantiate(explosionEffect, transform.position, Quaternion.Euler(-90,0,0));
 
         //Makeshift way to visualise explosion radius.

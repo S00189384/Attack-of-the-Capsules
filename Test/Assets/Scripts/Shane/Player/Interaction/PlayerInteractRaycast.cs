@@ -63,9 +63,6 @@ public class PlayerInteractRaycast : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hitInfo, interactDistance, layerMask, QueryTriggerInteraction.Collide)) //Looks at interactable.
                 {
-                    Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 1);
-
-
                     if (!CheckForRaycastLeavingInteractableObject)
                         CheckForRaycastLeavingInteractableObject = true;
 

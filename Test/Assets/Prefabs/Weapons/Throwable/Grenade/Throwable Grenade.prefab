@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6112674456810158280}
   - component: {fileID: 4032176784523948211}
   - component: {fileID: 7002212633528593439}
+  - component: {fileID: 6402575769543973419}
   m_Layer: 0
   m_Name: Throwable Grenade
   m_TagString: Throwable
@@ -206,6 +207,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d25eec25e834f40840c77adc4427e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  audioSource: {fileID: 0}
+  inventoryUISlot: {fileID: 0}
+  nameOfWeapon: 
   weaponPrefab: {fileID: 7002212633528593439}
   playerInventoryIndex: 6
   defaultWeaponPosition: {x: 0, y: 0, z: 0}
@@ -217,3 +222,18 @@ MonoBehaviour:
   throwForce: 20
   CanDamageTarget: 1
   throwAudio: {fileID: 0}
+  throwAnimation: {fileID: 0}
+--- !u!64 &6402575769543973419
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4732439747941075255}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 769ce5ae38a9e85458d672ac28752435, type: 3}

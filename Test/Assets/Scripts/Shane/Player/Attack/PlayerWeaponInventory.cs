@@ -178,16 +178,12 @@ public class PlayerWeaponInventory : MonoBehaviour
     public void ActivateEquippedWeapon()
     {
         if(activeWeaponIndex != -1)
-        {
             activeWeapon.gameObject.SetActive(true);
-        }
     }
     public void DisableEquippedWeapon()
     {
         if (activeWeaponIndex != -1)
-        {
             activeWeapon.gameObject.SetActive(false);
-        }
     }
 
     //Fix weapon position.
@@ -196,5 +192,6 @@ public class PlayerWeaponInventory : MonoBehaviour
         activeWeapon.transform.parent = transform;
         activeWeapon.transform.localPosition = activeWeapon.defaultWeaponPosition;
         activeWeapon.transform.forward = transform.forward;
+        activeWeapon.transform.localRotation = Quaternion.identity;
     }
 }
