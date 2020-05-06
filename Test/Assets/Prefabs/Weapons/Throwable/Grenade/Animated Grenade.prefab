@@ -160,6 +160,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   audioSource: {fileID: 0}
+  inventoryUISlot: {fileID: 0}
+  nameOfWeapon: 
   weaponPrefab: {fileID: 7002212633528593439, guid: 85c27b247c6d7534795ba7e53f25e772,
     type: 3}
   playerInventoryIndex: 5
@@ -174,9 +176,10 @@ MonoBehaviour:
   throwAudio: {fileID: 8300000, guid: 7b4b4858badee3f4da47da79c22c9795, type: 3}
   throwAnimation: {fileID: 7400000, guid: 852f6fb160c74eb438427f6cf8ccd5ff, type: 2}
   IsActivated: 0
+  explosionEffect: {fileID: 1427962332153456, guid: 301583a5af63a494298d60cd9f296909,
+    type: 3}
   explosionRadius: 10
   timeUntilExplosion: 3
-  explosionSounds: []
 --- !u!64 &6159086636320207657
 MeshCollider:
   m_ObjectHideFlags: 0

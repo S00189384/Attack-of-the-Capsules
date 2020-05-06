@@ -11,9 +11,9 @@ public class Grenade : ThrowableWeapon
     public bool IsActivated;
 
     [Header("Explosion")]
+    public GameObject explosionEffect;
     public float explosionRadius = 10;
     public float timeUntilExplosion = 3f;
-    public AudioClip[] explosionSounds;
 
     public static int numberInPlayerInventory;
 
@@ -32,25 +32,31 @@ public class Grenade : ThrowableWeapon
     public void Explode()
     {
         //Spawn explosion effect
+        GameObject explosion = Instantiate(explosionEffect, transform.position, Quaternion.Euler(-90,0,0));
 
+        //Makeshift way to visualise explosion radius.
+        //GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        //go.transform.position = transform.position;
+        //go.GetComponent<SphereCollider>().radius = explosionRadius;
+        //go.GetComponent<SphereCollider>().isTrigger = true;
+
+        DamageNearbyTargets();
+        Destroy(gameObject);
+    }
+
+    private void DamageNearbyTargets()
+    {
         Collider[] collidersInRangeOfExplosion = Physics.OverlapSphere(transform.position, explosionRadius, targetMask, QueryTriggerInteraction.Ignore);
-
-        //Visualising explosion radius.
-        GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        go.transform.position = transform.position;
 
         for (int i = 0; i < collidersInRangeOfExplosion.Length; i++)
         {
-            if(((1 << collidersInRangeOfExplosion[i].gameObject.layer) & targetMask) != 0)
+            if (((1 << collidersInRangeOfExplosion[i].gameObject.layer) & targetMask) != 0)
             {
                 collidersInRangeOfExplosion[i].GetComponent<HealthComponent>().ApplyDamage(damage);
                 print(collidersInRangeOfExplosion[i].gameObject.name);
             }
         }
-
-        Destroy(gameObject);
     }
-
     public override void Throw()
     {
         base.Throw();
