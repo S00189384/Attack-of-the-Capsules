@@ -15,7 +15,7 @@ public class MissileComputerCanvas : MonoBehaviour
     [Header("Components")]
     AudioSource audioSource;
     public MissileComputerScreen computerScreen;
-    public BlackScreen blackScreen;
+    //public BlackScreen blackScreen;
 
     //Events.
     public CooldownDelegate CooldownEndedEvent;
@@ -30,11 +30,15 @@ public class MissileComputerCanvas : MonoBehaviour
     [Header("Canvas Groups")]
     public CanvasGroup missileAvailableCanvasGroup;
     public CanvasGroup missileNotAvailableCanvasGroup;
+    public CanvasGroup blackScreen;
 
     Coroutine fadeMissileStatusCoroutine;
     Coroutine flashInputFieldCoroutine;
     Coroutine typeCommandCoroutine;
     Coroutine cooldownCoroutine;
+
+    [Header("Fading To Black")]
+    public float blackScreenFadeSpeed;
 
     //Missile Status
     [Header("Missile Status")]
@@ -69,6 +73,8 @@ public class MissileComputerCanvas : MonoBehaviour
 
     void Start()
     {
+        //Components.
+
         //Audio
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = typingSounds;
@@ -166,11 +172,11 @@ public class MissileComputerCanvas : MonoBehaviour
         audioSource.Stop();
 
         Instantiate(missilePrefab, missileStartPosition.position,Quaternion.Euler(0,0,-90));
-        yield return StartCoroutine(blackScreen.FadeToBlack(fadeToBlackTimeAfterCommandTyped));
+        yield return StartCoroutine(UIBehaviour.FadeCavasGroupAlphaFromTo(blackScreen,blackScreen.alpha,1,blackScreenFadeSpeed));
         audioSource.clip = missileDrop;
         audioSource.Play();
         computerScreen.computerScreenCamera.enabled = false;
-        StartCoroutine(blackScreen.FadeToClear(fadeToBlackTimeAfterCommandTyped));
+        StartCoroutine(UIBehaviour.FadeCavasGroupAlphaFromTo(blackScreen, blackScreen.alpha, 0, blackScreenFadeSpeed));
 
         StopCoroutine(typeCommandCoroutine);
         typeCommandCoroutine = null;

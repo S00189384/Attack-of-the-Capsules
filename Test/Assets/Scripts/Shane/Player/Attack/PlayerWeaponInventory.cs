@@ -48,10 +48,19 @@ public class PlayerWeaponInventory : MonoBehaviour
     }
     public void AddThrowableToInventory(ThrowableWeapon throwableWeaponToAdd)
     {
-        if(weaponInventory[throwableWeaponToAdd.playerInventoryIndex] == null)
+        //Need better way of doing this - update UI with no. of throwable.
+        switch (throwableWeaponToAdd.tag)
+        {
+            case "Grenade":
+                uiBehaviour.UpdateThrowableRemaining(Grenade.numberInPlayerInventory);
+                break;
+        }
+
+        //If there is none in inventory - add.
+        if (weaponInventory[throwableWeaponToAdd.playerInventoryIndex] == null)
         {
             weaponInventory[throwableWeaponToAdd.playerInventoryIndex] = throwableWeaponToAdd;
-            uiBehaviour.inventoryUISlots[throwableWeaponToAdd.playerInventoryIndex].EnableInventoryItemPicture();
+            uiBehaviour.inventoryUISlots[throwableWeaponToAdd.playerInventoryIndex].EnableInventoryItemPicture();           
         }
     }
 

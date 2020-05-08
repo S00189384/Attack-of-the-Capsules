@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
    Computer screen script handles player camera zooming in and out of screen and enables / disables cooldown. 
@@ -87,6 +88,7 @@ public class MissileComputerScreen : PlayerInteractableObject
         computerScreenCamera.targetTexture = null;
         playerCamera.enabled = false;
         PlayerLookedAtScreenEvent();
+        computerCanvas.GetComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
     }
     IEnumerator MoveCameraBackToPlayerPosition()
     {

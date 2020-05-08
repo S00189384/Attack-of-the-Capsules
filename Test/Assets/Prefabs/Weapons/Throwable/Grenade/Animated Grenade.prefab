@@ -161,7 +161,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   audioSource: {fileID: 0}
   inventoryUISlot: {fileID: 0}
-  nameOfWeapon: 
+  nameOfWeapon: Grenade
   weaponPrefab: {fileID: 7002212633528593439, guid: 85c27b247c6d7534795ba7e53f25e772,
     type: 3}
   playerInventoryIndex: 5

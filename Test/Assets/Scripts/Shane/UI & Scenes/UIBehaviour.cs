@@ -167,6 +167,18 @@ public class UIBehaviour : MonoBehaviour
     }
 
     //General tmpro methods (used in other UI - game over screen etc.)
+    public static IEnumerator FadeCavasGroupAlphaFromTo(CanvasGroup canvasGroup,float from,float to,float fadeSpeed)
+    {
+        float initialAlpha = from;
+        float percentageComplete = 0;
+
+        while (percentageComplete < 1)
+        {
+            percentageComplete += fadeSpeed * Time.deltaTime;
+            canvasGroup.alpha = Mathf.Lerp(initialAlpha, to, percentageComplete);
+            yield return null;
+        }
+    }
     public static IEnumerator FadeTMProColourFromTo(TextMeshProUGUI tmProElement, float fadeSpeed,Color currentColour,Color colourToFadeTo)
     {
         float percentageComplete = 0;
@@ -280,9 +292,9 @@ public class UIBehaviour : MonoBehaviour
     }
 
     //Throwable UI.
-    public void UpdateThrowableRemaining(int numberThrowableRemaining)
+    public void UpdateThrowableRemaining(int numberOfThrowableInInventory)
     {
-        TMProThrowableCount.text = numberThrowableRemaining.ToString();
+        TMProThrowableCount.text = numberOfThrowableInInventory.ToString();
     }
     public void EnableThrowableUI()
     {
