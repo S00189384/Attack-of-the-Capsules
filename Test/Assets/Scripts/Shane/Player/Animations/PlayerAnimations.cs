@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimations : MonoBehaviour
 {
+    UIBehaviour uiBehaviour;
     HealthComponent playerHealthComponent;
     Animator animator;
 
@@ -13,6 +14,7 @@ public class PlayerAnimations : MonoBehaviour
 
     void Start()
     {
+        uiBehaviour = GameObject.FindGameObjectWithTag("UI").GetComponent<UIBehaviour>();
         playerHealthComponent = GetComponent<HealthComponent>();
         playerHealthComponent.OnDeathEvent += StartDeathAnimation;
 
@@ -27,6 +29,6 @@ public class PlayerAnimations : MonoBehaviour
 
     private void StartFadeToBlack()
     {
-        StartCoroutine(GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().FadeToBlackAndLoadScene(0,fadeToBlackSpeed,1));
+        uiBehaviour.FadeToBlackAndLoadScene(fadeToBlackSpeed,1);
     }
 }

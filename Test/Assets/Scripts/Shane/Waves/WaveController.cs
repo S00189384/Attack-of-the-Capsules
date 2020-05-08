@@ -9,6 +9,7 @@ public class WaveController : MonoBehaviour
     System.Random rng = new System.Random();
 
     //Components.
+    GameManager gameManager;
     AudioSource audioSource;
     UIBehaviour uiBehaviour;
 
@@ -30,6 +31,7 @@ public class WaveController : MonoBehaviour
     [Header("End of Waves - End Game")]
     public float endGameFadeToBlackSpeed = 0.5f;
     public float endGameFadeToBlackDelay = 2f;
+    public float delayBeforeDisablingPlayerControl;
 
     [Header("Spawners")]
     public List<Spawner> activeSpawnersList = new List<Spawner>();
@@ -37,9 +39,9 @@ public class WaveController : MonoBehaviour
 
     IEnumerator Start()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         audioSource = GetComponent<AudioSource>();
         uiBehaviour = GameObject.FindGameObjectWithTag("UI").GetComponent<UIBehaviour>();
-
         currentWave = wavesList[currentWaveIndex];
 
         //Play audio at start - when it ends start to spawn waves.
@@ -96,8 +98,12 @@ public class WaveController : MonoBehaviour
         else
         {
             GameOverUI.gameOverText = "You Win!";
-            StartCoroutine(GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().FadeToBlackAndLoadScene(endGameFadeToBlackDelay,endGameFadeToBlackSpeed,1));
 
+            yield return new WaitForSeconds(endGameFadeToBlackDelay);
+
+            uiBehaviour.FadeToBlackAndLoadScene(endGameFadeToBlackSpeed, 1);
+            StartCoroutine(uiBehaviour.FadeUI());
+            gameManager.DisablePlayerMovement();
         }
     }
     IEnumerator BeforeWaveTransition(AudioClip transitionAudio)
@@ -142,4 +148,5 @@ public class WaveController : MonoBehaviour
             wavesList[i].numberOfEnemiesSpawned = 0;
         }
     }
+
 }

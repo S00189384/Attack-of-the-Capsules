@@ -20,7 +20,6 @@ public class BlackScreen : MonoBehaviour
             yield return null;
         }
     }
-
     public IEnumerator FadeToClear(float fadeSpeed)
     {
         Color startingColor = Color.black;

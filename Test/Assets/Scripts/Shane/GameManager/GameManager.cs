@@ -14,26 +14,19 @@ public class GameManager : MonoBehaviour
         player.GetComponent<HealthComponent>().OnDeathEvent += DisablePlayerMovement;
     }
 
+    //Player Controlling.
     public void DisablePlayerMovement()
     {
         CanControlPlayer = false;
+        player.GetComponent<AudioSource>().Stop();
     }
-
+    public IEnumerator DisablePlayerMovementAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        DisablePlayerMovement();
+    }
     public void EnablePlayerMovement()
     {
         CanControlPlayer = true;
-    }
-
-    //Ending the game.
-    public IEnumerator FadeToBlackAndLoadScene(float delayBeforeStartingFade,float fadeSpeed,int sceneIndex)
-    {
-        yield return new WaitForSeconds(delayBeforeStartingFade);
-
-        DisablePlayerMovement();
-        player.GetComponent<AudioSource>().Stop();
-
-        yield return GameObject.FindGameObjectWithTag("BlackScreen").GetComponent<BlackScreen>().FadeToBlack(fadeSpeed);
-
-        SceneManager.LoadScene(sceneIndex);
     }
 }

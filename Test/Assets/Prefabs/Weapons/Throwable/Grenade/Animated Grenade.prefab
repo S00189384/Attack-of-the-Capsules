@@ -178,7 +178,7 @@ MonoBehaviour:
   IsActivated: 0
   explosionEffect: {fileID: 1427962332153456, guid: 301583a5af63a494298d60cd9f296909,
     type: 3}
-  explosionRadius: 4
+  explosionRadius: 6.3
   timeUntilExplosion: 3
   layersToCheckIfCanDealDamage:
     serializedVersion: 2

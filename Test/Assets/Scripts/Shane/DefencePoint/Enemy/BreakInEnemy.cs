@@ -167,7 +167,6 @@ public class BreakInEnemy : NavMeshEnemy
         CanAttack = false;
     }
 
-
     //General Attack.
     IEnumerator AttackTarget()
     {

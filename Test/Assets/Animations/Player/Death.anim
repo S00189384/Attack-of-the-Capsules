@@ -1289,7 +1289,8 @@ AnimationClip:
   - time: 3.6833334
     functionName: StartFadeToBlack
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: a48bcadc3c8f70a42b9c7fc12a295c5e,
+      type: 3}
     floatParameter: 0
-    intParameter: 0
+    intParameter: 1
     messageOptions: 0

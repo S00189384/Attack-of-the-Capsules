@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class UIBehaviour : MonoBehaviour
 {
+    //Components.
+    GameManager gameManager;
+
     //General
     public static Color transparentColour = new Color(255, 255, 255, 0);
 
@@ -52,14 +55,47 @@ public class UIBehaviour : MonoBehaviour
     public InventoryUISlot[] inventoryUISlots;
     private InventoryUISlot lastInventoryUISlotEquipped;
 
+    [Header("Pause Menu")]
+    public CanvasGroup pauseMenuCanvasGroup;
+    public bool CanPauseGame;
+    public bool GameIsPaused;
+
+    [Header("Black Screen")]
+    public CanvasGroup blackScreenCanvasGroup;
+    public float blackScreenFadeSpeed;
+
     private void Start()
     {
         aimDotOriginalColour = _imgPlayerAimDot.color;
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         HealthComponent playerHealthComponent = player.GetComponent<HealthComponent>();
 
         playerHealthComponent.OnDeathEvent += UpdateGameOverTextFailure;
         playerHealthComponent.OnDeathEvent += DisableUI;
+
+        //Pausing stuff.
+        if (Time.timeScale != 1)
+            Time.timeScale = 1;   
+
+        CanPauseGame = true;
+    }
+    private void Update()
+    {
+        if(gameManager.CanControlPlayer && !GameIsPaused)
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                EnablePauseMenu();
+            }
+        }
+        else if(GameIsPaused)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                DisablePauseMenu();
+            }
+        }
     }
 
     //Interact Message.
@@ -266,4 +302,44 @@ public class UIBehaviour : MonoBehaviour
         inventoryUISlots[indexToEnable].ChangeBackgroundColourToEquipped();
         lastInventoryUISlotEquipped = inventoryUISlots[indexToEnable];
     }        
+
+    //Pause Menu.
+    private void EnablePauseMenu()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        pauseMenuCanvasGroup.gameObject.SetActive(true);
+        DisableUIExceptInteractMessage();
+        HidePlayerInteractMessage();
+        GameIsPaused = true;
+        Time.timeScale = 0;
+    }
+    public void DisablePauseMenu()
+    {
+        pauseMenuCanvasGroup.gameObject.SetActive(false);
+        EnableUIExceptInteractMessage();
+        ShowPlayerInteractMessage("", false);
+        GameIsPaused = false;
+        Time.timeScale = 1;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    //Black Screen.
+    public IEnumerator FadeAndLoadScene(float fadeSpeed,int sceneIndexToLoad)
+    {
+        float percentageComplete = 0;
+        while (percentageComplete < 1)
+        {
+            percentageComplete += fadeSpeed * Time.deltaTime;
+            blackScreenCanvasGroup.alpha = Mathf.Lerp(0, 1, percentageComplete);
+            yield return null;
+        }
+
+        GetComponent<SceneLoader>().LoadScene(sceneIndexToLoad);
+    }
+    public void FadeToBlackAndLoadScene(float fadeSpeed,int sceneIndexToLoad)
+    {
+        StartCoroutine(FadeAndLoadScene(fadeSpeed,sceneIndexToLoad));
+    }
 }
