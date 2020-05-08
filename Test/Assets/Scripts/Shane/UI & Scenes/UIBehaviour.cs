@@ -82,16 +82,13 @@ public class UIBehaviour : MonoBehaviour
     }
     private void Update()
     {
-        if(gameManager.CanControlPlayer && !GameIsPaused)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if (gameManager.CanControlPlayer && !GameIsPaused)
             {
                 EnablePauseMenu();
             }
-        }
-        else if(GameIsPaused)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            else if(GameIsPaused)
             {
                 DisablePauseMenu();
             }

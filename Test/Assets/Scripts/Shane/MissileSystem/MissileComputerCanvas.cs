@@ -257,7 +257,6 @@ public class MissileComputerCanvas : MonoBehaviour
     {
         canvasGroupToShow.alpha = 1;
     }
-
     public void PlayAudioWhenMissileHitsGround()
     {
         audioSource.Stop();

@@ -7,8 +7,12 @@ using UnityEngine.UI;
 /*
    Computer screen script handles player camera zooming in and out of screen and enables / disables cooldown. 
    Canvas script handles everything else (mainly updating what's on screen - cooldown timer countdown, status message etc.)
- */
 
+    The missile screen canvas scaler is constant pixel size by default, but when you interact and zoom in the camera changes and the canvas has to be readjusted to take into account possible different screen sizes.
+    There was an issue with changing the scaling from constant pixel size to scale with screen size once you're fully zoomed in - sometimes the switching between the two was really noticable and just looked bad. 
+    A fix I came up with was to apply the scaling change just before the camera fully zoomed in in the coroutine (close to 100% worked quite well).
+    
+ */
 
 public delegate void PlayerInteractionWithScreen();
 public class MissileComputerScreen : PlayerInteractableObject
@@ -30,8 +34,12 @@ public class MissileComputerScreen : PlayerInteractableObject
     private float playerCameraFieldOfView;
 
     [Header("Computer Camera")]
+    CanvasScaler computerCanvasScaler;
     public Camera computerScreenCamera;
     public RenderTexture computerScreenRenderTexture;
+    [Range(0, 1)]
+    public float zoomInApplyCanvasScalingPercentage;
+    private bool appliedScaling;
     private Camera playerCamera;
 
     [Header("Player Interaction")]
@@ -44,6 +52,9 @@ public class MissileComputerScreen : PlayerInteractableObject
     public override void Start()
     {
         base.Start();
+        computerCanvasScaler = computerCanvas.GetComponent<CanvasScaler>();
+        appliedScaling = false;
+
         playerCameraFieldOfView = Camera.main.fieldOfView;
         playerHealthComponent = player.GetComponent<HealthComponent>();
         playerAudioSource = player.GetComponent<AudioSource>();
@@ -69,8 +80,14 @@ public class MissileComputerScreen : PlayerInteractableObject
         playerCameraRotationAtStartOfInteraction = Camera.main.transform.rotation;
         float percentageComplete = 0;
 
-        while(percentageComplete <= 1)
+        while (percentageComplete <= 1)
         {
+            if (!appliedScaling && percentageComplete > zoomInApplyCanvasScalingPercentage)
+            {
+                computerCanvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+                appliedScaling = true;
+            }
+
             percentageComplete += interactSpeed * Time.deltaTime;
             Camera.main.transform.position = Vector3.Lerp(playerCameraPositionAtStartOfInteraction, targetPosition, percentageComplete);
             Camera.main.transform.rotation = Quaternion.Lerp(playerCameraRotationAtStartOfInteraction, targetRotation, percentageComplete);
@@ -88,10 +105,11 @@ public class MissileComputerScreen : PlayerInteractableObject
         computerScreenCamera.targetTexture = null;
         playerCamera.enabled = false;
         PlayerLookedAtScreenEvent();
-        computerCanvas.GetComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
     }
     IEnumerator MoveCameraBackToPlayerPosition()
     {
+        computerCanvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPixelSize;
+
         //Re-enable the comp screen.
         computerScreenCamera.enabled = true;
         computerScreenCamera.targetTexture = computerScreenRenderTexture;
@@ -108,6 +126,9 @@ public class MissileComputerScreen : PlayerInteractableObject
 
         //Re-enable UI.
         uiBehaviour.EnableUIExceptInteractMessage();
+
+        //Set up scaling again for next interaction.
+        appliedScaling = false;
     }
 
     //Interaction.
