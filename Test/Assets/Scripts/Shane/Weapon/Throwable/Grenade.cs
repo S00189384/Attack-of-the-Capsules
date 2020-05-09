@@ -17,8 +17,6 @@ public class Grenade : ThrowableWeapon
     public float timeUntilExplosion = 3f;
     public LayerMask layersToCheckIfCanDealDamage;
 
-    public static int numberInPlayerInventory;
-
     public override void Awake()
     {
         base.Awake();
@@ -69,12 +67,12 @@ public class Grenade : ThrowableWeapon
         ActivateGrenade();
 
         //Updating Inventory.
-        numberInPlayerInventory--;
+        playerWeaponInventory.numberOfGrenadesInInventory--;
 
         //Update UI.
-        uiBehaviour.UpdateThrowableRemaining(numberInPlayerInventory);
+        uiBehaviour.UpdateThrowableRemaining(playerWeaponInventory.numberOfGrenadesInInventory);
 
-        if (numberInPlayerInventory > 0)
+        if (playerWeaponInventory.numberOfGrenadesInInventory > 0)
         {
             playerWeaponInventory.EquipThrowable(playerInventoryIndex);
         } 

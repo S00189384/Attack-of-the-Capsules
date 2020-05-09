@@ -2,22 +2,29 @@
 
 public class PlayerPickupItem : PlayerInteractableObject
 {
+    //Components.
+    PlayerWeaponInventory playerWeaponInventory;
+
     [Header("Pickup Info")]
     public GameObject prefabToPickup;
     public string ObjectType;
 
+    public override void Start()
+    {
+        base.Start();
+        playerWeaponInventory = player.GetComponentInChildren<PlayerWeaponInventory>();
+    }
+
     public override void PlayerInteracted()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        
+             
         switch (ObjectType)
         {
             case "Weapon":
-                player.GetComponentInChildren<PlayerWeaponInventory>().AddWeaponToInventory(prefabToPickup.GetComponent<Weapon>());
+                playerWeaponInventory.AddWeaponToInventory(prefabToPickup.GetComponent<Weapon>());
                 break;
             case "Grenade":
-                Grenade.numberInPlayerInventory++;
-                player.GetComponentInChildren<PlayerWeaponInventory>().AddThrowableToInventory(prefabToPickup.GetComponent<Grenade>());
+                playerWeaponInventory.AddThrowableToInventory(prefabToPickup.GetComponent<Grenade>());
                 break;
         }
 

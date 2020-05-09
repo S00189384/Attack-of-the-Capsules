@@ -24,11 +24,10 @@ public class PlayerWeaponInventory : MonoBehaviour
     [Header("Throwable Weapons")]
     public ThrowableWeapon activeThrowableWeapon;
 
+    public int numberOfGrenadesInInventory;
+
     void Start()
     {
-        //FIX LATER.
-        Grenade.numberInPlayerInventory = 0;
-
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         uiBehaviour = GameObject.FindGameObjectWithTag("UI").GetComponent<UIBehaviour>();
         playerAttack = GetComponent<PlayerGunAttack>();
@@ -55,7 +54,8 @@ public class PlayerWeaponInventory : MonoBehaviour
         switch (throwableWeaponToAdd.tag)
         {
             case "Grenade":
-                uiBehaviour.UpdateThrowableRemaining(Grenade.numberInPlayerInventory);
+                numberOfGrenadesInInventory++;
+                uiBehaviour.UpdateThrowableRemaining(numberOfGrenadesInInventory);
                 break;
         }
 

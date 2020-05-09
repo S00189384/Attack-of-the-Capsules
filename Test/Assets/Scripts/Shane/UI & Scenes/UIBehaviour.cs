@@ -7,6 +7,8 @@ public class UIBehaviour : MonoBehaviour
 {
     //Components.
     GameManager gameManager;
+    GameObject player;
+    PlayerWeaponInventory playerWeaponInventory;
 
     //General
     public static Color transparentColour = new Color(255, 255, 255, 0);
@@ -68,7 +70,8 @@ public class UIBehaviour : MonoBehaviour
     {
         aimDotOriginalColour = _imgPlayerAimDot.color;
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerWeaponInventory = player.GetComponentInChildren<PlayerWeaponInventory>();
         HealthComponent playerHealthComponent = player.GetComponent<HealthComponent>();
 
         playerHealthComponent.OnDeathEvent += UpdateGameOverTextFailure;
@@ -251,7 +254,7 @@ public class UIBehaviour : MonoBehaviour
         if(weaponToEquip.CompareTag("Grenade"))
         {         
             EnableThrowableUI();
-            UpdateThrowableRemaining(Grenade.numberInPlayerInventory);
+            UpdateThrowableRemaining(playerWeaponInventory.numberOfGrenadesInInventory);
         }
         else
         {
