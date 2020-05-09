@@ -136,6 +136,7 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 66560
+  timeToDestroyAfterExplosion: 5
 --- !u!114 &2354863571512305820
 MonoBehaviour:
   m_ObjectHideFlags: 0

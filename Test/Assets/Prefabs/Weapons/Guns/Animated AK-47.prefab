@@ -185,7 +185,7 @@ MonoBehaviour:
   weaponPosAiming: {x: 0.001, y: -0.065, z: 0.416}
   playerCamera: {fileID: 0}
   MaxReserves: 200
-  Reserves: 100
+  Reserves: 70
   MaxMagazine: 30
   Magazine: 0
   AmmoUsePerShot: 1

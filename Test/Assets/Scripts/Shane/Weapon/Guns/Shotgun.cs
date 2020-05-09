@@ -10,7 +10,7 @@ End Reloading - Shotgun rotates back into original position (Reset variables / a
 public class Shotgun : RaycastGun
 {
     [Header("Shotgun Shooting")]
-    public Vector3 spread = new Vector3(0.1f,0,0);
+    public Vector3 spread = new Vector3(0.01f,0,0);
     public AudioClip pumpSound;
 
     [Header("Shotgun Animations")]

@@ -16,8 +16,7 @@ public class PlayerPickupItem : PlayerInteractableObject
     }
 
     public override void PlayerInteracted()
-    {
-             
+    {           
         switch (ObjectType)
         {
             case "Weapon":

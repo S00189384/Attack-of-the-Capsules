@@ -113,12 +113,7 @@ public class WaveController : MonoBehaviour
         //Clear list and add a wave that is generated using a simple algorithm (increases difficulty as waves get higher).
         //If not infinite waves, increase index and check if its the last wave.
         if(Settings.InfiniteWaves)
-        {
             IncreaseDifficultyOfInfiniteWave();
-            //wavesList.Clear();
-            //wavesList.Add(GenerateWave());
-            //currentWave = wavesList[currentWaveIndex];
-        }
         else
             currentWaveIndex++;
 

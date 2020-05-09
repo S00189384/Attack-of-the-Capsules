@@ -192,9 +192,9 @@ MonoBehaviour:
   shootAudio: {fileID: 8300000, guid: 759ea4a2c2e95774f83c8a0b2949b649, type: 3}
   reloadAudio: {fileID: 8300000, guid: 456b7af7e6d02094eaecced5486bea99, type: 3}
   kickMinMax: {x: 0.05, y: 0.2}
-  range: 3
+  range: 24
   bulletHoleEffect: {fileID: 0}
-  spread: {x: 0.5, y: 0, z: 0}
+  spread: {x: 0.2, y: 0, z: 0}
   pumpSound: {fileID: 8300000, guid: eb06c605e3a6831418df076763ee23af, type: 3}
   initialReloadAnimation: {fileID: 7400000, guid: 99b72a676c3d2334db326ab6c6420f15,
     type: 2}

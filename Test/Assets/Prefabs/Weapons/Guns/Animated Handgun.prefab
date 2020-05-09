@@ -180,7 +180,7 @@ MonoBehaviour:
   shootAudio: {fileID: 8300000, guid: 587c47ebcc90e154fa50744f44182f08, type: 3}
   reloadAudio: {fileID: 8300000, guid: fee3a21f251a4914cabce25b13e7d2a8, type: 3}
   kickMinMax: {x: 0.05, y: 0.2}
-  range: 10
+  range: 30
   bulletHoleEffect: {fileID: 3820066492337826296, guid: 6b6bc8b138678fd438c48a2f83dd5755,
     type: 3}
 --- !u!114 &6703451923835559097
