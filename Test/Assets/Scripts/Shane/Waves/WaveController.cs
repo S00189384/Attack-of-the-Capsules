@@ -40,9 +40,17 @@ public class WaveController : MonoBehaviour
 
     [Header("Infinite Waves (Potentially)")]
     public GameObject prefabToSpawn;
+    public Wave infiniteWaveToStartFrom;
+    private int infiniteWaveStartingNumberEnemiesInWave;
+    public int minNumberOfEnemiesToAddToEachWave;
+    public int maxNumberOfEnemiesToAddToEachWave;
+    public float minTimeToReduceForMinTimeBetweenEnemySpawns;
+    public float maxTimeToReduceForMaxTimeBetweenEnemySpawns;
 
     IEnumerator Start()
     {
+        infiniteWaveStartingNumberEnemiesInWave = infiniteWaveToStartFrom.numberOfEnemiesInWave;
+
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         audioSource = GetComponent<AudioSource>();
         uiBehaviour = GameObject.FindGameObjectWithTag("UI").GetComponent<UIBehaviour>();
@@ -64,8 +72,8 @@ public class WaveController : MonoBehaviour
         if(Settings.InfiniteWaves)
         {
             wavesList.Clear();
-            wavesList.Add(GenerateWave());
-            currentWave = wavesList[0];
+            wavesList.Add(infiniteWaveToStartFrom);
+            currentWave = infiniteWaveToStartFrom;
 
             while(true)
             {
@@ -106,9 +114,10 @@ public class WaveController : MonoBehaviour
         //If not infinite waves, increase index and check if its the last wave.
         if(Settings.InfiniteWaves)
         {
-            wavesList.Clear();
-            wavesList.Add(GenerateWave());
-            currentWave = wavesList[currentWaveIndex];
+            IncreaseDifficultyOfInfiniteWave();
+            //wavesList.Clear();
+            //wavesList.Add(GenerateWave());
+            //currentWave = wavesList[currentWaveIndex];
         }
         else
             currentWaveIndex++;
@@ -163,28 +172,25 @@ public class WaveController : MonoBehaviour
 
         if (numberOfEnemiesKilledInWave >= currentWave.numberOfEnemiesInWave)
             allEnemiesKilledInWave = true;
+
+        print("Killed: " + numberOfEnemiesKilledInWave + " ---- Target: " + currentWave.numberOfEnemiesInWave);
     }
 
     //Resetting wave stats when game is ended - scriptable object wasn't doing it automatically.
     public void OnDisable()
     {
+        infiniteWaveToStartFrom.numberOfEnemiesSpawned = 0;
+        infiniteWaveToStartFrom.numberOfEnemiesInWave = infiniteWaveStartingNumberEnemiesInWave;
+
         for (int i = 0; i < wavesList.Count; i++)
         {
             wavesList[i].numberOfEnemiesSpawned = 0;
         }
     }
 
-
-    private Wave GenerateWave()
+    private void IncreaseDifficultyOfInfiniteWave()
     {
-        Wave wave = ScriptableObject.CreateInstance<Wave>();
-        wave.minTimeBetweenEnemySpawns = 2;
-        wave.maxTimeBetweenEnemySpawns = 2.5f;
-        wave.numberOfEnemiesInWave = 2;
-        wave.prefabToSpawn = prefabToSpawn;
-
-        return wave;
+        infiniteWaveToStartFrom.numberOfEnemiesSpawned = 0;
+        infiniteWaveToStartFrom.numberOfEnemiesInWave += Random.Range(minNumberOfEnemiesToAddToEachWave, maxNumberOfEnemiesToAddToEachWave);
     }
-
-
 }

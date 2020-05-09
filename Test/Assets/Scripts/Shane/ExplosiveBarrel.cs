@@ -36,8 +36,7 @@ public class ExplosiveBarrel : MonoBehaviour
         //Go through all enemies in explosion radius and check if wall is in the way of applying damage.
         for (int i = 0; i < collidersInRangeOfExplosion.Length; i++)
         {
-            damageCheckRay = new Ray(transform.position, collidersInRangeOfExplosion[i].gameObject.transform.position - transform.position);
-            Debug.DrawRay(damageCheckRay.origin, damageCheckRay.direction * explosionRadius, Color.green, 200);
+            damageCheckRay = new Ray(transform.position, collidersInRangeOfExplosion[i].gameObject.transform.position - transform.position);       
             if (Physics.Raycast(damageCheckRay, out hitInfo, explosionRadius, layersToCheckIfCanDealDamage, QueryTriggerInteraction.Ignore))
             {
                 if (((1 << hitInfo.collider.gameObject.layer) & targetMask) != 0)

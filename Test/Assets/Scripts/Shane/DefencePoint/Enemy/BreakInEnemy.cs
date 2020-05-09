@@ -230,7 +230,6 @@ public class BreakInEnemy : NavMeshEnemy
     {
         if (Physics.Raycast(transform.position, player.transform.position - transform.position, out preventDashAttackHitCheck, distanceToAttack,layersToCheckIfDashAttackPossible,QueryTriggerInteraction.Ignore))
         {
-            Debug.DrawRay(transform.position, (player.transform.position - transform.position) * 20, Color.red, 20);
             if (preventDashAttackHitCheck.collider.tag != "Player")
             {
                 return true;
@@ -303,7 +302,6 @@ public class BreakInEnemy : NavMeshEnemy
         ParticleSystem.MainModule psMainModule = particleSystem.main;
         psMainModule.startColor = materialOfEnemy.color;
         Destroy(particleSystem.gameObject, particleSystem.main.startLifetimeMultiplier);
-
 
         waveController.IncreaseEnemiesKilledInWave();
         UnsubscribeAttackTargetEvents();

@@ -33,6 +33,7 @@ public class HealthComponent : MonoBehaviour
 
             if (currentHealth <= 0)
             {
+                CanTakeDamage = false;
                 IsAlive = false;
 
                 if (DestroyOnDeath)
