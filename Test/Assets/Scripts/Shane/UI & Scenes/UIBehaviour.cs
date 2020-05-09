@@ -319,6 +319,7 @@ public class UIBehaviour : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         pauseMenuCanvasGroup.gameObject.SetActive(true);
         DisableUIExceptInteractMessage();
+        gameManager.DisablePlayerMovement();
         HidePlayerInteractMessage();
         GameIsPaused = true;
         Time.timeScale = 0;
@@ -328,6 +329,7 @@ public class UIBehaviour : MonoBehaviour
         pauseMenuCanvasGroup.gameObject.SetActive(false);
         EnableUIExceptInteractMessage();
         ShowPlayerInteractMessage("", false);
+        gameManager.EnablePlayerMovement();
         GameIsPaused = false;
         Time.timeScale = 1;
         Cursor.visible = false;

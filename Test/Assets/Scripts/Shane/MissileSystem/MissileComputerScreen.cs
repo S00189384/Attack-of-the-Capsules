@@ -10,8 +10,7 @@ using UnityEngine.UI;
 
     The missile screen canvas scaler is constant pixel size by default, but when you interact and zoom in the camera changes and the canvas has to be readjusted to take into account possible different screen sizes.
     There was an issue with changing the scaling from constant pixel size to scale with screen size once you're fully zoomed in - sometimes the switching between the two was really noticable and just looked bad. 
-    A fix I came up with was to apply the scaling change just before the camera fully zoomed in in the coroutine (close to 100% worked quite well).
-    
+    A fix I came up with was to apply the scaling change just before the camera fully zoomed in in the coroutine (close to 100% worked quite well).   
  */
 
 public delegate void PlayerInteractionWithScreen();

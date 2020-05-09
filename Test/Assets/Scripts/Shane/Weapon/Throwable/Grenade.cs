@@ -12,6 +12,7 @@ public class Grenade : ThrowableWeapon
 
     [Header("Explosion")]
     public GameObject explosionEffect;
+    public GameObject explosion;
     public float explosionRadius = 10;
     public float timeUntilExplosion = 3f;
     public LayerMask layersToCheckIfCanDealDamage;
@@ -35,12 +36,6 @@ public class Grenade : ThrowableWeapon
     {
         //Spawn explosion effect.
         GameObject explosion = Instantiate(explosionEffect, transform.position, Quaternion.Euler(-90,0,0));
-
-        //Makeshift way to visualise explosion radius.
-        GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        go.transform.position = transform.position;
-        go.GetComponent<SphereCollider>().radius = explosionRadius;
-        go.GetComponent<SphereCollider>().isTrigger = true;
 
         DamageNearbyTargets();
         Destroy(gameObject);

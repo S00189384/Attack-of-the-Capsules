@@ -4822,6 +4822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4296680985399300}
   - component: {fileID: 82477833726926110}
+  - component: {fileID: -3586556980858539261}
   m_Layer: 0
   m_Name: Barrel Explosion Prefab
   m_TagString: Untagged
@@ -4946,6 +4947,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &-3586556980858539261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126181125208960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313939116a69d3140bbe4845127027cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBeforeDestroying: 10
+  possibleExplosionSounds:
+  - {fileID: 8300000, guid: dd0264e11df5d694fbe924abc3e80301, type: 3}
+  - {fileID: 8300000, guid: ca80aad89fdc47a4b91e62a663ebd1f0, type: 3}
+  - {fileID: 8300000, guid: 0579dc5d712b04b4291909f2dd3fd64e, type: 3}
+  - {fileID: 8300000, guid: 2cc6c6aebec9fd343aab9a4451b7e5e8, type: 3}
+  - {fileID: 8300000, guid: f51e493a8b9df094b868413e03a7d0e1, type: 3}
+  - {fileID: 8300000, guid: 37a8c4b99174fa742938356c88331c14, type: 3}
 --- !u!1 &1189621324720392
 GameObject:
   m_ObjectHideFlags: 0
@@ -9839,7 +9860,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1199321400970542}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0

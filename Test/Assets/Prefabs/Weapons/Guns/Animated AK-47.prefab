@@ -174,7 +174,7 @@ MonoBehaviour:
   damage: 50
   targetMask:
     serializedVersion: 2
-    m_Bits: 23552
+    m_Bits: 547840
   EjectCasingOnShoot: 1
   casingPrefab: {fileID: 5566844798329587950, guid: 0a86d87bbf6572e46a32b4f4cca3f747,
     type: 3}

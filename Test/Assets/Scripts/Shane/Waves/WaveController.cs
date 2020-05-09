@@ -14,6 +14,7 @@ public class WaveController : MonoBehaviour
     UIBehaviour uiBehaviour;
 
     [Header("Waves")]
+    public int waveNumber = 1;
     public int currentWaveIndex;
     public Wave currentWave;
     public List<Wave> wavesList = new List<Wave>();
@@ -37,6 +38,9 @@ public class WaveController : MonoBehaviour
     public List<Spawner> activeSpawnersList = new List<Spawner>();
     public List<Spawner> allSpawnersList = new List<Spawner>();
 
+    [Header("Infinite Waves (Potentially)")]
+    public GameObject prefabToSpawn;
+
     IEnumerator Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
@@ -57,19 +61,32 @@ public class WaveController : MonoBehaviour
 
     IEnumerator SpawnAllWaves()
     {
-        while(currentWaveIndex < wavesList.Count)
+        if(Settings.InfiniteWaves)
         {
-            yield return SpawnAllEnemiesInWave();
+            wavesList.Clear();
+            wavesList.Add(GenerateWave());
+            currentWave = wavesList[0];
+
+            while(true)
+            {
+                yield return SpawnAllEnemiesInWave();
+            }
+        }
+        else
+        {
+            while (currentWaveIndex < wavesList.Count)
+            {
+                yield return SpawnAllEnemiesInWave();
+            }
         }
     }
     IEnumerator SpawnAllEnemiesInWave()
     {
-        //Spawn all enemies in wave.
         while (currentWave.numberOfEnemiesSpawned < currentWave.numberOfEnemiesInWave)
         {
             //If the chosen random spawner already has max no. of enemies dont spawn anything & wait until next spawn time.
             Spawner randomSpawner = GetRandomSpawner();
-            if(!randomSpawner.DefencePointEnemyBehaviour.HasMaxNumberOfEnemies())
+            if (!randomSpawner.DefencePointEnemyBehaviour.HasMaxNumberOfEnemies())
             {
                 randomSpawner.SpawnEnemy(currentWave.prefabToSpawn);
                 currentWave.numberOfEnemiesSpawned++;
@@ -79,22 +96,31 @@ public class WaveController : MonoBehaviour
         }
 
         //Wait until all the enemies are killed.
-        while(allEnemiesKilledInWave == false)
+        while (allEnemiesKilledInWave == false)
         {
             yield return null;
         }
 
-        //Transition to next wave if there is one.
-        currentWaveIndex++;
-        if (currentWaveIndex < wavesList.Count)
+        //If infinite waves is active - I want to keep the list of waves always at 1 and not to add lots to it.
+        //Clear list and add a wave that is generated using a simple algorithm (increases difficulty as waves get higher).
+        //If not infinite waves, increase index and check if its the last wave.
+        if(Settings.InfiniteWaves)
         {
+            wavesList.Clear();
+            wavesList.Add(GenerateWave());
+            currentWave = wavesList[currentWaveIndex];
+        }
+        else
+            currentWaveIndex++;
+
+        if(currentWaveIndex < wavesList.Count)
+        {
+            waveNumber++;
             currentWave = wavesList[currentWaveIndex];
             numberOfEnemiesKilledInWave = 0;
             allEnemiesKilledInWave = false;
-
             yield return BeforeWaveTransition(transitionBetweenWavesAudio);
         }
-        //All waves are over - end game.
         else
         {
             GameOverUI.gameOverText = "You Win!";
@@ -104,7 +130,7 @@ public class WaveController : MonoBehaviour
             uiBehaviour.FadeToBlackAndLoadScene(endGameFadeToBlackSpeed, 1);
             StartCoroutine(uiBehaviour.FadeUI());
             gameManager.DisablePlayerMovement();
-        }
+        }      
     }
     IEnumerator BeforeWaveTransition(AudioClip transitionAudio)
     {
@@ -112,7 +138,7 @@ public class WaveController : MonoBehaviour
         audioSource.clip = transitionAudio;
         audioSource.Play();
 
-        StartCoroutine(uiBehaviour.UpdateRoundNumberOnRoundTransition(currentWaveIndex + 1));
+        StartCoroutine(uiBehaviour.UpdateRoundNumberOnRoundTransition(waveNumber));
 
         //Wait until audio ends.
         yield return new WaitForSeconds(transitionAudio.length * transitionAudioWaveStarterOffset);
@@ -139,7 +165,6 @@ public class WaveController : MonoBehaviour
             allEnemiesKilledInWave = true;
     }
 
-
     //Resetting wave stats when game is ended - scriptable object wasn't doing it automatically.
     public void OnDisable()
     {
@@ -148,5 +173,18 @@ public class WaveController : MonoBehaviour
             wavesList[i].numberOfEnemiesSpawned = 0;
         }
     }
+
+
+    private Wave GenerateWave()
+    {
+        Wave wave = ScriptableObject.CreateInstance<Wave>();
+        wave.minTimeBetweenEnemySpawns = 2;
+        wave.maxTimeBetweenEnemySpawns = 2.5f;
+        wave.numberOfEnemiesInWave = 2;
+        wave.prefabToSpawn = prefabToSpawn;
+
+        return wave;
+    }
+
 
 }

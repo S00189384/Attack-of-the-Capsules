@@ -73,8 +73,6 @@ public class MissileComputerCanvas : MonoBehaviour
 
     void Start()
     {
-        //Components.
-
         //Audio
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = typingSounds;

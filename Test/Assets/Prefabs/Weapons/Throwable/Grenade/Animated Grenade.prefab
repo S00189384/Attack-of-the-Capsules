@@ -169,7 +169,7 @@ MonoBehaviour:
   damage: 100
   targetMask:
     serializedVersion: 2
-    m_Bits: 66560
+    m_Bits: 590848
   ThrowOnSpawn: 0
   throwForce: 20
   CanDamageTarget: 1
@@ -182,7 +182,7 @@ MonoBehaviour:
   timeUntilExplosion: 3
   layersToCheckIfCanDealDamage:
     serializedVersion: 2
-    m_Bits: 84992
+    m_Bits: 609280
 --- !u!64 &8835212659960875420
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -26,6 +26,9 @@ public class PlayerWeaponInventory : MonoBehaviour
 
     void Start()
     {
+        //FIX LATER.
+        Grenade.numberInPlayerInventory = 0;
+
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         uiBehaviour = GameObject.FindGameObjectWithTag("UI").GetComponent<UIBehaviour>();
         playerAttack = GetComponent<PlayerGunAttack>();
