@@ -171,10 +171,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsInteractable: 1
   ObjectName: Handgun
-  UIMessageToShowIfPlayerLooksAtObject: Press F to pickup Handgun
+  UIMessageIfPlayerLooksAtObjectInteractable: Press F To Buy Handgun - 100 Needed
+  UIMessageIfPlayerLooksAtObjectNotInteractable: Not Enough Points - 100 Required
   prefabToPickup: {fileID: 5266319058095843882, guid: e75e24228632007458a211f4df0ddec3,
     type: 3}
   ObjectType: Weapon
+  pointsRequiredToPickup: 100
 --- !u!1 &7823558336316569610
 GameObject:
   m_ObjectHideFlags: 0

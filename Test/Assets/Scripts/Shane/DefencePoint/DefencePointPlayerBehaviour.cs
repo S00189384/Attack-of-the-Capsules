@@ -60,7 +60,7 @@ public class DefencePointPlayerBehaviour : PlayerInteractableArea
     {
         if (!defencePoint.IsFullyBarricaded())
         {
-            uiBehaviour.ShowPlayerInteractMessage("Press and hold F to repair window", true);
+            uiBehaviour.ShowPlayerInteractMessage("Press and hold F to repair window", true,Color.white);
 
             if (PlayerIsInteracting)
             {

@@ -22,9 +22,12 @@ public class PlayerInteractRaycast : MonoBehaviour
     public float interactDistance = 200;
 
     [Header("Looking at interactable")]
-    public Color aimDotColorWhenLooking = Color.green;
+    public Color aimDotColorWhenLookingAtObjectInteractable = Color.green;
+    public Color aimDotColorWhenLookingAtObjectNotInteractable = Color.green;
     public float aimDotFadeSpeed = 2;
     public bool IsLookingAtInteractableObject;
+    public bool CheckForInteractableObjects;
+    private bool LookingAtObjectInteractableCheck = true;
 
     private void Start()
     {
@@ -42,11 +45,12 @@ public class PlayerInteractRaycast : MonoBehaviour
             if (IsLookingAtInteractableObject && interactableObject != null)
             {
                 //Check for interaction.
-                if (Input.GetKeyDown(KeyCode.F))
+                if (Input.GetKeyDown(KeyCode.F) && interactableObject.IsInteractable)
                 {
-                    interactableObject.PlayerInteracted();
-                    uiBehaviour.ResetAimDotColour();
                     IsLookingAtInteractableObject = false;
+                    interactableObject.PlayerInteracted();
+                    LookingAtObjectInteractableCheck = true;
+                    uiBehaviour.ResetAimDotColour();
                 }
             }
         }
@@ -55,43 +59,67 @@ public class PlayerInteractRaycast : MonoBehaviour
     //Inside interactable area? Check if player looks at interactable object.
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.tag == "InteractableArea")
+        if (other.gameObject.tag == "InteractableArea")
         {
-            if(playerCameraComponent.playerCamera.enabled)
+            if (playerCameraComponent.playerCamera.enabled)
             {
-                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                if (Physics.Raycast(ray, out hitInfo, interactDistance, layerMask, QueryTriggerInteraction.Collide)) //Looks at interactable.
+                if(CheckForInteractableObjects)
                 {
-                    if (!CheckForRaycastLeavingInteractableObject)
-                        CheckForRaycastLeavingInteractableObject = true;
+                    ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                    if (interactableObject == null || hitInfo.collider.gameObject != interactableObject.gameObject)
-                        interactableObject = hitInfo.collider.GetComponent<PlayerInteractableObject>();
-
-                    if (interactableObject != null)
+                    if (Physics.Raycast(ray, out hitInfo, interactDistance, layerMask, QueryTriggerInteraction.Collide)) //Looks at interactable.
                     {
-                        if (interactableObject.IsInteractable && !playerGunAttack.IsAiming)
+                        if (!CheckForRaycastLeavingInteractableObject)
+                            CheckForRaycastLeavingInteractableObject = true;
+
+                        if (interactableObject == null || hitInfo.collider.gameObject != interactableObject.gameObject)
+                            interactableObject = hitInfo.collider.GetComponent<PlayerInteractableObject>();
+
+                        if (interactableObject != null)
                         {
-                            IsLookingAtInteractableObject = true;
+                            if (LookingAtObjectInteractableCheck)
+                            {
+                                interactableObject.DetermineIfInteractable();
+                                LookingAtObjectInteractableCheck = false;
+                            }
 
-                            //Change UI stuff.
-                            uiBehaviour.ShowPlayerInteractMessage(interactableObject.UIMessageToShowIfPlayerLooksAtObject, true);
+                            if (!playerGunAttack.IsAiming)
+                            {
+                                IsLookingAtInteractableObject = true;
 
-                            if (uiBehaviour._imgPlayerAimDot.color != aimDotColorWhenLooking)
-                                uiBehaviour.FadeAimDotColour(aimDotFadeSpeed, aimDotColorWhenLooking);
+                                if (interactableObject.IsInteractable)
+                                {
+                                    uiBehaviour.ShowPlayerInteractMessage(interactableObject.UIMessageIfPlayerLooksAtObjectInteractable, true, Color.green);
+                                    if (uiBehaviour._imgPlayerAimDot.color != aimDotColorWhenLookingAtObjectInteractable)
+                                        uiBehaviour.FadeAimDotColour(aimDotFadeSpeed, aimDotColorWhenLookingAtObjectInteractable);
+                                }
+                                else
+                                {
+                                    uiBehaviour.ShowPlayerInteractMessage(interactableObject.UIMessageIfPlayerLooksAtObjectNotInteractable, true, Color.red);
+                                    if (uiBehaviour._imgPlayerAimDot.color != aimDotColorWhenLookingAtObjectNotInteractable)
+                                        uiBehaviour.FadeAimDotColour(aimDotFadeSpeed, aimDotColorWhenLookingAtObjectNotInteractable);
+                                }
+                            }
+                        }
+                    }
+                    else //Looks away from interactable.
+                    {
+                        if (interactableObject != null)
+                            interactableObject = null;
+
+                        if (LookingAtObjectInteractableCheck == false)
+                        {
+                            LookingAtObjectInteractableCheck = true;
                         }
                     }
                 }
-                else //Looks away from interactable.
-                {
-                    if (interactableObject != null)
-                        interactableObject = null;
-                }
-            }  
-            
+
+               
+            }
+        }
+
             //Checkforleave bool makes below code execute once - when the raycast leaves the object. 
-            if(CheckForRaycastLeavingInteractableObject && interactableObject == null)
+            if (CheckForRaycastLeavingInteractableObject && interactableObject == null)
             {
                 CheckForRaycastLeavingInteractableObject = false;
                 uiBehaviour.HidePlayerInteractMessage();
@@ -100,7 +128,53 @@ public class PlayerInteractRaycast : MonoBehaviour
                 if (uiBehaviour._imgPlayerAimDot.color != uiBehaviour.aimDotOriginalColour && !playerGunAttack.IsAiming)
                     uiBehaviour._imgPlayerAimDot.color = uiBehaviour.aimDotOriginalColour;
             }
-        }
+
+        //if(other.gameObject.tag == "InteractableArea")
+        //{
+        //    if(playerCameraComponent.playerCamera.enabled)
+        //    {
+        //        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        //        if (Physics.Raycast(ray, out hitInfo, interactDistance, layerMask, QueryTriggerInteraction.Collide)) //Looks at interactable.
+        //        {
+        //            if (!CheckForRaycastLeavingInteractableObject)
+        //                CheckForRaycastLeavingInteractableObject = true;
+
+        //            if (interactableObject == null || hitInfo.collider.gameObject != interactableObject.gameObject)
+        //                interactableObject = hitInfo.collider.GetComponent<PlayerInteractableObject>();
+
+        //            if (interactableObject != null)
+        //            {
+        //                if (interactableObject.IsInteractable && !playerGunAttack.IsAiming)
+        //                {
+        //                    IsLookingAtInteractableObject = true;
+
+        //                    //Change UI stuff.
+        //                    uiBehaviour.ShowPlayerInteractMessage(interactableObject.UIMessageToShowIfPlayerLooksAtObject, true);
+
+        //                    if (uiBehaviour._imgPlayerAimDot.color != aimDotColorWhenLooking)
+        //                        uiBehaviour.FadeAimDotColour(aimDotFadeSpeed, aimDotColorWhenLooking);
+        //                }
+        //            }
+        //        }
+        //        else //Looks away from interactable.
+        //        {
+        //            if (interactableObject != null)
+        //                interactableObject = null;
+        //        }
+        //    }  
+
+        //    //Checkforleave bool makes below code execute once - when the raycast leaves the object. 
+        //    if(CheckForRaycastLeavingInteractableObject && interactableObject == null)
+        //    {
+        //        CheckForRaycastLeavingInteractableObject = false;
+        //        uiBehaviour.HidePlayerInteractMessage();
+        //        IsLookingAtInteractableObject = false;
+
+        //        if (uiBehaviour._imgPlayerAimDot.color != uiBehaviour.aimDotOriginalColour && !playerGunAttack.IsAiming)
+        //            uiBehaviour._imgPlayerAimDot.color = uiBehaviour.aimDotOriginalColour;
+        //    }
+        //}
     }
 
     //Leaves interactable area trigger? Reset UI if on screen

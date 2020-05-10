@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5443682}
   - component: {fileID: 6450090}
   - component: {fileID: 8272170}
-  - component: {fileID: 4723914312631484692}
   m_Layer: 20
   m_Name: Explosive Barrel Piece 7
   m_TagString: Metal
@@ -209,19 +208,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4723914312631484692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100860}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fdc52df4b540c44e8a509ac70f2ba63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToDestroy: 0
 --- !u!1 &101972
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +222,6 @@ GameObject:
   - component: {fileID: 5408108}
   - component: {fileID: 6455892}
   - component: {fileID: 8202180}
-  - component: {fileID: 6369125223950260513}
   m_Layer: 20
   m_Name: Explosive Barrel Piece 6
   m_TagString: Metal
@@ -431,19 +416,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6369125223950260513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 101972}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fdc52df4b540c44e8a509ac70f2ba63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToDestroy: 0
 --- !u!1 &110808
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,7 +430,6 @@ GameObject:
   - component: {fileID: 5498290}
   - component: {fileID: 6486176}
   - component: {fileID: 8288466}
-  - component: {fileID: 3546283283345366934}
   m_Layer: 20
   m_Name: Explosive Barrel Piece 5
   m_TagString: Metal
@@ -653,19 +624,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3546283283345366934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 110808}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fdc52df4b540c44e8a509ac70f2ba63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToDestroy: 0
 --- !u!1 &126464
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,7 +638,6 @@ GameObject:
   - component: {fileID: 5406440}
   - component: {fileID: 6429492}
   - component: {fileID: 8211768}
-  - component: {fileID: 8528840415875510145}
   m_Layer: 20
   m_Name: Explosive Barrel Piece 2
   m_TagString: Metal
@@ -875,19 +832,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8528840415875510145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 126464}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fdc52df4b540c44e8a509ac70f2ba63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToDestroy: 0
 --- !u!1 &138970
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,7 +883,6 @@ GameObject:
   - component: {fileID: 5437840}
   - component: {fileID: 6452422}
   - component: {fileID: 8238156}
-  - component: {fileID: 3006823600898980734}
   m_Layer: 20
   m_Name: Explosive Barrel Piece 1
   m_TagString: Metal
@@ -1134,19 +1077,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3006823600898980734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139886}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fdc52df4b540c44e8a509ac70f2ba63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToDestroy: 0
 --- !u!1 &172402
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,7 +1091,6 @@ GameObject:
   - component: {fileID: 5467548}
   - component: {fileID: 6413862}
   - component: {fileID: 8227388}
-  - component: {fileID: 3440344990644275478}
   m_Layer: 20
   m_Name: Explosive Barrel Piece 4
   m_TagString: Metal
@@ -1356,19 +1285,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3440344990644275478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 172402}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fdc52df4b540c44e8a509ac70f2ba63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToDestroy: 0
 --- !u!1 &182082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1383,7 +1299,6 @@ GameObject:
   - component: {fileID: 5496500}
   - component: {fileID: 6409264}
   - component: {fileID: 8293090}
-  - component: {fileID: 331171220538810347}
   m_Layer: 20
   m_Name: Explosive Barrel Piece 3
   m_TagString: Metal
@@ -1578,16 +1493,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &331171220538810347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182082}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fdc52df4b540c44e8a509ac70f2ba63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeToDestroy: 0

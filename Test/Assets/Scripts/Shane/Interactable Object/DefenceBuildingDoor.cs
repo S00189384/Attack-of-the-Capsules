@@ -33,16 +33,29 @@ public class DefenceBuildingDoor : PlayerInteractableObject
 
     public override void PlayerInteracted()
     {
-        //Get which side the player interacted and determine which area index they opened.
-        if (sideOfDoorCheck1.bounds.Contains(player.transform.position))
-            indexOfAreaUnlocked = areaIndexOfSide2;
-        else if (sideOfDoorCheck2.bounds.Contains(player.transform.position))
-            indexOfAreaUnlocked = areaIndexOfSide1;
+        if(playerData.points >= pointsToUnlock)
+        {
+            playerData.RemovePoints(pointsToUnlock);
 
-        UnlockDoorEvent(indexOfAreaUnlocked);
-        Destroy(gameObject);
-        uiBehaviour.HidePlayerInteractMessage();
+            //Get which side the player interacted and determine which area index they opened.
+            if (sideOfDoorCheck1.bounds.Contains(player.transform.position))
+                indexOfAreaUnlocked = areaIndexOfSide2;
+            else if (sideOfDoorCheck2.bounds.Contains(player.transform.position))
+                indexOfAreaUnlocked = areaIndexOfSide1;
 
-        GetComponent<NavMeshObstacle>().carving = false;
+            UnlockDoorEvent(indexOfAreaUnlocked);
+            Destroy(gameObject);
+            uiBehaviour.HidePlayerInteractMessage();
+
+            GetComponent<NavMeshObstacle>().carving = false;
+        }
+    }
+
+    public override void DetermineIfInteractable()
+    {
+        if (playerData.points >= pointsToUnlock)
+            IsInteractable = true;
+        else
+            IsInteractable = false;
     }
 }

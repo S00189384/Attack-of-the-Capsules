@@ -286,7 +286,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsInteractable: 1
   ObjectName: Knife
-  UIMessageToShowIfPlayerLooksAtObject: Press F To Pickup Knife
+  UIMessageIfPlayerLooksAtObjectInteractable: Press F To Pickup Knife
+  UIMessageIfPlayerLooksAtObjectNotInteractable: 
   prefabToPickup: {fileID: 8276893301750851256, guid: ccc7b143e6be8b743a20a3469ef9aa4c,
     type: 3}
   ObjectType: Weapon
+  pointsRequiredToPickup: 0

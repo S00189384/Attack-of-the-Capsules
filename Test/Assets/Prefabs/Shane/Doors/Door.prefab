@@ -261,11 +261,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsInteractable: 1
   ObjectName: Door
-  UIMessageToShowIfPlayerLooksAtObject: Press F to Unlock Door
+  UIMessageIfPlayerLooksAtObjectInteractable: Press F Unlock Door - X Needed
+  UIMessageIfPlayerLooksAtObjectNotInteractable: Not Enough Points To Unlock Door
+    - X Needed
   indexOfAreaUnlocked: -1
   areaIndexOfSide1: 0
   areaIndexOfSide2: 0
-  pointsToUnlock: 300
+  pointsToUnlock: 100
   unlockSound: {fileID: 8300000, guid: b7886a023cfc2034a98d530d6a368bc4, type: 3}
   sideOfDoorCheck1: {fileID: 3718153148299924268}
   sideOfDoorCheck2: {fileID: 8355962653560319303}

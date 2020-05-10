@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanControlMissile: 1
-  movementSensitivity: 10
+  movementSensitivity: 350
   initialVelocityDownwards: 20
   boostVelocityDownwards: 25
   HasAppliedBoost: 0
@@ -242,4 +242,4 @@ MonoBehaviour:
   layersToCheckIfCanDealDamage:
     serializedVersion: 2
     m_Bits: 263168
-  explosionSound: {fileID: 8300000, guid: 36ba676d2cb8e5247a07b757ddb886a8, type: 3}
+  timeToDestroyAfterSpawning: 5

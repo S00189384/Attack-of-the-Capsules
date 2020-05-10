@@ -180,14 +180,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsInteractable: 1
   ObjectName: 
-  UIMessageToShowIfPlayerLooksAtObject: 
+  UIMessageIfPlayerLooksAtObjectInteractable: Press F To Activate Trap - 300 Points
+  UIMessageIfPlayerLooksAtObjectNotInteractable: 
   particleTrap: {fileID: 0}
+  pointsToUse: 300
   buttonLight: {fileID: 7209219454511982735}
   buttonInteractableMaterial: {fileID: 2100000, guid: c5eb520ed2c34664281ff32da640f2cb,
     type: 2}
   buttonNotInteractableMaterial: {fileID: 2100000, guid: 7dd429fee38b97746ba3e4c19a1df0b3,
     type: 2}
-  buttonMaterial: {fileID: 2100000, guid: b1971728cbcdc764bb802aec3e5044a1, type: 2}
 --- !u!1 &2648689214855347282
 GameObject:
   m_ObjectHideFlags: 0

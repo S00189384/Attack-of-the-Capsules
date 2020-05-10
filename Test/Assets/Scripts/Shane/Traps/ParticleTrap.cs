@@ -75,6 +75,8 @@ public class ParticleTrap : MonoBehaviour
     }
     IEnumerator CooldownCountdown()
     {
+        trapButton.UIMessageIfPlayerLooksAtObjectNotInteractable = "Trap is in Cooldown";
+
         IsInCooldown = true;
 
         while (cooldownTimer <= cooldownTime)

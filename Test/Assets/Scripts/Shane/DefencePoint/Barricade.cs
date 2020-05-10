@@ -63,7 +63,7 @@ public class Barricade : MonoBehaviour
             defencePoint.barricadeIndex--;
 
             if (defencePoint.defencePointPlayerBehaviour.PlayerInRange && !uiBehaviour.IsNotificationMessageOnScreen())
-                uiBehaviour.ShowPlayerInteractMessage("Press and hold F to repair window", true);
+                uiBehaviour.ShowPlayerInteractMessage("Press and hold F to repair window", true,Color.white);
 
         }
     }

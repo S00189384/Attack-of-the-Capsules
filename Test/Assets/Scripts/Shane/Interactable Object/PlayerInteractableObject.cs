@@ -7,7 +7,8 @@ public class PlayerInteractableObject : PlayerInteractableComponent
     [Header("Object Info for UI")]
     public bool IsInteractable = true;
     public string ObjectName;
-    public string UIMessageToShowIfPlayerLooksAtObject;
+    public string UIMessageIfPlayerLooksAtObjectInteractable;
+    public string UIMessageIfPlayerLooksAtObjectNotInteractable;
 
     public virtual void Update()
     {
@@ -21,5 +22,10 @@ public class PlayerInteractableObject : PlayerInteractableComponent
     public virtual void SwitchInteractableStatus()
     {
         IsInteractable = !IsInteractable;
+    }
+
+    public virtual void DetermineIfInteractable()
+    {
+
     }
 }

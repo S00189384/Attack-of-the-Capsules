@@ -37,6 +37,9 @@ public class Missile : MonoBehaviour
     Ray damageCheckRay;
     RaycastHit hitInfo;
 
+    [Header("Failsafe")]
+    public float timeToDestroyAfterSpawning;
+
     void Start()
     {
         ExplodedEvent += GameObject.FindGameObjectWithTag("MissileScreen").GetComponent<MissileComputerScreen>().RecontrolPlayer;
@@ -45,10 +48,12 @@ public class Missile : MonoBehaviour
         ExplodedEvent += missileComputerCanvas.PlayAudioWhenMissileHitsGround;
 
         uiBehaviour = GameObject.FindGameObjectWithTag("UI").GetComponent<UIBehaviour>();
-        uiBehaviour.ShowPlayerInteractMessage("Press space to boost", true);
+        uiBehaviour.ShowPlayerInteractMessage("Press space to boost", true,Color.white);
 
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.AddForce(Vector3.down * initialVelocityDownwards, ForceMode.Impulse);
+
+        Destroy(gameObject, timeToDestroyAfterSpawning);
     }
 
     void Update()
@@ -72,7 +77,7 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        positionOfImpact = collision.GetContact(0).point + new Vector3(0,1,0);
+        positionOfImpact = collision.GetContact(0).point + new Vector3(0, 1, 0);
         Collider[] collidersHit = Physics.OverlapSphere(positionOfImpact, explosionRadius, layersToDealDamageTo, QueryTriggerInteraction.Ignore);
 
         //Go through all enemies in explosion radius and check if wall is in the way of applying damage.
@@ -89,7 +94,11 @@ public class Missile : MonoBehaviour
             }
         }
 
-        ExplodedEvent();
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        ExplodedEvent();
     }
 }

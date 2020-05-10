@@ -490,7 +490,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsInteractable: 1
   ObjectName: AK-47
-  UIMessageToShowIfPlayerLooksAtObject: Press F to pickup AK-47
+  UIMessageIfPlayerLooksAtObjectInteractable: Press F To Pickup AK-47 - 300 Needed
+  UIMessageIfPlayerLooksAtObjectNotInteractable: Not Enough Points - 300 Required
   prefabToPickup: {fileID: 385955537631303032, guid: 073485a463316a945976cdbae7bc8c45,
     type: 3}
   ObjectType: Weapon
+  pointsRequiredToPickup: 300

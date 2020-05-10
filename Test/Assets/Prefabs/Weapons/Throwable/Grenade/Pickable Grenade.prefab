@@ -169,7 +169,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsInteractable: 1
   ObjectName: Grenade
-  UIMessageToShowIfPlayerLooksAtObject: Press F to Pickup Grenade
+  UIMessageIfPlayerLooksAtObjectInteractable: Press F To Pickup Grenade
+  UIMessageIfPlayerLooksAtObjectNotInteractable: 
   prefabToPickup: {fileID: 2468688346091377338, guid: 1df99c44f4ac6a74380dc222ec78cc53,
     type: 3}
   ObjectType: Grenade
+  pointsRequiredToPickup: 0

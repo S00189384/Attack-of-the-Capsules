@@ -8,6 +8,8 @@ public class PlayerPickupItem : PlayerInteractableObject
     [Header("Pickup Info")]
     public GameObject prefabToPickup;
     public string ObjectType;
+    public int pointsRequiredToPickup;
+    private bool itemCanBePickedUp;
 
     public override void Start()
     {
@@ -20,14 +22,31 @@ public class PlayerPickupItem : PlayerInteractableObject
         switch (ObjectType)
         {
             case "Weapon":
-                playerWeaponInventory.AddWeaponToInventory(prefabToPickup.GetComponent<Weapon>());
+                if(playerData.points >= pointsRequiredToPickup)
+                {
+                    playerWeaponInventory.AddWeaponToInventory(prefabToPickup.GetComponent<Weapon>());
+                    itemCanBePickedUp = true;
+                }
                 break;
             case "Grenade":
                 playerWeaponInventory.AddThrowableToInventory(prefabToPickup.GetComponent<Grenade>());
+                itemCanBePickedUp = true;
                 break;
         }
 
-        uiBehaviour.HidePlayerInteractMessage();
-        Destroy(gameObject);
+        if(itemCanBePickedUp)
+        {
+            playerData.RemovePoints(pointsRequiredToPickup);
+            uiBehaviour.HidePlayerInteractMessage();
+            Destroy(gameObject);
+        }
+    }
+
+    public override void DetermineIfInteractable()
+    {
+        if (playerData.points >= pointsRequiredToPickup)
+            IsInteractable = true;
+        else
+            IsInteractable = false;
     }
 }

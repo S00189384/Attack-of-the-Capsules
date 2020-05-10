@@ -42,11 +42,13 @@ public class MissileComputerScreen : PlayerInteractableObject
     private Camera playerCamera;
 
     [Header("Player Interaction")]
+    //public bool UsingComputerScreen;
     public float interactSpeed = 5f;
+    public int pointsRequiredToUse;
 
     [Header("Cooldown")]
+    public string interactMessageIfInCooldown;
     public bool IsInCooldown;
-
 
     public override void Start()
     {
@@ -62,14 +64,6 @@ public class MissileComputerScreen : PlayerInteractableObject
 
         computerCanvas.CooldownStartedEvent += ActivateCooldown;
         computerCanvas.CooldownEndedEvent += DisableCooldown;
-    }
-    public override void Update()
-    {
-        //Testing.
-        if(Input.GetKeyDown(KeyCode.B))
-        {
-            StartCoroutine(MoveCameraBackToPlayerPosition());
-        }
     }
 
     //Moving player camera to position;
@@ -119,12 +113,14 @@ public class MissileComputerScreen : PlayerInteractableObject
         PlayerLookedAwayFromScreenEvent();
 
         //Reset player state.
+        playerInteractRaycast.CheckForInteractableObjects = true;
         gameManager.EnablePlayerMovement();
         playerWeaponInventory.ActivateEquippedWeapon();
         playerHealthComponent.CanTakeDamage = true;
 
         //Re-enable UI.
         uiBehaviour.EnableUIExceptInteractMessage();
+        UIMessageIfPlayerLooksAtObjectNotInteractable = "";
 
         //Set up scaling again for next interaction.
         appliedScaling = false;
@@ -135,6 +131,11 @@ public class MissileComputerScreen : PlayerInteractableObject
     {
         if(!IsInCooldown)
         {
+            playerData.RemovePoints(pointsRequiredToUse);
+
+            playerInteractRaycast.CheckForInteractableObjects = false;
+            UIMessageIfPlayerLooksAtObjectNotInteractable = "";
+
             //Disable footstep audio from player if they were walking when they interacted.
             playerAudioSource.Stop();
 
@@ -155,6 +156,14 @@ public class MissileComputerScreen : PlayerInteractableObject
         }
     }
 
+    public override void DetermineIfInteractable()
+    {
+        if(!IsInCooldown && playerData.points >= pointsRequiredToUse)
+            IsInteractable = true;
+        else
+            IsInteractable = false;
+    }
+
     public void ActivateCooldown()
     {
         IsInteractable = false;
@@ -162,8 +171,11 @@ public class MissileComputerScreen : PlayerInteractableObject
     }
     public void DisableCooldown()
     {
-        IsInteractable = true;
+        DetermineIfInteractable();
         IsInCooldown = false;
+
+        uiBehaviour.HidePlayerInteractMessage();
+        UIMessageIfPlayerLooksAtObjectNotInteractable = "Not Enough Points - " + pointsRequiredToUse  + " Required";
     }
 
     //Recontrolling player after missile explodes.

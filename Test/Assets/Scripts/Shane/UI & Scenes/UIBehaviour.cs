@@ -99,9 +99,10 @@ public class UIBehaviour : MonoBehaviour
     }
 
     //Interact Message.
-    public void ShowPlayerInteractMessage(string message, bool FadeUIElement)
+    public void ShowPlayerInteractMessage(string message, bool FadeUIElement,Color colourToApply)
     {
         tmProInteractMessage.text = message;
+        tmProInteractMessage.color = colourToApply;
 
         if (FadeUIElement)
         {
@@ -192,6 +193,7 @@ public class UIBehaviour : MonoBehaviour
     public static IEnumerator FadeTMProFromClearToVisibleContinuously(TextMeshProUGUI tmProElement, float fadeSpeed)
     {
         Color tmProOriginalColour = tmProElement.color;
+        Color transparentColour = new Color(tmProOriginalColour.r, tmProOriginalColour.g, tmProOriginalColour.b, 0);
         float fadeTimer = 0;
 
         while (true)
@@ -331,7 +333,7 @@ public class UIBehaviour : MonoBehaviour
     {
         pauseMenuCanvasGroup.gameObject.SetActive(false);
         EnableUIExceptInteractMessage();
-        ShowPlayerInteractMessage("", false);
+        ShowPlayerInteractMessage("", false,Color.white);
         gameManager.EnablePlayerMovement();
         GameIsPaused = false;
         Time.timeScale = 1;
