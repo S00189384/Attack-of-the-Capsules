@@ -66,6 +66,9 @@ public class UIBehaviour : MonoBehaviour
     public CanvasGroup blackScreenCanvasGroup;
     public float blackScreenFadeSpeed;
 
+    [Header("Points Counter")]
+    public TextMeshProUGUI tmProPointsCounter;
+
     private void Start()
     {
         aimDotOriginalColour = _imgPlayerAimDot.color;
@@ -274,15 +277,15 @@ public class UIBehaviour : MonoBehaviour
     }
     public void UpdateAmmoCount(Gun gunToUpdate)
     {
-        tmProGunAmmoCount.text = gunToUpdate.Magazine.ToString();
-        if(gunToUpdate.Magazine <= gunToUpdate.MaxMagazine * gunToUpdate.lowOnAmmoPercentage)
+        tmProGunAmmoCount.text = gunToUpdate.magazine.ToString();
+        if(gunToUpdate.magazine <= gunToUpdate.maxMagazine * gunToUpdate.lowOnAmmoPercentage)
             tmProGunAmmoCount.color = ammoCountLowColour;
         else
             tmProGunAmmoCount.color = ammoCountNotLowColour;
     }
     public void UpdateReserveCount(Gun gunToUpdate)
     {
-        tmProGunReserveCount.text = gunToUpdate.Reserves.ToString();
+        tmProGunReserveCount.text = gunToUpdate.reserves.ToString();
     }
     public void EnableGunInfoUI()
     {
@@ -357,5 +360,11 @@ public class UIBehaviour : MonoBehaviour
     public void FadeToBlackAndLoadScene(float fadeSpeed,int sceneIndexToLoad)
     {
         StartCoroutine(FadeAndLoadScene(fadeSpeed,sceneIndexToLoad));
+    }
+
+    //Points Counter.
+    public void UpdatePointsCounter(int pointsToDisplay)
+    {
+        tmProPointsCounter.text = pointsToDisplay.ToString();
     }
 }

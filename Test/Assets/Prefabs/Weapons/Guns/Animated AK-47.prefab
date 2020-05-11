@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385955537631303032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.2759976, y: -0.14299877, z: 0.9699916}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6067148048240482987}
@@ -184,11 +184,12 @@ MonoBehaviour:
   gunInventoryIndex: 1
   weaponPosAiming: {x: 0.001, y: -0.065, z: 0.416}
   playerCamera: {fileID: 0}
-  MaxReserves: 200
-  Reserves: 70
-  MaxMagazine: 30
-  Magazine: 0
-  AmmoUsePerShot: 1
+  defaultReserveCount: 120
+  maxReserves: 200
+  reserves: 120
+  maxMagazine: 30
+  magazine: 0
+  ammoUsePerShot: 1
   lowOnAmmoPercentage: 0.1
   singleRateOfFire: 2
   IsAutomatic: 1

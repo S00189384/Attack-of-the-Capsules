@@ -6,6 +6,7 @@ public class PlayerPickupItem : PlayerInteractableObject
     PlayerWeaponInventory playerWeaponInventory;
 
     [Header("Pickup Info")]
+    public AmmoPurchase ammoPurchase;
     public GameObject prefabToPickup;
     public string ObjectType;
     public int pointsRequiredToPickup;
@@ -39,6 +40,8 @@ public class PlayerPickupItem : PlayerInteractableObject
             playerData.RemovePoints(pointsRequiredToPickup);
             uiBehaviour.HidePlayerInteractMessage();
             Destroy(gameObject);
+            if(ammoPurchase != null)
+                ammoPurchase.gameObject.SetActive(true);
         }
     }
 

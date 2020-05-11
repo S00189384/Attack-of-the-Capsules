@@ -186,7 +186,7 @@ public class MissileComputerCanvas : MonoBehaviour
 
     //Cooldown.
     public void SwitchToCooldown()
-    {
+    {      
         HideCanvasGroup(missileAvailableCanvasGroup);
         ShowCanvasGroup(missileNotAvailableCanvasGroup);
 

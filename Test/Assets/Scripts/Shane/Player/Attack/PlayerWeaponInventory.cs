@@ -45,12 +45,21 @@ public class PlayerWeaponInventory : MonoBehaviour
     //Adding to inventory.
     public void AddWeaponToInventory(Weapon weaponToAdd)
     {
-        weaponInventory[weaponToAdd.playerInventoryIndex] = weaponToAdd;
+        //weaponInventory[weaponToAdd.playerInventoryIndex] = weaponToAdd;
+        //uiBehaviour.inventoryUISlots[weaponToAdd.playerInventoryIndex].EnableInventoryItemPicture();
+        //weaponToAdd = Instantiate(weaponInventory[weaponToAdd.playerInventoryIndex], transform.position, Quaternion.identity);
+        //FixWeaponPosition(weaponToAdd);
+        //transform.Find(weaponInventory[weaponToAdd.playerInventoryIndex].gameObject.name + "(Clone)").gameObject.SetActive(false);
+
         uiBehaviour.inventoryUISlots[weaponToAdd.playerInventoryIndex].EnableInventoryItemPicture();
+        weaponToAdd = Instantiate(weaponToAdd, transform.position, Quaternion.identity);
+        weaponInventory[weaponToAdd.playerInventoryIndex] = weaponToAdd;
+        FixWeaponPosition(weaponToAdd);
+        //transform.Find(weaponToAdd.gameObject.name).gameObject.SetActive(false);
+        weaponToAdd.gameObject.SetActive(false);
     }
     public void AddThrowableToInventory(ThrowableWeapon throwableWeaponToAdd)
     {
-        //Need better way of doing this - update UI with no. of throwable.
         switch (throwableWeaponToAdd.tag)
         {
             case "Grenade":
@@ -121,7 +130,7 @@ public class PlayerWeaponInventory : MonoBehaviour
                 }
 
                 //Check if weapon is already spawned in as a child of player.
-                Transform weaponToEquip = transform.Find(weaponInventory[index].gameObject.name + "(Clone)");
+                Transform weaponToEquip = transform.Find(weaponInventory[index].gameObject.name);
 
                 //No - spawn it.
                 if (!weaponToEquip)
@@ -142,7 +151,7 @@ public class PlayerWeaponInventory : MonoBehaviour
                     activeThrowableWeapon = activeWeapon.gameObject.GetComponent<Grenade>();
 
                 //Set its position to be correct.
-                FixActiveWeaponPosition();
+                FixWeaponPosition(activeWeapon);
                 activeWeaponIndex = index;
 
                 //Update UI.
@@ -157,7 +166,7 @@ public class PlayerWeaponInventory : MonoBehaviour
         activeThrowableWeapon = activeWeapon.gameObject.GetComponent<ThrowableWeapon>();
 
         //Set its position to be correct.
-        FixActiveWeaponPosition();
+        FixWeaponPosition(activeThrowableWeapon);
         activeWeaponIndex = index;
 
         uiBehaviour.EnableInventoryItemSlot(activeWeaponIndex);
@@ -185,7 +194,7 @@ public class PlayerWeaponInventory : MonoBehaviour
     public void FindAndDestroyEquippedWeapon()
     {
         if(activeWeaponIndex != -1)
-            Destroy(transform.Find(weaponInventory[activeWeaponIndex].gameObject.name + "(Clone)").gameObject);
+            Destroy(transform.Find(weaponInventory[activeWeaponIndex].gameObject.name).gameObject);
     }
     public void ActivateEquippedWeapon()
     {
@@ -194,16 +203,34 @@ public class PlayerWeaponInventory : MonoBehaviour
     }
     public void DisableEquippedWeapon()
     {
-        if (activeWeaponIndex != -1)
+        if(activeWeaponIndex != -1)
             activeWeapon.gameObject.SetActive(false);
+
+        //activeWeapon = null;
+        //activeGun = null;
+        //activeMeleeWeapon = null;
+        //activeThrowableWeapon = null;
     }
 
     //Fix weapon position.
-    public void FixActiveWeaponPosition()
+    public void FixWeaponPosition(Weapon weapon)
     {
-        activeWeapon.transform.parent = transform;
-        activeWeapon.transform.localPosition = activeWeapon.defaultWeaponPosition;
-        activeWeapon.transform.forward = transform.forward;
-        activeWeapon.transform.localRotation = Quaternion.identity;
+        weapon.transform.parent = transform;
+        weapon.transform.localPosition = weapon.defaultWeaponPosition;
+        weapon.transform.forward = transform.forward;
+        weapon.transform.localRotation = Quaternion.identity;
+    }
+
+    public Gun GetGunInPlayerInventory(string gunNameToSearchFor)
+    {
+        for (int i = 0; i < weaponInventory.Length; i++)
+        {
+            if(weaponInventory[i] != null && weaponInventory[i].nameOfWeapon == gunNameToSearchFor)
+            {
+                return weaponInventory[i].GetComponent<Gun>();
+            }
+        }
+
+        return null;
     }
 }

@@ -53,7 +53,7 @@ public class PlayerGunAttack : MonoBehaviour
     {
         if (!PlayerWeaponInventory.activeGun.IsReloading)
         {
-            if (PlayerWeaponInventory.activeGun.Magazine > 0)
+            if (PlayerWeaponInventory.activeGun.magazine > 0)
             {
                 //Gun can shoot. Check if automatic or not.
                 if (PlayerWeaponInventory.activeGun.IsAutomatic)

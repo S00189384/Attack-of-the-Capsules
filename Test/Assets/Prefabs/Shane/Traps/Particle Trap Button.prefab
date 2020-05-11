@@ -181,7 +181,7 @@ MonoBehaviour:
   IsInteractable: 1
   ObjectName: 
   UIMessageIfPlayerLooksAtObjectInteractable: Press F To Activate Trap - 300 Points
-  UIMessageIfPlayerLooksAtObjectNotInteractable: 
+  UIMessageIfPlayerLooksAtObjectNotInteractable: Not Enough Points - 100 Required
   particleTrap: {fileID: 0}
   pointsToUse: 300
   buttonLight: {fileID: 7209219454511982735}

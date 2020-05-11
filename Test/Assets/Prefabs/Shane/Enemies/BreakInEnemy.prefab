@@ -246,7 +246,7 @@ MonoBehaviour:
   attackSpeed: 2
   attackTimer: 0
   timeBetweenAttacks: 2
-  dashAttackOffset: 0.5
+  dashAttackOffset: 0.425
   CheckForPlayerCollision: 0
   attackSound: {fileID: 8300000, guid: f7c208d0bb3269845a8793f1ddd0cc50, type: 3}
   layersToCheckIfDashAttackPossible:
@@ -263,12 +263,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 8922f117b6219cd4785d3566d28e937e, type: 2}
   - {fileID: 2100000, guid: 52970d2d8ce378443b6dd9f9f87b758a, type: 2}
   - {fileID: 2100000, guid: 8b50ddb5c7c68574087f73e24183eaf5, type: 2}
+  possiblePointsForKilling: 460000005000000055000000
   deathParticleEffect: {fileID: 4125538035131897410, guid: 1fbd98a5fe2a65b4f8b76e9ff4172339,
     type: 3}
   directionRaycastHit: {x: 0, y: 0, z: 0}
-  possibleDeathSounds:
-  - {fileID: 8300000, guid: 61d8b56be1c203f43bc15603ee30b10c, type: 3}
-  - {fileID: 8300000, guid: c79a389f835f8bf4fba7be53097e3bd7, type: 3}
   navMeshAreaMaskInsideBuilding: InsideDefenceArea
 --- !u!114 &114673429035078704
 MonoBehaviour:
@@ -283,6 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsAlive: 1
+  CanTakeDamage: 1
   maxHealth: 100
   currentHealth: 0
   DestroyOnDeath: 1

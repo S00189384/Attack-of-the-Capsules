@@ -495,4 +495,4 @@ MonoBehaviour:
   prefabToPickup: {fileID: 385955537631303032, guid: 073485a463316a945976cdbae7bc8c45,
     type: 3}
   ObjectType: Weapon
-  pointsRequiredToPickup: 300
+  pointsRequiredToPickup: 800

@@ -162,11 +162,12 @@ MonoBehaviour:
   gunInventoryIndex: 0
   weaponPosAiming: {x: 0, y: -0.051, z: 0.422}
   playerCamera: {fileID: 0}
-  MaxReserves: 100
-  Reserves: 50
-  MaxMagazine: 6
-  Magazine: 0
-  AmmoUsePerShot: 1
+  defaultReserveCount: 60
+  maxReserves: 100
+  reserves: 60
+  maxMagazine: 10
+  magazine: 0
+  ammoUsePerShot: 1
   lowOnAmmoPercentage: 0.465
   singleRateOfFire: 5
   IsAutomatic: 0

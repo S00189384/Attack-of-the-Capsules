@@ -49,7 +49,7 @@ public class Shotgun : RaycastGun
     }
     IEnumerator PumpShotgun()
     {
-        if(Magazine > 0)
+        if(magazine > 0)
         {
             yield return new WaitForSeconds(singleRateOfFire / 2.0f);
 
@@ -68,7 +68,7 @@ public class Shotgun : RaycastGun
     {
         if (!IsReloading && HasAmmoToReload())
         {
-            numberOfRoundsToReload = MaxMagazine - Magazine;
+            numberOfRoundsToReload = maxMagazine - magazine;
             IsReloading = true;
             animator.SetBool("InitialReloading", true);
         }
@@ -82,14 +82,14 @@ public class Shotgun : RaycastGun
     public void LoadShotgunShell()
     {
         numberOfRoundsToReload--;
-        Reserves--;
-        Magazine++;
+        reserves--;
+        magazine++;
 
         uiBehaviour.UpdateAmmoCount(this);
         uiBehaviour.UpdateReserveCount(this);
 
         //Check to stop reload animation.
-        if (numberOfRoundsToReload <= 0 || StopReloadEarly || Reserves <= 0)
+        if (numberOfRoundsToReload <= 0 || StopReloadEarly || reserves <= 0)
         {
             animator.SetBool("Reloading", false);
             animator.SetBool("EndReloading", true);

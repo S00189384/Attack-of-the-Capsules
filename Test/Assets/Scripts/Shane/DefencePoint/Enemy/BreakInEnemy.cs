@@ -14,8 +14,9 @@ public delegate void LeftDefencePoint(BreakInEnemy enemy);
 public class BreakInEnemy : NavMeshEnemy
 {
     System.Random rng = new System.Random();
-    
+
     //Components.
+    PlayerData playerData;
     WaveController waveController;
     DefencePointEnemyBehaviour DefencePointEnemyBehaviour;
     DefencePointPlayerBehaviour DefencePointPlayerBehaviour;
@@ -63,6 +64,7 @@ public class BreakInEnemy : NavMeshEnemy
     public List<Material> possibleMaterials;
 
     [Header("Death")]
+    public int[] possiblePointsForKilling;
     public ParticleSystem deathParticleEffect;
     public Vector3 directionRaycastHit;
 
@@ -87,6 +89,7 @@ public class BreakInEnemy : NavMeshEnemy
         DefencePointPlayerBehaviour = defencePoint.GetComponentInChildren<DefencePointPlayerBehaviour>();
 
         player = GameObject.FindGameObjectWithTag("Player");
+        playerData = player.GetComponent<PlayerData>();
         waveController = GameObject.FindGameObjectWithTag("WaveController").GetComponent<WaveController>();
 
         //Subscribing events.
@@ -109,11 +112,6 @@ public class BreakInEnemy : NavMeshEnemy
 	public override void Update ()
     {
         base.Update();
-
-        //if(Input.GetKeyDown(KeyCode.L))
-        //{
-        //    navMeshAgent.areaMask = 1 << 5;
-        //}
 
         if(CanAttack)
         {
@@ -165,6 +163,7 @@ public class BreakInEnemy : NavMeshEnemy
     public void DisableAttack()
     {
         CanAttack = false;
+        attackTarget = null;
     }
 
     //General Attack.
@@ -297,6 +296,8 @@ public class BreakInEnemy : NavMeshEnemy
     }
     public void OnDeath()
     {
+        playerData.AddPoints(possiblePointsForKilling[Random.Range(0,possiblePointsForKilling.Length)]);
+
         //Particle effect - spawning, setting colour, destroying.
         ParticleSystem particleSystem = Instantiate(deathParticleEffect,transform.position,Quaternion.FromToRotation(Vector3.forward,healthComponent.directionOfHit));
         ParticleSystem.MainModule psMainModule = particleSystem.main;

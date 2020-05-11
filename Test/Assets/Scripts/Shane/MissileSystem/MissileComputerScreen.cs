@@ -47,7 +47,6 @@ public class MissileComputerScreen : PlayerInteractableObject
     public int pointsRequiredToUse;
 
     [Header("Cooldown")]
-    public string interactMessageIfInCooldown;
     public bool IsInCooldown;
 
     public override void Start()
@@ -101,6 +100,8 @@ public class MissileComputerScreen : PlayerInteractableObject
     }
     IEnumerator MoveCameraBackToPlayerPosition()
     {
+        uiBehaviour.HidePlayerInteractMessage();
+
         computerCanvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPixelSize;
 
         //Re-enable the comp screen.
@@ -171,8 +172,8 @@ public class MissileComputerScreen : PlayerInteractableObject
     }
     public void DisableCooldown()
     {
-        DetermineIfInteractable();
         IsInCooldown = false;
+        DetermineIfInteractable();
 
         uiBehaviour.HidePlayerInteractMessage();
         UIMessageIfPlayerLooksAtObjectNotInteractable = "Not Enough Points - " + pointsRequiredToUse  + " Required";

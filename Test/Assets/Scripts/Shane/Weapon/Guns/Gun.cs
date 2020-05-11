@@ -28,13 +28,14 @@ public class Gun : Weapon
     public Camera playerCamera;
 
     [Header("Ammo")]
-    public int MaxReserves;
-    public int Reserves;
+    public int defaultReserveCount;
+    public int maxReserves;
+    public int reserves;
 
-    public int MaxMagazine;
-    public int Magazine;
+    public int maxMagazine;
+    public int magazine;
 
-    public int AmmoUsePerShot;
+    public int ammoUsePerShot;
 
     [Tooltip("What percentage of the max magazine do you consider the gun to be low on ammo? UI shows ammo count as red when its low on ammo.")]
     [Range(0, 1)]
@@ -70,13 +71,12 @@ public class Gun : Weapon
         base.Awake();
         muzzleFlash = GetComponent<GunMuzzleFlash>();
         playerCamera = Camera.main;
-        Magazine = MaxMagazine;
-        Reserves = MaxReserves;
+        magazine = maxMagazine;
     }
 
     public virtual void Fire(Vector3 fireFromPosition,Vector3 fireDirection)
     {
-        Magazine -= AmmoUsePerShot;
+        magazine -= ammoUsePerShot;
         audioSource.PlayOneShot(shootAudio);
 
         uiBehaviour.UpdateAmmoCount(this);
@@ -88,7 +88,7 @@ public class Gun : Weapon
         if (EjectCasingOnShoot)
             EjectCasing();
 
-        if (AutoReload && Magazine <= 0)
+        if (AutoReload && magazine <= 0)
             Reload();
     }
 
@@ -98,11 +98,11 @@ public class Gun : Weapon
     }
     public bool HasAmmoToShoot()
     {
-        return Magazine >= AmmoUsePerShot;
+        return magazine >= ammoUsePerShot;
     }
     public bool HasAmmoToReload()
     {
-        return Magazine < MaxMagazine && Reserves > 0;
+        return magazine < maxMagazine && reserves > 0;
     }
     public virtual void Reload()
     {
@@ -119,17 +119,17 @@ public class Gun : Weapon
 
         yield return new WaitForSeconds(reloadTime);
 
-        int ammoToReload = MaxMagazine - Magazine;
+        int ammoToReload = maxMagazine - magazine;
 
-        if (Reserves >= ammoToReload)
+        if (reserves >= ammoToReload)
         {
-            Magazine += ammoToReload;
-            Reserves -= ammoToReload;
+            magazine += ammoToReload;
+            reserves -= ammoToReload;
         }
         else
         {
-            Magazine += Reserves;
-            Reserves -= Reserves;
+            magazine += reserves;
+            reserves -= reserves;
         }
 
         reloadCoroutine = null;
@@ -140,10 +140,18 @@ public class Gun : Weapon
         uiBehaviour.UpdateReserveCount(this);
     }
 
+    public void AddAmmo(int amountOfAmmo)
+    {
+        reserves += amountOfAmmo;
+        if (reserves > maxReserves)
+            reserves = maxReserves;
+    }
+
     //If reload animation is playing when player switches weapon, reset the animation.
     //Animation is playing on the gameobject that is the first child of the Gun - hence GetChild(0).
     public override void OnDisable()
     {
         reloadAnimation.SampleAnimation(transform.GetChild(0).gameObject, 0);
+
     }
 }

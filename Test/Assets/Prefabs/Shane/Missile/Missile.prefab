@@ -230,9 +230,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanControlMissile: 1
-  movementSensitivity: 350
-  initialVelocityDownwards: 20
-  boostVelocityDownwards: 25
+  movementSensitivity: 480
+  initialVelocityDownwards: 25
+  boostVelocityDownwards: 38
   HasAppliedBoost: 0
   layersToDealDamageTo:
     serializedVersion: 2

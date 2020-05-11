@@ -108,9 +108,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsAlive: 1
-  maxHealth: 300
+  CanTakeDamage: 1
+  maxHealth: 400
   currentHealth: 0
   DestroyOnDeath: 0
+  directionOfHit: {x: 0, y: 0, z: 0}
 --- !u!114 &-5663672457291940037
 MonoBehaviour:
   m_ObjectHideFlags: 0
