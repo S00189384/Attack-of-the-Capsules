@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class KnifeAnimationEvents : MeleeWeaponAnimations
+﻿public class KnifeAnimationEvents : MeleeWeaponAnimations
 {
     public override void Start()
     {

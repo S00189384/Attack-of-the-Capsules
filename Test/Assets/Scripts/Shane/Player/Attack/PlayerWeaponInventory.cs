@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
+//Player weapon Inventory. 
+//Player has array of weapons they can pick up.
+//When they pick up a weapon, its temporarily spawned and equipped on the player, then disabled straight away. This object is then added to the array.
 public class PlayerWeaponInventory : MonoBehaviour
 {
     //Components.
@@ -24,6 +25,7 @@ public class PlayerWeaponInventory : MonoBehaviour
     [Header("Throwable Weapons")]
     public ThrowableWeapon activeThrowableWeapon;
 
+    //Inventory.
     public int numberOfGrenadesInInventory;
 
     void Start()
@@ -45,17 +47,10 @@ public class PlayerWeaponInventory : MonoBehaviour
     //Adding to inventory.
     public void AddWeaponToInventory(Weapon weaponToAdd)
     {
-        //weaponInventory[weaponToAdd.playerInventoryIndex] = weaponToAdd;
-        //uiBehaviour.inventoryUISlots[weaponToAdd.playerInventoryIndex].EnableInventoryItemPicture();
-        //weaponToAdd = Instantiate(weaponInventory[weaponToAdd.playerInventoryIndex], transform.position, Quaternion.identity);
-        //FixWeaponPosition(weaponToAdd);
-        //transform.Find(weaponInventory[weaponToAdd.playerInventoryIndex].gameObject.name + "(Clone)").gameObject.SetActive(false);
-
         uiBehaviour.inventoryUISlots[weaponToAdd.playerInventoryIndex].EnableInventoryItemPicture();
         weaponToAdd = Instantiate(weaponToAdd, transform.position, Quaternion.identity);
         weaponInventory[weaponToAdd.playerInventoryIndex] = weaponToAdd;
         FixWeaponPosition(weaponToAdd);
-        //transform.Find(weaponToAdd.gameObject.name).gameObject.SetActive(false);
         weaponToAdd.gameObject.SetActive(false);
     }
     public void AddThrowableToInventory(ThrowableWeapon throwableWeaponToAdd)
@@ -205,11 +200,6 @@ public class PlayerWeaponInventory : MonoBehaviour
     {
         if(activeWeaponIndex != -1)
             activeWeapon.gameObject.SetActive(false);
-
-        //activeWeapon = null;
-        //activeGun = null;
-        //activeMeleeWeapon = null;
-        //activeThrowableWeapon = null;
     }
 
     //Fix weapon position.

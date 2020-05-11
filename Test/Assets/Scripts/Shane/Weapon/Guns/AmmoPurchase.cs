@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 //After buying weapon on wall it is replaced by an ammo purchase option.
@@ -68,8 +65,6 @@ public class AmmoPurchase : PlayerInteractableObject
 
     public override void PlayerInteracted()
     {
-        //Gun gun = null;
-
         audioSource.PlayOneShot(ammoPurchase);
 
         gunToAddAmmoTo.AddAmmo(ammoToGive);

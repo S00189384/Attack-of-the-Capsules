@@ -1,12 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+//Casing can be ejected from gun when gun is fired.
+//Casing fades over time and the destroys itself.
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(AudioSource))]
 public class BulletCasing : MonoBehaviour
 {
-    System.Random rng = new System.Random();
     Rigidbody rigidbody;
     AudioSource audioSource;
 
@@ -53,7 +53,7 @@ public class BulletCasing : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        audioSource.PlayOneShot(hitFloorAudio[rng.Next(0, hitFloorAudio.Length)]);
+        audioSource.PlayOneShot(hitFloorAudio[Random.Range(0, hitFloorAudio.Length)]);
     }
 
 }

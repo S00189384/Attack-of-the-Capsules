@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+//Scene where player can change settings - settings static class is updated when player presses save button.
 public class SettingsScene : MonoBehaviour
 {
     [Header("Sensitivity")]

@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+//When player is in interactable area - a raycast is activated and goes directly forward. It checks if it hits an interactable object.
+//When it hits an interactable object it checks if the object is interactable (once - it doesn't call this every frame).
+//If it is interactable the ui is updated to display whatever message and update checks if player presses F to interact.
 public class PlayerInteractRaycast : MonoBehaviour
 {
     //Components.

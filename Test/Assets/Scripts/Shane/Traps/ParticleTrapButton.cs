@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+//Trap button activates trap and has a points requirement to use.
+//When button is pushed it changes a colour above the button to show if its interactable or not, it updates UI and activates trap. 
 public class ParticleTrapButton : PlayerInteractableObject
 {
     //Components.

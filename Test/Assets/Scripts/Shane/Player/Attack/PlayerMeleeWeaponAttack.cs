@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+//Checks for melee weapon attack.
 public class PlayerMeleeWeaponAttack : MonoBehaviour
 {
+    //Components.
     GameManager gameManager;
     PlayerWeaponInventory PlayerWeaponInventory;
 

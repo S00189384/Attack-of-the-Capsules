@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Script for handling all UI. Not sure if it was better to make multiple scripts.
+//UI has inventory slots, wave number, ammo counter, points counter, interact message etc.
 public class UIBehaviour : MonoBehaviour
 {
     //Components.

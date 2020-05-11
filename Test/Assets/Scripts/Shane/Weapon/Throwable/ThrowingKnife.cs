@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ThrowingKnife : ThrowableWeapon
 {
@@ -29,7 +27,6 @@ public class ThrowingKnife : ThrowableWeapon
         //Hit one of the target layers.
         if (CanDamageTarget && (((1 << collision.gameObject.layer) & targetMask) != 0))
         {
-            //audioSource.PlayOneShot(impactOnEnemy);
             collision.gameObject.GetComponent<HealthComponent>().ApplyDamage(damage);
             CanDamageTarget = false;
         }

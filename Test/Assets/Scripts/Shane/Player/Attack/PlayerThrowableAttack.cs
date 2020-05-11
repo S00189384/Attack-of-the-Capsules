@@ -1,12 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+//Check for throwing weapon if they have a throwable equipped.
 public class PlayerThrowableAttack : MonoBehaviour
 {
+    //Components.
     GameManager gameManager;
     PlayerWeaponInventory PlayerWeaponInventory;
 
+    [Header("Throw Info")]
     public float throwCooldownTime = 2;
     public float nextTimeCanThrow;
 

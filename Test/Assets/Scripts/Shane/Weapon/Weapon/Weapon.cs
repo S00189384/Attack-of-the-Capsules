@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+//Base Weapon Script.
 [RequireComponent(typeof(AudioSource))]
 public class Weapon : MonoBehaviour
 {

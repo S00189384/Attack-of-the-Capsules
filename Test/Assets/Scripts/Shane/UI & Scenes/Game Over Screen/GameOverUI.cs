@@ -1,10 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
+//This scene is loaded when player wins or dies (decided to just have one scene for this, only thing different is the gameover text).
+//Game over text is different depending on if the player died or survived all waves.
 public class GameOverUI : MonoBehaviour
 {
     public static string gameOverText;

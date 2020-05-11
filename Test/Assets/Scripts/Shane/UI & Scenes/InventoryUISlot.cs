@@ -1,8 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+//UI Slot Item on bottom of screen as part of UI.
+//On equipping weapon its image is added to its inventory slot.
+//When weapon is equipped the background changes to green.
+//UIBehaviour script has an array of this object - when weapon is equipped or picked up - this array at index of weapon index is updated.
 public class InventoryUISlot : MonoBehaviour
 {
     [Header("Background Image")]
@@ -18,11 +20,6 @@ public class InventoryUISlot : MonoBehaviour
         defaultBackgroundColour = backgroundImage.color;
     }
 
-    //Update Background colour (on equipping).
-    //public void SwitchBackgroundColour()
-    //{
-    //    backgroundImage.color = backgroundImage.color == defaultBackgroundColour ? equippedBackgroundColour : defaultBackgroundColour;
-    //}
     public void ChangeBackgroundColourToEquipped()
     {
         backgroundImage.color = equippedBackgroundColour;

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /* 
  Temporary and really bad fix to call animation events from the animator which is in the child of the shotgun.

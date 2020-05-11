@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 
+//Waves are just like Cod5 Nazi zombies.
+//Audio plays at start of game, when audio ends the waves start.
+//Wave controller waits until all enemies are spawned, then it waits for the player to kill all enemies.
+//When all enemies are killed it goes to next wave - next wave in wave list or it updates the single infinite wave object to get harder if the player chose infinite wave setting.
+//Between each wave there is an audio transition, when the transition ends the wave starts.
 [RequireComponent(typeof(AudioSource))]
 public class WaveController : MonoBehaviour
 {
-    System.Random rng = new System.Random();
-
     //Components.
     GameManager gameManager;
     AudioSource audioSource;
@@ -131,7 +134,7 @@ public class WaveController : MonoBehaviour
 
             yield return new WaitForSeconds(endGameFadeToBlackDelay);
 
-            uiBehaviour.FadeToBlackAndLoadScene(endGameFadeToBlackSpeed, 1);
+            uiBehaviour.FadeToBlackAndLoadScene(endGameFadeToBlackSpeed, 2);
             StartCoroutine(uiBehaviour.FadeUI());
             gameManager.DisablePlayerMovement();
         }      
@@ -149,7 +152,7 @@ public class WaveController : MonoBehaviour
     }
     public Spawner GetRandomSpawner()
     {
-        return activeSpawnersList[rng.Next(0, activeSpawnersList.Count)];
+        return activeSpawnersList[Random.Range(0, activeSpawnersList.Count)];
     }
 
     //When player opens door to new area - spawners in that area become active.

@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//Used in menu scenes to load other scenes on button click.
 public class SceneLoader : MonoBehaviour
 {    
     public void LoadScene(int sceneNumber)

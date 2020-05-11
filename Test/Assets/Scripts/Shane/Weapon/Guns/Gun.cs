@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
-using System.Linq;
 
+//Gun script.
 public delegate void GunReload();
 [RequireComponent(typeof(GunMuzzleFlash))]
 [RequireComponent(typeof(AudioSource))]

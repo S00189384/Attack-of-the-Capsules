@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+//Activated when gun is fired.
+//Turns a sprite on and off at end of gun.
 public class GunMuzzleFlash : MonoBehaviour
 {
     System.Random rng = new System.Random();

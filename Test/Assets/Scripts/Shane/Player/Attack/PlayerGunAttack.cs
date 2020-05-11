@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+//If gun is equipped, checks if player fires gun and checks if player aims down sights.
 public class PlayerGunAttack : MonoBehaviour
 {
     //Components.

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Rotates camera on mouse input.
 public class PlayerCameraRotation : MonoBehaviour
 {
     //Components.

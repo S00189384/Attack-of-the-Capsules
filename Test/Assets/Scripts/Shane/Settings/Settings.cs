@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿
+//Settings has two settings - camera sensitivity and an infinite waves option.
+//Settings can be changed in the settings scene loaded from the main menu.
 public static class Settings
 {
     public static int playerCameraSensitivity = 65;

@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+//Scriptable object that represents a wave. 
+//Wave controller has a list of this object.
 [CreateAssetMenu(fileName = "Wave", menuName = "Scriptable Object- Wave")]
 public class Wave : ScriptableObject
 {

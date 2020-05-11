@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
+//Player Movement - player can jump and sprint(sprint has cooldown). 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(AudioSource))]
 public class PlayerMovement : MonoBehaviour

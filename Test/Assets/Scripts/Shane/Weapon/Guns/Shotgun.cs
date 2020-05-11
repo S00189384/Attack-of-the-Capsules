@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-
-/*Animation states for reloading - 
+/* Animation states for reloading - 
 Initial reloading - Shotgun rotates into position.
 Reloading - shell enters gun (checking if user presses shoot again to signal an early reload stoppage)
 End Reloading - Shotgun rotates back into original position (Reset variables / animations)
