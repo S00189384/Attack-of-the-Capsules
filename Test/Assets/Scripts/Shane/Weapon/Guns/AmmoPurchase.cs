@@ -13,6 +13,8 @@ public class AmmoPurchase : PlayerInteractableObject
     AudioSource audioSource;
     PlayerWeaponInventory playerWeaponInventory;
 
+    private Gun gunToAddAmmoTo;
+
     [Header("Info")]
     public string gunNameToAddAmmoTo;
     public int pointsForPurchase;
@@ -24,7 +26,7 @@ public class AmmoPurchase : PlayerInteractableObject
     public Color textDisplayColourNotInteractable;
 
     [Header("Audio")] 
-    public AudioClip gunPurchase; // Played when enabled as this object gets enabled when gun is purchased.
+    public AudioClip gunPurchase; // Played at start as this object gets enabled when gun is purchased.
     public AudioClip ammoPurchase;
 
     public override void Start()
@@ -36,12 +38,13 @@ public class AmmoPurchase : PlayerInteractableObject
         audioSource.PlayOneShot(gunPurchase);
         
         playerWeaponInventory = player.GetComponentInChildren<PlayerWeaponInventory>();
+     
+        gunToAddAmmoTo = playerWeaponInventory.GetGunInPlayerInventory(gunNameToAddAmmoTo);
+        gunToAddAmmoTo.GunReloadedEvent += DetermineIfInteractable;
     }
 
     public override void DetermineIfInteractable()
     {
-        Gun gunToAddAmmoTo = playerWeaponInventory.GetGunInPlayerInventory(gunNameToAddAmmoTo);
-
         if (playerData.points >= pointsForPurchase && gunToAddAmmoTo.reserves < gunToAddAmmoTo.maxReserves)
         {
             IsInteractable = true;
@@ -58,37 +61,24 @@ public class AmmoPurchase : PlayerInteractableObject
             }
             else
             {
-                UIMessageIfPlayerLooksAtObjectNotInteractable = "Not Enough Points - " + pointsForPurchase + "Required";
+                UIMessageIfPlayerLooksAtObjectNotInteractable = "Not Enough Points - " + pointsForPurchase + " Required";
             }
         }
     }
 
     public override void PlayerInteracted()
     {
-        Gun gun = null;
+        //Gun gun = null;
 
-        for (int i = 0; i < playerWeaponInventory.weaponInventory.Length; i++)
-        {
-            //Find Gun to add ammo to in inventory.
-            if(playerWeaponInventory.weaponInventory[i] != null && playerWeaponInventory.weaponInventory[i].nameOfWeapon == gunNameToAddAmmoTo)
-            {
-                gun = playerWeaponInventory.weaponInventory[i].GetComponent<Gun>();
-                
-                //Check if gun already was spawned in and is child of player.
-                //Transform gunChildOfPlayer = playerWeaponInventory.transform.Find(gun.gameObject.name + "(Clone)");
-                //gun = gunChildOfPlayer.GetComponent<Gun>();
+        audioSource.PlayOneShot(ammoPurchase);
 
-                gun.AddAmmo(ammoToGive);
+        gunToAddAmmoTo.AddAmmo(ammoToGive);
+        if (playerWeaponInventory.activeGun == gunToAddAmmoTo)
+            uiBehaviour.UpdateReserveCount(gunToAddAmmoTo);
 
-                //If weapon is equipped while purchasing - update ui reserve count.
-                if (playerWeaponInventory.activeGun == gun)
-                    uiBehaviour.UpdateReserveCount(gun);
+        playerData.RemovePoints(pointsForPurchase);
 
-                playerData.RemovePoints(pointsForPurchase);
-
-                //Hide temporarily in case player keeps looking at object when they make a purchase and it becomes not interactable anymore - therefore change colour of UI message.
-                uiBehaviour.HidePlayerInteractMessage();
-            }
-        }
+        //Hide temporarily in case player keeps looking at object when they make a purchase and it becomes not interactable anymore - therefore change colour of UI message.
+        uiBehaviour.HidePlayerInteractMessage();
     }
 }

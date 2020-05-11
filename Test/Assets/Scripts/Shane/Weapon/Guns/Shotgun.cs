@@ -93,6 +93,7 @@ public class Shotgun : RaycastGun
         {
             animator.SetBool("Reloading", false);
             animator.SetBool("EndReloading", true);
+            GunReloadedEvent();
         }
     }
     public void SwitchToIdleFromReload()

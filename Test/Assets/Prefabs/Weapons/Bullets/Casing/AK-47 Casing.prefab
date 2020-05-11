@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7888299296054684534}
   - component: {fileID: -87076039681356103}
   - component: {fileID: 3797600689868751765}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: AK-47 Casing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

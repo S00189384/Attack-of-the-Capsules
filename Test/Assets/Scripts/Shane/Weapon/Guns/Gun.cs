@@ -2,12 +2,16 @@
 using UnityEngine;
 using System.Linq;
 
+public delegate void GunReload();
 [RequireComponent(typeof(GunMuzzleFlash))]
 [RequireComponent(typeof(AudioSource))]
 public class Gun : Weapon
 {
     //Components.
     GunMuzzleFlash muzzleFlash;
+
+    //Events.
+    public GunReload GunReloadedEvent;
 
     [Header("Casing ejection")]
     public bool EjectCasingOnShoot;
@@ -135,9 +139,11 @@ public class Gun : Weapon
         reloadCoroutine = null;
         IsReloading = false;
         animator.SetBool("Reloading", false);
-
+       
         uiBehaviour.UpdateAmmoCount(this);
         uiBehaviour.UpdateReserveCount(this);
+
+        GunReloadedEvent(); //Notifies gun purchase on wall to check to change interact status.
     }
 
     public void AddAmmo(int amountOfAmmo)
@@ -152,6 +158,5 @@ public class Gun : Weapon
     public override void OnDisable()
     {
         reloadAnimation.SampleAnimation(transform.GetChild(0).gameObject, 0);
-
     }
 }

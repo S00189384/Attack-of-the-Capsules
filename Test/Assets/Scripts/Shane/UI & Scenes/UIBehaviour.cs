@@ -68,6 +68,8 @@ public class UIBehaviour : MonoBehaviour
 
     [Header("Points Counter")]
     public TextMeshProUGUI tmProPointsCounter;
+    public Color pointsCounterColourAboveZero;
+    public Color pointsCounterColourZero;
 
     private void Start()
     {
@@ -366,5 +368,10 @@ public class UIBehaviour : MonoBehaviour
     public void UpdatePointsCounter(int pointsToDisplay)
     {
         tmProPointsCounter.text = pointsToDisplay.ToString();
+
+        if (pointsToDisplay <= 0)
+            tmProPointsCounter.color = pointsCounterColourZero;
+        else
+            tmProPointsCounter.color = pointsCounterColourAboveZero;
     }
 }

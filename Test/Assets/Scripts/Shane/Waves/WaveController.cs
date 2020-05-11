@@ -167,8 +167,6 @@ public class WaveController : MonoBehaviour
 
         if (numberOfEnemiesKilledInWave >= currentWave.numberOfEnemiesInWave)
             allEnemiesKilledInWave = true;
-
-        print("Killed: " + numberOfEnemiesKilledInWave + " ---- Target: " + currentWave.numberOfEnemiesInWave);
     }
 
     //Resetting wave stats when game is ended - scriptable object wasn't doing it automatically.

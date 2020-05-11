@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3469965372224849509}
   - component: {fileID: 7836820327873178857}
   - component: {fileID: 2845409570117704855}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Handgun Casing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

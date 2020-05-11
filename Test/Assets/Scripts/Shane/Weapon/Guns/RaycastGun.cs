@@ -26,7 +26,6 @@ public class RaycastGun : Gun
     public void ShootRayToApplyDamage(Vector3 origin, Vector3 direction)
     {
         ShootRay(origin, direction);
-        Debug.DrawRay(ray.origin, ray.direction * range, Color.red,1000);
 
         if(Physics.Raycast(ray, out hitInfo, range, targetMask, QueryTriggerInteraction.Ignore))
         {
@@ -48,5 +47,4 @@ public class RaycastGun : Gun
     {
         base.Awake();
     }
-
 }

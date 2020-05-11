@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabToSpawn: {fileID: 1472139789441538, guid: fc135b8ce57dedd42ab9f311c51b18b6,
     type: 3}
-  numberOfEnemiesInWave: 50
+  numberOfEnemiesInWave: 7
   numberOfEnemiesSpawned: 0
-  minTimeBetweenEnemySpawns: 0.5
-  maxTimeBetweenEnemySpawns: 1.6
+  minTimeBetweenEnemySpawns: 2
+  maxTimeBetweenEnemySpawns: 2.5
