@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//Door which blocks path to part of the level. Need points to unlock.
+//When unlocked all the spawners in the area that is unlocked gets added to active spawners which enemies can spawn out of.
 public delegate void UnlockDoorDelegate(int indexOfAreaUnlocked);
 [RequireComponent(typeof(AudioSource))]
 public class DefenceBuildingDoor : PlayerInteractableObject
@@ -11,6 +13,9 @@ public class DefenceBuildingDoor : PlayerInteractableObject
     AudioSource audioSource;
     WaveController waveController;
 
+    //Events.
+    public UnlockDoorDelegate UnlockDoorEvent;
+
     [Header("Door")]
     public int indexOfAreaUnlocked;
     public int areaIndexOfSide1;
@@ -18,10 +23,9 @@ public class DefenceBuildingDoor : PlayerInteractableObject
     public int pointsToUnlock;
     public AudioClip unlockSound;
 
+    [Header("Sides of Door")]
     public BoxCollider sideOfDoorCheck1;
     public BoxCollider sideOfDoorCheck2;
-
-    public UnlockDoorDelegate UnlockDoorEvent;
 
     public override void Start()
     {

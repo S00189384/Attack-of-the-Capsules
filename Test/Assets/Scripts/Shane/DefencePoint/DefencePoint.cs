@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
 
+/* Defence Point script contains info for barricade positions, rotations and barricades themselves.
+ * Here is where barricades get spawned. 
+ */
 public class DefencePoint : MonoBehaviour
 {
+    //Components.
     public DefencePointPlayerBehaviour defencePointPlayerBehaviour;
     UIBehaviour uiBehaviour;
     AudioSource audioSource;
 
+    [Header("Audio")]
     public AudioClip repairSound;
 
     [Header("Barricade Numbers")]
@@ -33,16 +38,6 @@ public class DefencePoint : MonoBehaviour
         //-1 if no barricades -> one less than amount of barricades if barricaded at start.
         barricadeIndex = TotalNumberOfBarricades - 1;
     }
-
-    //Testing
-    //private void Update()
-    //{
-    //    // Simulate enemy breaking down a barricade.
-    //    if (Input.GetKeyDown(KeyCode.Alpha1))
-    //    {
-    //        ActiveBarricades[barricadeIndex].GetComponent<HealthComponent>().ApplyDamage(20);
-    //    }
-    //}
 
     public void SpawnBarricade()
     {

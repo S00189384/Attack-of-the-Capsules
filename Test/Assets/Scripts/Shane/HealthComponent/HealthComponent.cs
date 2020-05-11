@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Health component attached to barricades, player, enemies, explosive barrels etc.
 public delegate void OnDeath();
 public class HealthComponent : MonoBehaviour
 {
@@ -65,5 +66,4 @@ public class HealthComponent : MonoBehaviour
             }
         }       
     }
-
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Explosive barrel that can be found all around level. Exploding damages enemies and player.
 [RequireComponent(typeof(HealthComponent))]
 public class ExplosiveBarrel : MonoBehaviour
 {

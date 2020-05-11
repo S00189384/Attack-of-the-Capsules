@@ -1,7 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/* Barricade is like a wooden plank that can be at a defence point stopping enemies from entering.
+   PlayerDefencePointBehaviour script checks if player keeps hold of F, if they hold it long enough a barricade spawns, rotates a certain amount, then moves to position to barricade defence point. 
+ */
 [RequireComponent(typeof(HealthComponent))]
 public class Barricade : MonoBehaviour
 {

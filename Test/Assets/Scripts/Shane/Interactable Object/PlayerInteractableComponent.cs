@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+//Base class for interactable objects.
+//Interactable objects often need reference to UI, player + player interact raycast so its good to have a base class that has this information.
 [RequireComponent(typeof(Collider))]
 public class PlayerInteractableComponent : MonoBehaviour
 {
+    //Components.
     protected UIBehaviour uiBehaviour;
     protected PlayerInteractRaycast playerInteractRaycast;
     protected PlayerData playerData;

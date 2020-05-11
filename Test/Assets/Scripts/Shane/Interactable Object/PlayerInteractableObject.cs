@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+//Interactable object base class - pickable items, missile screen etc. inherit from this.
 public class PlayerInteractableObject : PlayerInteractableComponent
 {
     [Header("Object Info for UI")]

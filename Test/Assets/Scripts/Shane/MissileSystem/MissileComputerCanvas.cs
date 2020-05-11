@@ -15,7 +15,6 @@ public class MissileComputerCanvas : MonoBehaviour
     [Header("Components")]
     AudioSource audioSource;
     public MissileComputerScreen computerScreen;
-    //public BlackScreen blackScreen;
 
     //Events.
     public CooldownDelegate CooldownEndedEvent;
@@ -32,6 +31,7 @@ public class MissileComputerCanvas : MonoBehaviour
     public CanvasGroup missileNotAvailableCanvasGroup;
     public CanvasGroup blackScreen;
 
+    //Coroutines.
     Coroutine fadeMissileStatusCoroutine;
     Coroutine flashInputFieldCoroutine;
     Coroutine typeCommandCoroutine;

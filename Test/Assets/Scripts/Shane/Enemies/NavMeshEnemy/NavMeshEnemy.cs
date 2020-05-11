@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//Base script for enemy that uses navmesh.
 [RequireComponent(typeof(NavMeshAgent))]
 public class NavMeshEnemy : NavMeshMover
 {

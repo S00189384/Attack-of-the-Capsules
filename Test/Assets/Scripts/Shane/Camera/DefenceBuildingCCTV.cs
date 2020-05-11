@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//CCTV Camera rotates slowly from one point to another and can be seen on the control panel on the second floor.
 public class DefenceBuildingCCTV : MonoBehaviour
 {
     [Header("Camera Rotates Or Not")]
@@ -40,7 +42,6 @@ public class DefenceBuildingCCTV : MonoBehaviour
             rotationSpeed = -rotationSpeed;
 
             yield return new WaitForSeconds(rotationDelay);
-            yield return null;
         }
     }
 }

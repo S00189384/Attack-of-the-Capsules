@@ -1,15 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AI;
+﻿using UnityEngine;
 
-/* Spawns break in enemies. Gives them a defence point and notifies defence point enemy behaviour script.
- */
-
+//Spawns break in enemies. Gives them a defence point and notifies defence point enemy behaviour script.
 public class Spawner : MonoBehaviour
 {
+    //Components.
     public DefencePointEnemyBehaviour DefencePointEnemyBehaviour;
 
+    //Variables.
     [Header("Defence Point")]
     public int areaIndex;
     public DefencePoint defencePoint;
@@ -18,13 +15,6 @@ public class Spawner : MonoBehaviour
     {
         DefencePointEnemyBehaviour = defencePoint.GetComponentInChildren<DefencePointEnemyBehaviour>();
 	}
-	
-	void Update ()
-    {
-        //Testing.
-        //if (Input.GetKeyDown(KeyCode.Alpha9))
-        //    SpawnEnemy(enemyPrefab);
-    }
 
     public void SpawnEnemy(GameObject enemyPrefab)
     {

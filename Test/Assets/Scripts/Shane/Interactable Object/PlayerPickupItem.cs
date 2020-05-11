@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+//At the moment only item that can be picked up is weapons.
+//When picked up, checks which type of item / weapon it is and adds to inventory.
+
 public class PlayerPickupItem : PlayerInteractableObject
 {
     //Components.

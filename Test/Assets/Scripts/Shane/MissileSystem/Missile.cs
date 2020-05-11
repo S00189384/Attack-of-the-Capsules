@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Missile that spawns from interacting with missile screen.
+//Destroys itself after X seconds in case player ends up not hitting ground.
+//Player can apply boost to missile once.
+//When hits ground, it calls event which moves control back to player.
 
 public delegate void MissileExplodedDelegate();
 public class Missile : MonoBehaviour

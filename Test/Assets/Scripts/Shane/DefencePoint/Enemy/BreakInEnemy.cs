@@ -13,8 +13,6 @@ using UnityEngine.AI;
 public delegate void LeftDefencePoint(BreakInEnemy enemy);
 public class BreakInEnemy : NavMeshEnemy
 {
-    System.Random rng = new System.Random();
-
     //Components.
     PlayerData playerData;
     WaveController waveController;
@@ -104,7 +102,7 @@ public class BreakInEnemy : NavMeshEnemy
         }
 
         //Assigning material of enemy.
-        materialOfEnemy = possibleMaterials[rng.Next(0, possibleMaterials.Count)];
+        materialOfEnemy = possibleMaterials[Random.Range(0, possibleMaterials.Count)];
         GetComponent<MeshRenderer>().material = materialOfEnemy;
     }	
 
@@ -175,7 +173,6 @@ public class BreakInEnemy : NavMeshEnemy
 
             //Lerps to target - melee attack.
             //After attack -check if barricade if fully destroyed.If it is target player. 
-
             //Check if barricade still exists as other enemy might have destroyed it.
             if (attackTarget != null)
             {

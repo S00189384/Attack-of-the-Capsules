@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Grenades, missile, explosive barrels could use this script instead of having their own explosion methods but I haven't implemented it yet.
 public class Explosion : MonoBehaviour
 {
     [Header("Damage")]

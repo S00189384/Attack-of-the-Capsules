@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 
+/* If player stays in trigger area, script checks if they try to repair the defence point.
+ * This is all the player can do near the defence point.     
+ */
+
 public delegate void PlayerEnteredAreaDelegate();
 public delegate void PlayerLeftAreaDelegate();
-
 public class DefencePointPlayerBehaviour : PlayerInteractableArea
 {
     //Components.

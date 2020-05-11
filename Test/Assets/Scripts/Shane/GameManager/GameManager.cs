@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
+//A script that mainly deals with enabling / disabling player movement. Could have put that in player movement (probably better) but ended up putting it here.
+//When they load in from menu it makes the cursor not visible.
 public class GameManager : MonoBehaviour
 {
     [Header("Player")]
@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         player.GetComponent<HealthComponent>().OnDeathEvent += DisablePlayerMovement;
+        Cursor.visible = false;
     }
 
     //Player Controlling.

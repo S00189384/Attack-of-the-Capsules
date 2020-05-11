@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Base class for interactable area. Checks if player is in range and wants to interact.
+//Logic in update is bad, need to fix.
 public class PlayerInteractableArea : PlayerInteractableComponent
 {
+    [Header("Player Status")]
     public bool PlayerInRange;
     public bool PlayerIsInteracting;
     public bool PlayerInteractedOnce;
@@ -15,7 +18,6 @@ public class PlayerInteractableArea : PlayerInteractableComponent
 
     public virtual void Update()
     {
-
         if(PlayerInRange)
         {
             if(Input.GetKeyDown(KeyCode.F))
