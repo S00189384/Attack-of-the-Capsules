@@ -49,8 +49,6 @@ public class ParticleTrapButton : PlayerInteractableObject
 
     public override void SwitchInteractableStatus()
     {
-        uiBehaviour.HidePlayerInteractMessage();
-
         if (IsInteractable)
         {
             buttonLightMeshRenderer.material = buttonNotInteractableMaterial;
@@ -73,6 +71,8 @@ public class ParticleTrapButton : PlayerInteractableObject
                 uiBehaviour.ShowPlayerInteractMessage(UIMessageIfPlayerLooksAtObjectNotInteractable, true, Color.red);
             }
         }
+
+        uiBehaviour.HidePlayerInteractMessage();
     }
     public void PlayInteractNoise()
     {

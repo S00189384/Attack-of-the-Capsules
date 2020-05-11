@@ -175,10 +175,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsInteractable: 1
   ObjectName: Knife
-  UIMessageToShowIfPlayerLooksAtObject: Press F to pickup Knife
+  UIMessageIfPlayerLooksAtObjectInteractable: Press F To Pick Up Throwing Knife
+  UIMessageIfPlayerLooksAtObjectNotInteractable: 
+  ammoPurchase: {fileID: 0}
   prefabToPickup: {fileID: 8276893301750851256, guid: ccc7b143e6be8b743a20a3469ef9aa4c,
     type: 3}
   ObjectType: Weapon
+  pointsRequiredToPickup: 0
 --- !u!64 &8025461446144580971
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -303,6 +306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   audioSource: {fileID: 0}
+  inventoryUISlot: {fileID: 0}
   nameOfWeapon: Knife
   weaponPrefab: {fileID: 0}
   playerInventoryIndex: -1
