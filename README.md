@@ -1,6 +1,7 @@
 # Attack-of-the-Capsules
 A first person shooter wave defense game made with Unity as part of a second year project. The player is trapped in a building and has to defend themselves from capsules that spawn in waves.
-The game can be downloaded through itch.io - 
+
+Game download & itch.io link: https://shaneb22.itch.io/attack-of-the-capsules
 
 ## Features: 
 - Capsule enemies attempt to break into the building, chase and lunge at you to try and deal damage. 
