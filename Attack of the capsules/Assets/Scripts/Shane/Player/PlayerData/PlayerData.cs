@@ -13,7 +13,6 @@ public class PlayerData : MonoBehaviour
         uiBehaviour = GameObject.FindGameObjectWithTag("UI").GetComponent<UIBehaviour>();
         uiBehaviour.UpdatePointsCounter(points);
     }
-
     public void AddPoints(int pointsToAdd)
     {
         points += pointsToAdd;
