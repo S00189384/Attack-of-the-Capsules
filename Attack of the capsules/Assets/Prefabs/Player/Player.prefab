@@ -171,6 +171,7 @@ MonoBehaviour:
   activeGun: {fileID: 0}
   activeMeleeWeapon: {fileID: 0}
   activeThrowableWeapon: {fileID: 0}
+  numberOfGrenadesInInventory: 0
 --- !u!82 &4862942536356610204
 AudioSource:
   m_ObjectHideFlags: 0
@@ -460,7 +461,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerBody: {fileID: 4862942537249221198}
-  mouseSensitivity: 186.23
+  playerCamera: {fileID: 0}
+  defaultMouseSensitivity: 0
   horizontalRotationInput: 0
   verticalRotationInput: 0
   VerticalRotation: 0
@@ -491,6 +493,7 @@ GameObject:
   - component: {fileID: 8487372716417438025}
   - component: {fileID: 473896433}
   - component: {fileID: 473896432}
+  - component: {fileID: 5752317618072944706}
   m_Layer: 16
   m_Name: Player
   m_TagString: Player
@@ -677,14 +680,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24380bf8c826a1140b17bc2f7f391f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableObject: {fileID: 0}
   Interacted: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 4096
   interactDistance: 2
-  aimDotColorWhenLooking: {r: 0, g: 1, b: 0, a: 1}
+  aimDotColorWhenLookingAtObjectInteractable: {r: 0, g: 1, b: 0, a: 1}
+  aimDotColorWhenLookingAtObjectNotInteractable: {r: 1, g: 0, b: 0, a: 1}
   aimDotFadeSpeed: 10
   IsLookingAtInteractableObject: 0
+  CheckForInteractableObjects: 0
 --- !u!114 &4862942537249221195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -698,6 +704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsAlive: 1
+  CanTakeDamage: 1
   maxHealth: 100
   currentHealth: 0
   DestroyOnDeath: 0
@@ -748,3 +755,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeToBlackSpeed: 0
+--- !u!114 &5752317618072944706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4862942537249221186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9b0885f77f8db45b8c0d4aa07af300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 200

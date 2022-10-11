@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-//Player Data only has player points for now - player points are needed to interact with certain items in the game (unlock doors, buy guns ammo etc).
 public class PlayerData : MonoBehaviour
 {
     //Components.
