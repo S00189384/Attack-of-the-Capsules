@@ -30,7 +30,7 @@ Play the game here -
 ![grenade](https://user-images.githubusercontent.com/47157867/195151310-97affc5d-70ff-4e12-a640-023cce30bd4b.gif)
 
 ### Particle Traps
-#### Activated by pressing a button on the wall. Kills enemies that make contact with the particles it emits. Has a cooldown and costs points to use.
+#### Activated by pressing a button on the wall and kills enemies that make contact with the particles it emits. Has a cooldown and costs points to use.
 
 ![trap](https://user-images.githubusercontent.com/47157867/195151635-4f43a159-04e4-48ca-8893-8b1e1e1f54ee.gif)
 
