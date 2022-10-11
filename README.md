@@ -1,12 +1,12 @@
 # Attack-of-the-Capsules
-A first person shooter wave defence game made with Unity as part of a second year project. The player is trapped in a building and has to defend themselves from capsules that spawn in waves.
-Play the game here - 
+A first person shooter wave defense game made with Unity as part of a second year project. The player is trapped in a building and has to defend themselves from capsules that spawn in waves.
+The game can be downloaded through itch.io - 
 
 ## Features: 
 - Capsule enemies attempt to break into the building, chase and lunge at you to try and deal damage. 
 - Different weapons you can use to defend yourself - Pistol, AK-47, Shotgun, Grenades and a Throwing Knife. 
-- Defence barricades that enemies try to break through can be fortified by the player.
-- Points are gained from killing enemies and can be spent on opening up new areas, buying weapons / ammo or activating traps or other defence systems. 
+- Defense barricades that enemies try to break through can be fortified by the player.
+- Points are gained from killing enemies and can be spent on opening up new areas, buying weapons / ammo or activating traps or other defense systems. 
 - Missile system on the second floor which the player can control.
 - Particle traps.
 - Explodable barrels that deal damage.
@@ -19,8 +19,8 @@ Play the game here -
 ![gameplay](https://user-images.githubusercontent.com/47157867/195150246-eb66973b-c41f-4747-8c3c-60d4a50a4681.gif)
 
 
-### Defence Points
-#### Enemies work together to break through defence points. These defence points can be barricaded by the player. If the player gets too close the enemies will target the player instead of the barricades.  
+### Defense Points
+#### Enemies work together to break through defense points. These defense points can be barricaded by the player. If the player gets too close the enemies will target the player instead of the barricades.  
 
 ![barricade2](https://user-images.githubusercontent.com/47157867/195148767-b2142927-f090-43bb-b91e-472afb704032.gif)
 
