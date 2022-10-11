@@ -14,8 +14,8 @@ Play the game here -
 
 ## Gameplay Showcase
 
-### Defend Yourself!
-#### Use the various weapons and items at your disposal to survive the enemy waves
+### Try to survive
+#### The player uses various weapons and items at their disposal to survive the enemy waves
 ![gameplay](https://user-images.githubusercontent.com/47157867/195150246-eb66973b-c41f-4747-8c3c-60d4a50a4681.gif)
 
 
